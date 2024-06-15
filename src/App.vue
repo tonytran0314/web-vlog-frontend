@@ -5,15 +5,28 @@
 
 <template>
 
-  <Menu />
+  <div class="master-container">
+    <Menu />
 
-  <main>
-    <RouterView />
-  </main>
+    <main>
+      <RouterView />
+    </main>
 
-  <Footer />
+    <Footer />
+  </div>
 
 </template>
 
-<style scoped>
+<style lang="scss">
+  @import '/src/assets/variables';
+
+  .master-container {
+    width: 100%;
+    background-color: $baseColor;
+  }
+
+  .container {
+    width: 82.5rem;
+    margin: auto;
+  }
 </style>
