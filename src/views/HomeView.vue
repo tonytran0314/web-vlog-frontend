@@ -1,13 +1,14 @@
 <script setup>
-    
+    import Slides from '/src/components/slides/Slides.vue'
 </script>
 
 <template>
     <div>
-        home
+        <Slides />
     </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+    @import '/src/assets/variables';    
     
 </style>

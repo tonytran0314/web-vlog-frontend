@@ -47,7 +47,7 @@
                 border-radius: 1rem;
                 width: inherit;
                 height: inherit;
-                background-color: $overlayColor;
+                background-color: $overlay75Color;
             }
         }
 
