@@ -1,14 +1,18 @@
 <script setup>
+  import Menu from './components/partials/Menu.vue'
+  import Footer from './components/partials/Footer.vue'
 </script>
 
 <template>
-  <nav>
-    <RouterLink to="/">Go to Home</RouterLink>
-    <RouterLink to="/category">Go to About</RouterLink>
-  </nav>
+
+  <Menu />
+
   <main>
     <RouterView />
   </main>
+
+  <Footer />
+
 </template>
 
 <style scoped>
