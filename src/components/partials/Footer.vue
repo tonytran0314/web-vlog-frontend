@@ -26,12 +26,12 @@
         height: 37.5rem;
         border-radius: 1rem;
         position: relative;
-        background-color: $red;
+        margin-bottom: 4rem;
 
         #background {
             position: relative;
             width: 82.5rem;
-            height: 37.5rem;
+            height: inherit;
 
             img {
                 width: inherit;
