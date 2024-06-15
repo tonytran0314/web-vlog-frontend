@@ -34,6 +34,5 @@
     #slides {
         height: 38rem;
         border-radius: 1rem;
-        margin: 2rem auto;
     }
 </style>
