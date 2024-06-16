@@ -1,5 +1,7 @@
 <script setup>
     import VideoCard from '/src/components/features/VideoCard.vue'
+    import SeeMoreButton from '/src/components/features/SeeMoreButton.vue'
+    import Pagination from '/src/components/pagination/Pagination.vue'
 </script>
 
 <template>
@@ -19,9 +21,13 @@
                 <VideoCard />
             </div>
         </div>
-        <div class="see-more">
-            <h6>xem thêm</h6>
-        </div>
+        <!-- has a prop to decide -->
+
+        <!-- home: -->
+        <SeeMoreButton />
+
+        <!-- category: -->
+        <!-- <Pagination /> -->
     </div>
 </template>
 
@@ -48,16 +54,6 @@
                 display: inherit;
                 gap: inherit;
             }
-        }
-
-        .see-more {
-            border-radius: 1rem;
-            padding: 1rem 0;
-            text-align: center;
-            text-transform: capitalize;
-            cursor: pointer;
-            background-color: $boxColor;
-            color: $white;
         }
     }
 </style>
