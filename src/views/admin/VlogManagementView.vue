@@ -1,6 +1,9 @@
 <script setup>
     import Menu from '/src/components/partials/admin/Menu.vue'
     import Setting from '/src/components/partials/admin/Setting.vue'
+    import Pagination from '/src/components/pagination/Pagination.vue'
+
+    const test = 10
 </script>
 
 <template>
@@ -33,7 +36,7 @@
                             <th>Ngày đăng</th>
                             <th></th>
                         </tr>
-                        <tr>
+                        <tr v-for="t in test">
                             <td><input type="checkbox" name="" id=""></td>
                             <td><img src="/src/assets/images/11.png" alt=""></td>
                             <td class="details">
@@ -49,6 +52,7 @@
                         </tr>
                     </table>
                 </div>
+                <Pagination />
             </div>
         </div>
     </div>
