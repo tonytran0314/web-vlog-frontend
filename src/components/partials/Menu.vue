@@ -10,7 +10,7 @@
                 <li><router-link to="/"><h6>Trang chủ</h6></router-link></li>
                 <li><router-link to="/"><h6>Gia Huy là ai?</h6></router-link></li>
                 <li><router-link to="/category"><h6>Series</h6></router-link></li>
-                <li><router-link to="/"><h6>Số Đặc Biệt</h6></router-link></li>
+                <li><router-link to="/admin"><h6>Số Đặc Biệt</h6></router-link></li>
             </ul>
         </nav>
     </div>

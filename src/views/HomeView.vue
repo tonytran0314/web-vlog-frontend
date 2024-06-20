@@ -1,14 +1,24 @@
 <script setup>
     import Slides from '/src/components/slides/Slides.vue'
-    import Feature from '../components/features/Feature.vue'
+    import Feature from '/src/components/features/Feature.vue'
+    import Menu from '/src/components/partials/Menu.vue'
+    import Footer from '/src/components/partials/Footer.vue'
 </script>
 
-<template>
-    <div id="home">
-        <Slides />
-        <Feature />
-        <Feature />
-        <Feature />
+<template>  
+    <div class="master-container">
+        <Menu />
+
+        <main>
+            <div id="home">
+                <Slides />
+                <Feature />
+                <Feature />
+                <Feature />
+            </div>
+        </main>
+
+        <Footer />
     </div>
 </template>
 

@@ -1,20 +1,8 @@
 <script setup>
-  import Menu from './components/partials/Menu.vue'
-  import Footer from './components/partials/Footer.vue'
 </script>
 
 <template>
-
-  <div class="master-container">
-    <Menu />
-
-    <main>
-      <RouterView />
-    </main>
-
-    <Footer />
-  </div>
-
+  <RouterView />
 </template>
 
 <style lang="scss">
@@ -25,6 +13,12 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    background-color: $baseColor;
+  }
+
+  .admin-container {
+    width: 100%;
+    display: flex;
     background-color: $baseColor;
   }
 
