@@ -2,8 +2,21 @@
     import Menu from '/src/components/partials/admin/Menu.vue'
     import Setting from '/src/components/partials/admin/Setting.vue'
     import Pagination from '/src/components/pagination/Pagination.vue'
+    import FilterModal from '/src/components/modals/FilterModal.vue'
+
+    import { ref } from 'vue'
 
     const test = 10
+
+    const isFilterModalOpen = ref(false)
+
+    const openFilterModal = () => {
+        isFilterModalOpen.value = true
+    }
+
+    const closeFilterModal = () => {
+        isFilterModalOpen.value = false
+    }
 </script>
 
 <template>
@@ -16,7 +29,7 @@
                 <div class="body-header">
                     <h1>Quản lý Vlogs</h1>
                     <div class="actions">
-                        <div class="button"><font-awesome-icon :icon="['fas', 'sliders-h']" /><h6>Bộ lọc</h6></div>
+                        <div @click="openFilterModal" class="button"><font-awesome-icon :icon="['fas', 'sliders-h']" /><h6>Bộ lọc</h6></div>
                         <div class="action-buttons">
                             <div class="button"><font-awesome-icon :icon="['fas', 'eye-slash']" /><h6>Ẩn/Hiện</h6></div>
                             <div class="button"><font-awesome-icon :icon="['fas', 'trash']" /><h6>Xoá</h6></div>
@@ -56,6 +69,7 @@
             </div>
         </div>
     </div>
+    <FilterModal v-show="isFilterModalOpen" @closeModal="closeFilterModal" />
 </template>
 
 <style lang="scss" scoped>
