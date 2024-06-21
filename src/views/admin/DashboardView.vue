@@ -60,6 +60,11 @@
         justify-content: space-between;
         color: $white;
 
+        a {
+            color: $white;
+            text-decoration: none;
+        }
+
         .actions {
             display: flex;
             gap: 5rem;

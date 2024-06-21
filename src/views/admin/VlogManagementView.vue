@@ -34,7 +34,10 @@
                             <div class="button"><font-awesome-icon :icon="['fas', 'eye-slash']" /><h6>Ẩn/Hiện</h6></div>
                             <div class="button"><font-awesome-icon :icon="['fas', 'trash']" /><h6>Xoá</h6></div>
                             <div class="button"><font-awesome-icon :icon="['fas', 'pen']" /><h6>Sửa</h6></div>
-                            <div class="button primary-button"><font-awesome-icon :icon="['fas', 'plus']" /><h6>Thêm mới</h6></div>
+                            <router-link to="/admin/vlog/add" class="button primary-button">
+                                <font-awesome-icon :icon="['fas', 'plus']" />
+                                <h6>Thêm mới</h6>
+                            </router-link>
                         </div>
                     </div>
                 </div>
