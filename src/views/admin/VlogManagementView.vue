@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="vlog-table">
+                <!-- <div id="vlog-table">
                     <table>
                         <tr>
                             <th></th>
@@ -64,7 +64,7 @@
                             <td class="options"><font-awesome-icon :icon="['fas', 'ellipsis-h']" /></td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
                 <Pagination />
             </div>
         </div>
