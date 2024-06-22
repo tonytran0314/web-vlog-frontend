@@ -24,21 +24,7 @@
     <div class="features container">
         <h2>Nhiều người xem nhất</h2>
         <div class="feature-body">
-            <!-- <div class="row">
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
-            </div>
-            <div class="row">
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
-            </div> -->
-            <div class="row">
-                <VideoCard v-for="vlog in latestVlogs" />
-            </div>
+            <VideoCard v-for="vlog in latestVlogs" />
         </div>
 
 
@@ -68,13 +54,8 @@
 
         .feature-body {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             gap: 1rem;
-
-            .row {
-                display: inherit;
-                gap: inherit;
-            }
         }
     }
 </style>

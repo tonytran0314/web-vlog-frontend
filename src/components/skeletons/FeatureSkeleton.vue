@@ -1,19 +1,14 @@
 <script setup>
     import VideoCardSkeleton from '/src/components/skeletons/VideoCardSkeleton.vue'
-    import SeeMoreButton from '/src/components/features/SeeMoreButton.vue'
-    import { ref } from 'vue'
+
+    const skeletons = Array(8)
 </script>
 
 <template>
     <div class="features container">
         <Skeleton width="20rem" height="2.875rem" borderRadius=".5rem"></Skeleton>
         <div class="feature-body">
-            <div class="row">
-                <VideoCardSkeleton />
-                <VideoCardSkeleton />
-                <VideoCardSkeleton />
-                <VideoCardSkeleton />
-            </div>
+            <VideoCardSkeleton v-for="item in skeletons" />
         </div>
 
         <Skeleton width="100%" height="3.75rem" borderRadius="1rem"></Skeleton>
@@ -36,13 +31,8 @@
 
         .feature-body {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             gap: 1rem;
-
-            .row {
-                display: inherit;
-                gap: inherit;
-            }
         }
     }
 </style>
