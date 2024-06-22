@@ -38,13 +38,28 @@ const routes = [
     beforeEnter: validateSlug },
   { 
     path: '/category', 
+    name: 'Category',
     component: CategoryView 
   },
 
-  { path: '/admin', component: DashboardView },
-  { path: '/admin/vlog', component: VlogManagementView },
-  { path: '/admin/vlog/add', component: AddVlogView },
-  { path: '/admin/category', component: CategoryManagementView },
+  // refactor by nested
+  { 
+    path: '/admin',
+    name: 'Dashboard',
+    component: DashboardView 
+  },
+  { 
+    path: '/admin/vlog',
+    name: 'Vlog Management',
+    component: VlogManagementView },
+  { 
+    path: '/admin/vlog/add',
+    name: 'New Vlog',
+    component: AddVlogView },
+  { 
+    path: '/admin/category',
+    name: 'Category Management',
+    component: CategoryManagementView },
 ]
 
 const router = createRouter({

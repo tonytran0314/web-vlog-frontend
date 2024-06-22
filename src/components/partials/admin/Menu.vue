@@ -7,15 +7,15 @@
         <div id="nav-bar">
             <p>Menu</p>
             <nav>
-                <router-link to="/admin">
+                <router-link :to="{ name: 'Dashboard' }">
                     <font-awesome-icon :icon="['fas', 'home']" />
                     <h6>Bảng điều khiển</h6>
                 </router-link>
-                <router-link to="/admin/vlog">
+                <router-link :to="{ name: 'Vlog Management' }">
                     <font-awesome-icon :icon="['fas', 'video']" />
                     <h6>Quản lý Vlogs</h6>
                 </router-link>
-                <router-link to="/admin/category">
+                <router-link :to="{ name: 'Category Management' }">
                     <font-awesome-icon :icon="['fas', 'layer-group']" />
                     <h6>Quản lý thể loại</h6>
                 </router-link>
