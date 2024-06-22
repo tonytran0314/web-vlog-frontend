@@ -1,5 +1,14 @@
 <script setup>
-    
+    const props = defineProps({
+        title: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: String,
+            required: true
+        }
+    })
 </script>
 
 <template>
@@ -8,9 +17,9 @@
             <img src="/src/assets/images/11.png" alt="thumbnail">
         </div>
         <div class="title">
-            <h6>Tiêu đề Video. Tiêu đề Video. Tiêu đề Video. Tiêu đề Video Tiêu đề Video. Tiêu đề Video. Tiêu đề Video. Tiêu đề Video</h6>
+            <h6>{{ title }}</h6>
         </div>
-        <p>13/06/2024</p>
+        <p>{{ date }}</p>
     </div>
 </template>
 

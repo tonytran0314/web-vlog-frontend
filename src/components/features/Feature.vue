@@ -24,7 +24,11 @@
     <div class="features container">
         <h2>Nhiều người xem nhất</h2>
         <div class="feature-body">
-            <VideoCard v-for="vlog in latestVlogs" />
+            <VideoCard
+                v-for="vlog in latestVlogs" 
+                :title="vlog.title"
+                :date="vlog.date"
+            />
         </div>
 
 
