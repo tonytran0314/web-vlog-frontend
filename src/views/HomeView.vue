@@ -13,40 +13,20 @@
         <Menu />
 
         <main>
-            <div id="home">
                 <Suspense>
                     <template #default>
-                        <Slides />
+                        <div class="home">
+                            <Slides />
+                            <Feature />
+                        </div>
                     </template>
                     <template #fallback>
-                        <SlidesSkeleton />
+                        <div class="home">
+                            <SlidesSkeleton />
+                            <FeatureSkeleton />
+                        </div>
                     </template>
                 </Suspense>
-                <Suspense>
-                    <template #default>
-                        <Feature />
-                    </template>
-                    <template #fallback>
-                        <FeatureSkeleton />
-                    </template>
-                </Suspense>
-                <!-- <Suspense>
-                    <template #default>
-                        <Feature />
-                    </template>
-                    <template #fallback>
-                        <FeatureSkeleton />
-                    </template>
-                </Suspense>
-                <Suspense>
-                    <template #default>
-                        <Feature />
-                    </template>
-                    <template #fallback>
-                        <FeatureSkeleton />
-                    </template>
-                </Suspense> -->
-            </div>
         </main>
 
         <Footer />
@@ -56,7 +36,7 @@
 <style lang="scss" scoped>
     @import '/src/assets/variables';    
     
-    #home {
+    .home {
         display: flex;
         flex-direction: column;
         gap: 2rem;
