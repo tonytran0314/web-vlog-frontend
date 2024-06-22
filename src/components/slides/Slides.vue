@@ -2,7 +2,7 @@
     import SlideItem from './SlideItem.vue'
 
     import axios from 'axios'
-    import { ref, watchEffect } from 'vue'
+    import { ref } from 'vue'
     import { register } from 'swiper/element/bundle'
 
     register()
@@ -12,22 +12,13 @@
     const getLatestVlogs = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/latest-vlogs')
-            return response.data.data
+            latestVlogs.value = response.data.data
         } catch (error) {
             console.error(error)
         }
     }
 
-    watchEffect(() => {
-        getLatestVlogs()
-            .then(response => {
-                latestVlogs.value = response
-                console.log(latestVlogs.value)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    })
+    await getLatestVlogs()
 </script>
 
 <template>
