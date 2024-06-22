@@ -29,7 +29,14 @@
         :pagination="{ clickable: true }"
         style="--swiper-pagination-color: #EC454F;--swiper-pagination-bullet-size: 12px;"
         >
-        <swiper-slide v-for="vlog in latestVlogs"><SlideItem /></swiper-slide>
+        <swiper-slide v-for="vlog in latestVlogs">
+            <SlideItem
+                :title="vlog.title"
+                :date="vlog.date"
+                :description="vlog.description"
+                :categories="vlog.categories"
+            />
+        </swiper-slide>
     </swiper-container>
 </template>
 

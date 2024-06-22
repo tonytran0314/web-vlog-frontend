@@ -1,5 +1,23 @@
 <script setup>
-    
+    const props = defineProps({
+        title: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        categories: {
+            type: Array,
+            required: true
+        }
+    })
+
 </script>
 
 <template>
@@ -10,23 +28,14 @@
         <div class="slide-info">
             <div class="info-body">
                 <div class="title">
-                    <h1>Tiêu đề video, ở đay Tiêu đề video, ở đayTiêu đề video, ở đay afkaflkajfkl asfdalksj sdjh</h1>
+                    <h1>{{ title }}</h1>
                 </div>
-                <p class="date">14/06/2024</p>
+                <p class="date">{{ date }}</p>
                 <div class="description">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident accusantium cum minus. Ex cum, itaque fuga minima esse adipisci modi voluptatem quos laboriosam officiis enim. Minima ipsa numquam blanditiis? At. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident accusantium cum minus. Ex cum, itaque fuga minima esse adipisci modi voluptatem quos laboriosam officiis enim. Minima ipsa numquam blanditiis? At.</p>
+                    <p>{{ description }}</p>
                 </div>
                 <div class="categories">
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
-                    <div class="category">Thể loại 1</div>
+                    <div v-for="category in categories" class="category">{{ category.name }}</div>
                 </div>
             </div>
             <router-link class="watch-button" to="/" ><h6>Xem ngay</h6></router-link>
