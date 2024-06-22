@@ -1,15 +1,46 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
 import HomeView from '/src/views/HomeView.vue'
+import VlogView from '/src/views/VlogView.vue'
 import CategoryView from '/src/views/CategoryView.vue'
+
 import DashboardView from '/src/views/admin/DashboardView.vue'
 import VlogManagementView from '/src/views/admin/VlogManagementView.vue'
 import AddVlogView from '/src/views/admin/AddVlogView.vue'
 import CategoryManagementView from '/src/views/admin/CategoryManagementView.vue'
 
+
+const validateSlug = (to, from, next) => {
+  const slug = to.params.slug
+  
+  // Check if slug exists and matches the required pattern
+  if (slug && /^[a-zA-Z0-9-]+$/.test(slug)) {
+    next() // Proceed to the route
+  } else {
+    next({ name: 'Home' }) // Redirect to Home if validation fails
+  }
+}
+
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/category', component: CategoryView },
+  { 
+    path: '/', 
+    name: 'Home', 
+    component: HomeView 
+  },
+  { 
+    path: '/vlog', 
+    redirect: '/' 
+  },
+  { 
+    path: '/vlog/:slug', 
+    name: 'Vlog', 
+    component: VlogView, 
+    beforeEnter: validateSlug },
+  { 
+    path: '/category', 
+    component: CategoryView 
+  },
+
   { path: '/admin', component: DashboardView },
   { path: '/admin/vlog', component: VlogManagementView },
   { path: '/admin/vlog/add', component: AddVlogView },

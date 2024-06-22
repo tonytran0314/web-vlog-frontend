@@ -4,6 +4,10 @@
             type: String,
             required: true
         },
+        slug: {
+            type: String,
+            required: true
+        },
         date: {
             type: String,
             required: true
@@ -38,7 +42,12 @@
                     <div v-for="category in categories" class="category">{{ category.name }}</div>
                 </div>
             </div>
-            <router-link class="watch-button" to="/" ><h6>Xem ngay</h6></router-link>
+            <router-link 
+                class="watch-button" 
+                :to="{ name: 'Vlog', params: { slug: slug } }" 
+                >
+                <h6>Xem ngay</h6>
+            </router-link>
         </div>
     </div>
 </template>

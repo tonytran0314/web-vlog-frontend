@@ -32,6 +32,7 @@
         <swiper-slide v-for="vlog in latestVlogs">
             <SlideItem
                 :title="vlog.title"
+                :slug="vlog.slug"
                 :date="vlog.date"
                 :description="vlog.description"
                 :categories="vlog.categories"

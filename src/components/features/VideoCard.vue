@@ -4,6 +4,10 @@
             type: String,
             required: true
         },
+        slug: {
+            type: String,
+            required: true
+        },
         date: {
             type: String,
             required: true
@@ -12,15 +16,17 @@
 </script>
 
 <template>
-    <div class="cards">
-        <div class="thumbnail">
-            <img src="/src/assets/images/11.png" alt="thumbnail">
+    <router-link :to="{ name: 'Vlog', params: { slug: slug } }">
+        <div class="cards">
+            <div class="thumbnail">
+                <img src="/src/assets/images/11.png" alt="thumbnail">
+            </div>
+            <div class="title">
+                <h6>{{ title }}</h6>
+            </div>
+            <p>{{ date }}</p>
         </div>
-        <div class="title">
-            <h6>{{ title }}</h6>
-        </div>
-        <p>{{ date }}</p>
-    </div>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>

@@ -27,6 +27,7 @@
             <VideoCard
                 v-for="vlog in latestVlogs" 
                 :title="vlog.title"
+                :slug="vlog.slug"
                 :date="vlog.date"
             />
         </div>
