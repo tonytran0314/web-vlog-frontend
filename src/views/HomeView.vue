@@ -3,6 +3,7 @@
     import Feature from '/src/components/features/Feature.vue'
     import Menu from '/src/components/partials/Menu.vue'
     import Footer from '/src/components/partials/Footer.vue'
+    import FeatureSkeleton from '/src/components/skeletons/FeatureSkeleton.vue'
 </script>
 
 <template>  
@@ -11,10 +12,31 @@
 
         <main>
             <div id="home">
-                <Slides />
-                <Feature />
-                <Feature />
-                <Feature />
+                <!-- <Slides /> -->
+                <Suspense>
+                    <template #default>
+                        <Feature />
+                    </template>
+                    <template #fallback>
+                        <FeatureSkeleton />
+                    </template>
+                </Suspense>
+                <!-- <Suspense>
+                    <template #default>
+                        <Feature />
+                    </template>
+                    <template #fallback>
+                        <FeatureSkeleton />
+                    </template>
+                </Suspense>
+                <Suspense>
+                    <template #default>
+                        <Feature />
+                    </template>
+                    <template #fallback>
+                        <FeatureSkeleton />
+                    </template>
+                </Suspense> -->
             </div>
         </main>
 
