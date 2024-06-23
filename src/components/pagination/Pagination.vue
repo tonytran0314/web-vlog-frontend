@@ -1,16 +1,20 @@
 <script setup>
     import Page from '/src/components/pagination/Page.vue'
+
+    const props = defineProps({
+        links: {
+            type: Object,
+            required: true
+        }
+    })
+
+    const test = 'abc'
 </script>
 
 <template>
     <div id="pagination">
-        <Page />
-        <Page />
-        <Page />
-        <Page />
-        <Page />
-        <Page />
-        <Page />
+        <Page name="Trang đầu" :url="links.first" />
+        <Page name="Trang cuối" :url="links.last" />
     </div>
 </template>
 

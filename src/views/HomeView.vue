@@ -13,20 +13,20 @@
         <Menu />
 
         <main>
-                <Suspense>
-                    <template #default>
-                        <div class="home">
-                            <Slides />
-                            <Feature />
-                        </div>
-                    </template>
-                    <template #fallback>
-                        <div class="home">
-                            <SlidesSkeleton />
-                            <FeatureSkeleton />
-                        </div>
-                    </template>
-                </Suspense>
+            <Suspense>
+                <template #default>
+                    <div class="home">
+                        <Slides />
+                        <Feature />
+                    </div>
+                </template>
+                <template #fallback>
+                    <div class="home">
+                        <SlidesSkeleton />
+                        <FeatureSkeleton />
+                    </div>
+                </template>
+            </Suspense>
         </main>
 
         <Footer />

@@ -1,11 +1,20 @@
 <script setup>
-    
+    const props = defineProps({
+        name: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
+    })
 </script>
 
 <template>
-    <div class="page">
-        <h6>1</h6>
-    </div>
+    <router-link to="url" class="page">
+        <h6>{{ name }}</h6>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -22,5 +31,9 @@
         &:hover {
             background-color: $red;
         }
+    }
+
+    .current_page {
+        background-color: $red;
     }
 </style>

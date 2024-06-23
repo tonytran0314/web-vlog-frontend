@@ -1,7 +1,7 @@
 <script setup>
     import VideoCardSkeleton from '/src/components/skeletons/VideoCardSkeleton.vue'
 
-    const skeletons = Array(8)
+    const skeletons = Array(24)
 </script>
 
 <template>
@@ -11,7 +11,9 @@
             <VideoCardSkeleton v-for="item in skeletons" />
         </div>
 
-        <Skeleton width="100%" height="3.75rem" borderRadius="1rem"></Skeleton>
+        <div class="feature-footer">
+            <Skeleton width="50%" height="3.75rem" borderRadius="1rem"></Skeleton>
+        </div>
     </div>
 </template>
 
@@ -27,6 +29,11 @@
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
+        }
+
+        .feature-footer {
+            display: flex;
+            justify-content: center;
         }
     }
 </style>
