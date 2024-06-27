@@ -37,7 +37,7 @@ const routes = [
     component: VlogView, 
     beforeEnter: validateSlug },
   { 
-    path: '/category', 
+    path: '/category/:slug', 
     name: 'Category',
     component: CategoryView 
   },

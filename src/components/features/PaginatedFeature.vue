@@ -4,21 +4,25 @@
 
     import axios from 'axios'
     import { ref } from 'vue'
+    import { useRoute } from 'vue-router'
 
     const vlogs = ref(null)
     const links = ref(null)
-    const meta = ref(null)
+    
+    const route = useRoute()
+    const slug = route.params.slug
 
     const getVlogsByCategory = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/vlogs')
             vlogs.value = response.data.data
-            links.value = response.data.links
-            meta.value = response.data.meta
+            links.value = response.data.pagination.links
         } catch (error) {
             console.error(error)
         }
     }
+
+    console.log(useRoute().params.slug)
 
     await getVlogsByCategory()
 </script>

@@ -7,12 +7,16 @@
         url: {
             type: String,
             required: true
+        },
+        active: {
+            type: Boolean,
+            required: true
         }
     })
 </script>
 
 <template>
-    <router-link to="url" class="page">
+    <router-link :to="url" class="page" :class="{ 'current-page': active }">
         <h6>{{ name }}</h6>
     </router-link>
 </template>
@@ -33,7 +37,7 @@
         }
     }
 
-    .current_page {
+    .current-page {
         background-color: $red;
     }
 </style>

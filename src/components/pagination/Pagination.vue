@@ -3,18 +3,19 @@
 
     const props = defineProps({
         links: {
-            type: Object,
+            type: Array,
             required: true
         }
     })
-
-    const test = 'abc'
 </script>
 
 <template>
     <div id="pagination">
-        <Page name="Trang đầu" :url="links.first" />
-        <Page name="Trang cuối" :url="links.last" />
+        <Page 
+            v-for="link in links" 
+            :name="link.label" 
+            :url="link.url"
+            :active="link.active" />
     </div>
 </template>
 
