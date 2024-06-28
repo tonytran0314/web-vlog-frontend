@@ -35,7 +35,12 @@ const routes = [
     path: '/vlog/:slug', 
     name: 'Vlog', 
     component: VlogView, 
-    beforeEnter: validateSlug },
+    beforeEnter: validateSlug 
+  },
+  { 
+    path: '/category', 
+    redirect: '/category/all' 
+  },
   { 
     path: '/category/:slug', 
     name: 'Category',

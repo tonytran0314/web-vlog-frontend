@@ -3,18 +3,27 @@
     import Pagination from '/src/components/pagination/Pagination.vue'
 
     import axios from 'axios'
-    import { ref } from 'vue'
+    import { ref, watchEffect } from 'vue'
     import { useRoute } from 'vue-router'
+
+    const apiUrl = import.meta.env.VITE_API_URL
+    const route = useRoute()
+    const slug = route.params.slug
+    const path = `categories/${slug}`
+    const url = `${apiUrl}${path}`
+
+    // should setup a function to validate page number : undefined, null, less than 1, not an integer ==> become 1
+    if (route.query.page === undefined || 
+        route.query.page === null ||
+        route.query.page < 1 ) 
+        { route.query.page = 1 }  
 
     const vlogs = ref(null)
     const links = ref(null)
     
-    const route = useRoute()
-    const slug = route.params.slug
-
     const getVlogsByCategory = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/vlogs')
+            const response = await axios.get(url, { params: { page: route.query.page } })
             vlogs.value = response.data.data
             links.value = response.data.pagination.links
         } catch (error) {
@@ -22,9 +31,12 @@
         }
     }
 
-    console.log(useRoute().params.slug)
+    watchEffect(async () => {
+        await getVlogsByCategory()
+    })
 
     await getVlogsByCategory()
+        
 </script>
 
 <template>

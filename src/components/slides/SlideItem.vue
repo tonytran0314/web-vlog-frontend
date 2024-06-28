@@ -39,7 +39,13 @@
                     <p>{{ description }}</p>
                 </div>
                 <div class="categories">
-                    <div v-for="category in categories" class="category">{{ category.name }}</div>
+                    <router-link 
+                        v-for="category in categories" 
+                        :to="{ name: 'Category', params: {slug: category.slug} }"
+                        class="category"
+                        >
+                            {{ category.name }}
+                    </router-link>
                 </div>
             </div>
             <router-link 

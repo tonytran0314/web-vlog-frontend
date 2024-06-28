@@ -3,8 +3,7 @@
 
     const props = defineProps({
         links: {
-            type: Array,
-            required: true
+            type: Array
         }
     })
 </script>
@@ -14,7 +13,7 @@
         <Page 
             v-for="link in links" 
             :name="link.label" 
-            :url="link.url"
+            :page="link.page"
             :active="link.active" />
     </div>
 </template>

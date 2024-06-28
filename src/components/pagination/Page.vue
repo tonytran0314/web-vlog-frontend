@@ -1,12 +1,10 @@
 <script setup>
     const props = defineProps({
         name: {
-            type: String,
             required: true
         },
-        url: {
-            type: String,
-            required: true
+        page: {
+            type: Number
         },
         active: {
             type: Boolean,
@@ -16,7 +14,12 @@
 </script>
 
 <template>
-    <router-link :to="url" class="page" :class="{ 'current-page': active }">
+    <router-link 
+        v-if="page !== null"
+        :to="{ name: 'Category', query: { page: page } }" 
+        class="page" 
+        :class="{ 'current-page': active }"
+        >
         <h6>{{ name }}</h6>
     </router-link>
 </template>
