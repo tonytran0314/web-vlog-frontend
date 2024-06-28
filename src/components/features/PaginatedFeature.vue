@@ -3,7 +3,7 @@
     import Pagination from '/src/components/pagination/Pagination.vue'
 
     import axios from 'axios'
-    import { ref, watchEffect } from 'vue'
+    import { reactive, watchEffect } from 'vue'
     import { useRoute } from 'vue-router'
 
     const apiUrl = import.meta.env.VITE_API_URL
@@ -18,14 +18,18 @@
         route.query.page < 1 ) 
         { route.query.page = 1 }  
 
-    const vlogs = ref(null)
-    const links = ref(null)
+    const vlogs = reactive({
+        list: null,
+        header: null,
+        links: null
+    })
     
     const getVlogsByCategory = async () => {
         try {
             const response = await axios.get(url, { params: { page: route.query.page } })
-            vlogs.value = response.data.data
-            links.value = response.data.pagination.links
+            vlogs.list = response.data.data
+            vlogs.header = response.data.header
+            vlogs.links = response.data.pagination.links
         } catch (error) {
             console.error(error)
         }
@@ -41,18 +45,18 @@
 
 <template>
     <div class="features container">
-        <h2>Nhiều người xem nhất</h2> 
+        <h2>{{ vlogs.header }}</h2> 
         <!-- should show how many vlogs in this category -->
         <div class="feature-body">
             <VideoCard
-                v-for="vlog in vlogs" 
+                v-for="vlog in vlogs.list" 
                 :title="vlog.title"
                 :slug="vlog.slug"
                 :date="vlog.date"
             />
         </div>
 
-        <Pagination :links="links" />
+        <Pagination :links="vlogs.links" />
     </div>
 </template>
 
