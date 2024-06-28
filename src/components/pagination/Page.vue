@@ -1,4 +1,9 @@
 <script setup>
+    import { useRoute } from 'vue-router'
+
+    const route = useRoute()
+    const slug = route.params.slug
+
     const props = defineProps({
         name: {
             required: true
@@ -16,7 +21,7 @@
 <template>
     <router-link 
         v-if="page !== null"
-        :to="{ name: 'Category', query: { page: page } }" 
+        :to="{ name: 'Category', params: { slug: slug}, query: { page: page } }" 
         class="page" 
         :class="{ 'current-page': active }"
         >
