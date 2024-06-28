@@ -21,7 +21,9 @@
     const vlogs = reactive({
         list: null,
         header: null,
-        links: null
+        links: null,
+        totalVlogs: null,
+        totalPages: null
     })
     
     const getVlogsByCategory = async () => {
@@ -30,6 +32,8 @@
             vlogs.list = response.data.data
             vlogs.header = response.data.header
             vlogs.links = response.data.pagination.links
+            vlogs.totalVlogs = response.data.pagination.totalVlogs
+            vlogs.totalPages = response.data.pagination.totalPages
         } catch (error) {
             console.error(error)
         }
@@ -45,8 +49,10 @@
 
 <template>
     <div class="features container">
-        <h2>{{ vlogs.header }}</h2> 
-        <!-- should show how many vlogs in this category -->
+        <h2>{{ vlogs.header }} (có {{ vlogs.totalVlogs }} vlogs)</h2> 
+
+        <Pagination v-if="vlogs.totalPages > 1" :links="vlogs.links" />
+        
         <div class="feature-body">
             <VideoCard
                 v-for="vlog in vlogs.list" 
@@ -56,7 +62,7 @@
             />
         </div>
 
-        <Pagination :links="vlogs.links" />
+        <Pagination v-if="vlogs.totalPages > 1" :links="vlogs.links" />
     </div>
 </template>
 
