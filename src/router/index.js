@@ -38,11 +38,7 @@ const routes = [
     beforeEnter: validateSlug 
   },
   { 
-    path: '/category', 
-    redirect: '/category/all' 
-  },
-  { 
-    path: '/category/:slug', 
+    path: '/category/:slug?', 
     name: 'Category',
     component: CategoryView 
   },

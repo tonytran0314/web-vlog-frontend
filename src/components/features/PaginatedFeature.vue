@@ -9,7 +9,7 @@
     const apiUrl = import.meta.env.VITE_API_URL
     const route = useRoute()
     const slug = route.params.slug
-    const path = `categories/${slug}`
+    const path = (slug === undefined || slug === null || slug === '') ? 'vlogs' : `categories/${slug}` 
     const url = `${apiUrl}${path}`
 
     // should setup a function to validate page number : undefined, null, less than 1, not an integer ==> become 1
