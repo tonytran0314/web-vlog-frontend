@@ -1,11 +1,16 @@
 <script setup>
-    
+    const props = defineProps({
+        categorySlug: {
+            type: String,
+            required: true
+        }
+    })
 </script>
 
 <template>
-    <div class="see-more">
+    <router-link :to="{ name: 'Category', params: { slug: props.categorySlug }  }" class="see-more">
         <h6>xem thêm</h6>
-    </div>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -16,7 +21,6 @@
         padding: 1rem 0;
         text-align: center;
         text-transform: capitalize;
-        cursor: pointer;
         background-color: $boxColor;
         color: $white;
     }

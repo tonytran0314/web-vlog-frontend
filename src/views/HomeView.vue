@@ -6,6 +6,22 @@
     
     import FeatureSkeleton from '/src/components/skeletons/FeatureSkeleton.vue'
     import SlidesSkeleton from '/src/components/skeletons/SlidesSkeleton.vue'
+
+    // later, this array would be fetch from DB. In admin dashboard, this array can be adjusted
+    // the array should store id only
+    // table `features`
+    const features = [
+        {
+            id: 100,
+            name: 'Buster Baumbach',
+            slug: 'buster-baumbach'
+        },
+        {
+            id: 88,
+            name: 'Nestor Lebsack',
+            slug: 'nestor-lebsack'
+        },
+    ]
 </script>
 
 <template>  
@@ -17,7 +33,7 @@
                 <template #default>
                     <div class="home">
                         <Slides />
-                        <Feature />
+                        <Feature v-for="feature in features" :feature="feature" />
                     </div>
                 </template>
                 <template #fallback>

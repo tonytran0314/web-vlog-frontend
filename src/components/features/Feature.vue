@@ -5,32 +5,43 @@
     import axios from 'axios'
     import { ref } from 'vue'
 
-    const latestVlogs = ref(null)
+    const props = defineProps({
+        feature: {
+            type: Object,
+            required: true
+        }
+    })
+    
+    const apiUrl = import.meta.env.VITE_API_URL
+    const featurePath = 'feature/'
+    const url = `${apiUrl}${featurePath}${props.feature.slug}`
+    
+    const featuredVlogs = ref(null)
 
-    const getLatestVlogs = async () => {
+    const getFeaturedVlogs = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/latest-vlogs')
-            latestVlogs.value = response.data.data
+            const response = await axios.get(url)
+            featuredVlogs.value = response.data.data
         } catch (error) {
             console.error(error)
         }
     }
-
-    await getLatestVlogs()
+ 
+    await getFeaturedVlogs()
 </script>
 
 <template>
     <div class="features container">
-        <h2>Nhiều người xem nhất</h2>
+        <h2>{{ feature.name }}</h2>
         <div class="feature-body">
             <VideoCard
-                v-for="vlog in latestVlogs" 
+                v-for="vlog in featuredVlogs" 
                 :title="vlog.title"
                 :slug="vlog.slug"
                 :date="vlog.date"
             />
         </div>
-        <SeeMoreButton />
+        <SeeMoreButton :categorySlug="feature.slug" />
     </div>
 </template>
 
