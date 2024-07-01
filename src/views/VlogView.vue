@@ -1,4 +1,6 @@
 <script setup>
+    import axios from 'axios'
+
     import Menu from '/src/components/partials/Menu.vue'
     import Video from '/src/components/video/Video.vue'
     import Feature from '/src/components/features/Feature.vue'

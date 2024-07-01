@@ -9,6 +9,7 @@ import VlogManagementView from '/src/views/admin/VlogManagementView.vue'
 import AddVlogView from '/src/views/admin/AddVlogView.vue'
 import CategoryManagementView from '/src/views/admin/CategoryManagementView.vue'
 
+import NotFoundView from '/src/views/NotFoundView.vue'
 
 const validateSlug = (to, from, next) => {
   const slug = to.params.slug
@@ -61,6 +62,11 @@ const routes = [
     path: '/admin/category',
     name: 'Category Management',
     component: CategoryManagementView },
+  { 
+    path: '/:pathName(.*)',
+    name: '404 Page',
+    component: NotFoundView 
+  },
 ]
 
 const router = createRouter({
