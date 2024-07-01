@@ -1,11 +1,34 @@
 <script setup>
     import { ref } from 'vue'
+    import axios from 'axios'
+    import { useRoute } from 'vue-router'
 
+    const emit = defineEmits(['categories'])
+
+    const value = ref(50)
     const isVideoPlaying = ref(true)
+
+    const apiUrl = import.meta.env.VITE_API_URL
+    const route = useRoute()
+    const path = 'vlogs/'
+    const url = `${apiUrl}${path}${route.params.slug}`
+    const vlog = ref(null)
+
+    const getVideo = async () => {
+        try {
+            const response = await axios.get(url)
+            vlog.value = response.data.data
+            emit('categories', response.data.data.categories)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     const playPauseToggle = () => {
         isVideoPlaying.value = !isVideoPlaying.value
     }
-    const value = ref(50)
+
+    await getVideo()
 </script>
 
 <template>
@@ -47,9 +70,9 @@
             <div class="reactions"></div>
         </div>
         <div class="video-detail">
-            <h1>Title here</h1>
-            <p>00/00/2024</p>
-            <p>Description</p>
+            <h1>{{ vlog.title }}</h1>
+            <p>{{ vlog.date }}</p>
+            <p>{{ vlog.description }}</p>
         </div>
     </div>
 </template>

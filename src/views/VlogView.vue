@@ -1,6 +1,4 @@
 <script setup>
-    import axios from 'axios'
-
     import Menu from '/src/components/partials/Menu.vue'
     import Video from '/src/components/video/Video.vue'
     import Feature from '/src/components/features/Feature.vue'
@@ -8,19 +6,13 @@
     import SlidesSkeleton from '/src/components/skeletons/SlidesSkeleton.vue'
     import FeatureSkeleton from '/src/components/skeletons/FeatureSkeleton.vue'
 
-    // an array contains the vlog categories, show features by those categories
-    const features = [
-        {
-            id: 100,
-            name: 'Buster Baumbach',
-            slug: 'buster-baumbach'
-        },
-        {
-            id: 88,
-            name: 'Nestor Lebsack',
-            slug: 'nestor-lebsack'
-        },
-    ]
+    import { ref } from 'vue'
+
+    const categories = ref(null)
+
+    const passCategories = (vlogCategories) => {
+        categories.value = vlogCategories
+    }
 </script>
 
 <template>
@@ -31,8 +23,8 @@
             <Suspense>
                 <template #default>
                     <div class="watch-video">
-                        <Video />
-                        <Feature v-for="feature in features" :feature="feature" />
+                        <Video @categories="passCategories" />
+                        <Feature v-for="category in categories" :feature="category" />
                     </div>
                 </template>
                 <template #fallback>
