@@ -1,19 +1,52 @@
 <script setup>
-    
+    import { ref } from 'vue'
+
+    const isVideoPlaying = ref(true)
+    const playPauseToggle = () => {
+        isVideoPlaying.value = !isVideoPlaying.value
+    }
+    const value = ref(50)
 </script>
 
 <template>
-    <div id="video-container" class="container">
-        <div id="video">
-            <video controls>
-                <source src="http://127.0.0.1:8000/storage/videoplayback.mp4" type="video/mp4">
+    <div class="video-container container">
+        <div class="video">
+            <video>
+                <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
-            <!-- <div id="reaction">
-                <div id="my-reaction"></div>
-                <div id="reactions"></div>
-            </div> -->
+            <div class="controls-container">
+                <div class="timeline-container"></div>
+                <div class="controls">
+                    <div class="left-controls">
+                        <button class="play-pause-button">
+                            <font-awesome-icon
+                                v-if="isVideoPlaying" 
+                                :icon="['fas', 'pause']" size="2x"
+                                @click="playPauseToggle" />
+                            <font-awesome-icon
+                                v-else
+                                :icon="['fas', 'play']" size="2x"
+                                @click="playPauseToggle" />
+                        </button>
+                        <div class="volume">
+                            <font-awesome-icon :icon="['fas', 'volume-high']" size="xl" />
+                            <div class="volume-slider">
+                                <Slider v-model="value" class="w-56" />
+                            </div>
+                        </div>
+                        <span>15:06/1:23:27</span>
+                    </div>
+                    <div class="right-controls">
+                        <font-awesome-icon :icon="['fas', 'expand']" size="2x" />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="video-detail">
+        <div class="reaction">
+            <div class="my-reaction"></div>
+            <div class="reactions"></div>
+        </div>
+        <div class="video-detail">
             <h1>Title here</h1>
             <p>00/00/2024</p>
             <p>Description</p>
@@ -24,50 +57,112 @@
 <style lang="scss" scoped>
     @import '/src/assets/variables';
 
-    #video-container {
+    .video-container {
         display: flex;
         flex-direction: column;
-        gap: 3.5rem;
+        gap: 1rem;
     }
 
-    #video {
+    .video {
         position: relative;
         width: 100%;
+        height: 38rem;
+
+        &:hover .controls-container {
+            opacity: 1;
+        }
 
         video {
             width: 100%;
+            height: 100%;
             border-radius: 1rem;
             background-color: $darkLabel;
         }
 
-        #reaction {
-            display: flex;
-            gap: 1rem;
+        .controls-container {
+            padding: 1.5rem 2rem;
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 150ms ease-in-out;
+            border-radius: 1rem;
 
-            #my-reaction {
-                width: 3rem;
-                height: 3rem;
-                border-radius: 50%;
-                cursor: pointer;
-                background-color: $boxColor;
-            }
-            #reactions {
-                width: 12rem;
-                height: 3rem;
-                border-radius: 2rem;
-                background-color: $boxColor;
+            .controls {
+                display: flex;
+                justify-content: space-between;
+                // background-color: $red;
+
+                svg {
+                    width: 1.5rem;
+                    cursor: pointer;
+                    opacity: .8;
+                    transition: opacity 150ms ease-in-out;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+                .left-controls {
+                    display: flex;
+                    gap: 2rem;
+                    align-items: center;
+
+                    button {
+                        border: none;
+                        background: none;
+                    }
+
+                    .volume {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+
+                        .volume-slider {
+                            width: 5rem;
+                            display: none;
+                            transition: 150ms ease-in-out;
+
+                            &:hover {
+                                display: block;
+                            }
+                        }
+                        
+                        &:hover .volume-slider {
+                            display: block;
+                        }
+                    }
+                }
             }
         }
     }
 
-    #video-detail {
+    .reaction {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        .my-reaction {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: $blue;
+        }
+
+        .reactions {
+            width: 10rem;
+            height: 3rem;
+            border-radius: 2rem;
+            background-color: $boxColor;
+        }
+    }
+
+    .video-detail {
         padding: 1rem 1.5rem;
         border-radius: 1rem;
         background-color: $boxColor;
-        h1 {
-        }
     }
 </style>

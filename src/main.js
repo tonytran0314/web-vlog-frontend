@@ -11,7 +11,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
-import Skeleton from 'primevue/skeleton';
+import Skeleton from 'primevue/skeleton'
+import Slider from 'primevue/slider'
 
 const app = createApp(App)
 
@@ -20,6 +21,7 @@ library.add(fas)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.component('Skeleton', Skeleton)
+app.component('Slider', Slider)
 app.use(PrimeVue, {
     theme: {
         preset: Aura
