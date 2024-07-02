@@ -1,9 +1,9 @@
 <script setup>
-    import Menu from '/src/components/partials/admin/Menu.vue'
-    import Setting from '/src/components/partials/admin/Setting.vue'
-    import Pagination from '/src/components/pagination/Pagination.vue'
-    import AddCategoryModal from '/src/components/modals/AddCategoryModal.vue'
-    import EditCategoryModal from '/src/components/modals/EditCategoryModal.vue'
+    import Menu from '@/components/partials/admin/Menu.vue'
+    import Setting from '@/components/partials/admin/Setting.vue'
+    import Pagination from '@/components/pagination/Pagination.vue'
+    import AddCategoryModal from '@/components/modals/AddCategoryModal.vue'
+    import EditCategoryModal from '@/components/modals/EditCategoryModal.vue'
 
     import { ref } from 'vue'
 
@@ -79,7 +79,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     #category-management {
         display: flex;
@@ -90,10 +90,6 @@
             border-radius: 1rem;
             color: $white;
             background-color: $boxColor;
-
-            table, th, td {
-                // border: 1px solid $white;
-            }
 
             table {
                 width: 100%;

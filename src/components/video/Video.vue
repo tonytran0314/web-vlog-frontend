@@ -80,7 +80,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';
+    @import '@/assets/variables';
 
     .video-container {
         display: flex;

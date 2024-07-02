@@ -75,7 +75,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     .modal-body {
         padding: 2.5rem 1.5rem 3.5rem 1.5rem;
@@ -127,7 +127,7 @@
 </style>
 
 <style lang="scss">
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     .overlay {
         width: 100%;

@@ -1,6 +1,6 @@
 <script setup>
-    import VideoCard from '/src/components/features/VideoCard.vue'
-    import Pagination from '/src/components/pagination/Pagination.vue'
+    import VideoCard from '@/components/features/VideoCard.vue'
+    import Pagination from '@/components/pagination/Pagination.vue'
 
     import axios from 'axios'
     import { reactive } from 'vue'
@@ -58,7 +58,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
     
     .features {
         display: flex;

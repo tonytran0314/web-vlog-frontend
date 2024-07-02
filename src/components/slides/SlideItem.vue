@@ -27,7 +27,7 @@
 <template>
     <div class="slide-item">
         <div class="background">
-            <img src="/src/assets/images/11.png" alt="background">
+            <img src="@/assets/images/11.png" alt="background">
         </div>
         <div class="slide-info">
             <div class="info-body">
@@ -59,7 +59,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     .slide-item {
         position:relative;

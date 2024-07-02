@@ -19,7 +19,7 @@
     <router-link :to="{ name: 'Vlog', params: { slug: slug } }">
         <div class="cards">
             <div class="thumbnail">
-                <img src="/src/assets/images/11.png" alt="thumbnail">
+                <img src="@/assets/images/11.png" alt="thumbnail">
             </div>
             <div class="title">
                 <h6>{{ title }}</h6>
@@ -30,7 +30,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';
+    @import '@/assets/variables';
 
     .cards {
         width: 19.875rem;

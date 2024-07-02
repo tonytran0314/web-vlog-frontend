@@ -1,5 +1,5 @@
 <script setup>
-    import VideoCardSkeleton from '/src/components/skeletons/VideoCardSkeleton.vue'
+    import VideoCardSkeleton from '@/components/skeletons/VideoCardSkeleton.vue'
 
     const skeletons = Array(24)
 </script>
@@ -18,7 +18,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
     
     .features {
         display: flex;

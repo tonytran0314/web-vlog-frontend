@@ -5,22 +5,22 @@
 <template>
     <footer class="container">
         <div id="background">
-            <img src="/src/assets/images/1.jfif" alt="footer background">
+            <img src="@/assets/images/1.jfif" alt="footer background">
             <div class="overlay"></div>
         </div>
         <div id="details">
             <div id="copyright"><h6>Copyright © 2024. All rights are reserved</h6></div>
             <div id="contacts">
-                <a href="#"><img src="/src/assets/images/TikTok.png" alt="tiktok"></a>
-                <a href="#"><img src="/src/assets/images/Facebook.png" alt="facebook"></a>
-                <a href="#"><img src="/src/assets/images/Youtube.png" alt="youtube"></a>
+                <a href="#"><img src="@/assets/images/TikTok.png" alt="tiktok"></a>
+                <a href="#"><img src="@/assets/images/Facebook.png" alt="facebook"></a>
+                <a href="#"><img src="@/assets/images/Youtube.png" alt="youtube"></a>
             </div>
         </div>
     </footer>
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';
+    @import '@/assets/variables';
 
     footer {
         height: 37.5rem;

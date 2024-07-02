@@ -1,5 +1,5 @@
 <script setup>
-    import SlideItem from './SlideItem.vue'
+    import SlideItem from '@/components/slides/SlideItem.vue'
 
     import axios from 'axios'
     import { ref } from 'vue'
@@ -42,7 +42,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';    
+    @import '@/assets/variables';    
     
     #slides {
         height: 38rem;

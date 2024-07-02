@@ -1,15 +1,15 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import HomeView from '/src/views/HomeView.vue'
-import VlogView from '/src/views/VlogView.vue'
-import CategoryView from '/src/views/CategoryView.vue'
+import HomeView from '@/views/HomeView.vue'
+import VlogView from '@/views/VlogView.vue'
+import CategoryView from '@/views/CategoryView.vue'
 
-import DashboardView from '/src/views/admin/DashboardView.vue'
-import VlogManagementView from '/src/views/admin/VlogManagementView.vue'
-import AddVlogView from '/src/views/admin/AddVlogView.vue'
-import CategoryManagementView from '/src/views/admin/CategoryManagementView.vue'
+import DashboardView from '@/views/admin/DashboardView.vue'
+import VlogManagementView from '@/views/admin/VlogManagementView.vue'
+import AddVlogView from '@/views/admin/AddVlogView.vue'
+import CategoryManagementView from '@/views/admin/CategoryManagementView.vue'
 
-import NotFoundView from '/src/views/NotFoundView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const validateSlug = (to, from, next) => {
   const slug = to.params.slug

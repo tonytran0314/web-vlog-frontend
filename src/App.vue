@@ -6,7 +6,7 @@
 </template>
 
 <style lang="scss">
-  @import '/src/assets/variables';
+  @import '@/assets/variables';
 
   .master-container {
     width: 100%;

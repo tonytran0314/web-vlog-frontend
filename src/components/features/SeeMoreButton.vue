@@ -14,7 +14,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
     
     .see-more {
         border-radius: 1rem;

@@ -1,11 +1,11 @@
 <script setup>
-    import Slides from '/src/components/slides/Slides.vue'
-    import Feature from '/src/components/features/Feature.vue'
-    import Menu from '/src/components/partials/Menu.vue'
-    import Footer from '/src/components/partials/Footer.vue'
+    import Slides from '@/components/slides/Slides.vue'
+    import Feature from '@/components/features/Feature.vue'
+    import Menu from '@/components/partials/Menu.vue'
+    import Footer from '@/components/partials/Footer.vue'
     
-    import FeatureSkeleton from '/src/components/skeletons/FeatureSkeleton.vue'
-    import SlidesSkeleton from '/src/components/skeletons/SlidesSkeleton.vue'
+    import FeatureSkeleton from '@/components/skeletons/FeatureSkeleton.vue'
+    import SlidesSkeleton from '@/components/skeletons/SlidesSkeleton.vue'
 
     // later, this array would be fetch from DB. In admin dashboard, this array can be adjusted
     // the array should store id only
@@ -50,7 +50,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';    
+    @import '@/assets/variables';    
     
     .home {
         display: flex;

@@ -40,7 +40,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     form {
         padding: 2.5rem 2.5rem 1.5rem 2.5rem;

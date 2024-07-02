@@ -1,6 +1,6 @@
 <script setup>
-    import Menu from '/src/components/partials/admin/Menu.vue'
-    import Setting from '/src/components/partials/admin/Setting.vue'
+    import Menu from '@/components/partials/admin/Menu.vue'
+    import Setting from '@/components/partials/admin/Setting.vue'
 </script>
 
 <template>
@@ -14,7 +14,7 @@
                     <h1>Bảng điều khiển</h1>
                 </div>
                 <div id="dashboard-background">
-                    <img src="/src/assets/images/11.png" alt="dashboard background">
+                    <img src="@/assets/images/11.png" alt="dashboard background">
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     #dashboard {
         display: flex;
@@ -44,7 +44,7 @@
 
 
 <style lang="scss">
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     .body {
         width: 100%;

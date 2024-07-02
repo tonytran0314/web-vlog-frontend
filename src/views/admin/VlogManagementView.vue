@@ -1,8 +1,8 @@
 <script setup>
-    import Menu from '/src/components/partials/admin/Menu.vue'
-    import Setting from '/src/components/partials/admin/Setting.vue'
-    import Pagination from '/src/components/pagination/Pagination.vue'
-    import FilterModal from '/src/components/modals/FilterModal.vue'
+    import Menu from '@/components/partials/admin/Menu.vue'
+    import Setting from '@/components/partials/admin/Setting.vue'
+    import Pagination from '@/components/pagination/Pagination.vue'
+    import FilterModal from '@/components/modals/FilterModal.vue'
 
     import { ref } from 'vue'
 
@@ -54,7 +54,7 @@
                         </tr>
                         <tr v-for="t in test">
                             <td><input type="checkbox" name="" id=""></td>
-                            <td><img src="/src/assets/images/11.png" alt=""></td>
+                            <td><img src="@/assets/images/11.png" alt=""></td>
                             <td class="details">
                                 <div class="title"><p>Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video</p></div>
                                 <div class="description"><span>Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video </span></div>
@@ -76,7 +76,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     #vlog-management {
         display: flex;

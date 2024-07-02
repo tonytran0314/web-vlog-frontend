@@ -1,5 +1,5 @@
 <script setup>
-    import Page from '/src/components/pagination/Page.vue'
+    import Page from '@/components/pagination/Page.vue'
 
     const props = defineProps({
         links: {
@@ -19,7 +19,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';
+    @import '@/assets/variables';
     
     #pagination {
         display: flex;

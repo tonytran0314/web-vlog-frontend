@@ -1,6 +1,6 @@
 <script setup>
-    import VideoCard from '/src/components/features/VideoCard.vue'
-    import SeeMoreButton from '/src/components/features/SeeMoreButton.vue'
+    import VideoCard from '@/components/features/VideoCard.vue'
+    import SeeMoreButton from '@/components/features/SeeMoreButton.vue'
 
     import axios from 'axios'
     import { ref } from 'vue'
@@ -46,7 +46,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
     
     .features {
         display: flex;

@@ -25,7 +25,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
     
     #admin-menu {
         min-width: 16rem;

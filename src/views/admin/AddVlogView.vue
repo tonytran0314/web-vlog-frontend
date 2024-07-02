@@ -1,6 +1,6 @@
 <script setup>
-    import Menu from '/src/components/partials/admin/Menu.vue'
-    import Setting from '/src/components/partials/admin/Setting.vue'
+    import Menu from '@/components/partials/admin/Menu.vue'
+    import Setting from '@/components/partials/admin/Setting.vue'
 </script>
 
 <template>
@@ -15,7 +15,7 @@
                 </div>
                 <div id="new-vlog">
                     <div id="vlog-thumbnail">
-                        <img src="/src/assets/images/11.png" alt="">
+                        <img src="@/assets/images/11.png" alt="">
                     </div>
                     <div id="vlog-detail">
                         <form>
@@ -61,7 +61,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';  
+    @import '@/assets/variables';  
 
     #new-vlog-container {
         display: flex;

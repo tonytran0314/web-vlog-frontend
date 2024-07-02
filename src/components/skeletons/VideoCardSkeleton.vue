@@ -16,7 +16,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '/src/assets/variables';
+    @import '@/assets/variables';
 
     .cards {
         width: 19.875rem;
