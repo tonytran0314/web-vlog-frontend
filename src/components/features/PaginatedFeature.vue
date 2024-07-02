@@ -3,20 +3,15 @@
     import Pagination from '/src/components/pagination/Pagination.vue'
 
     import axios from 'axios'
-    import { reactive, watchEffect } from 'vue'
-    import { useRoute } from 'vue-router'
+    import { reactive } from 'vue'
+    import { useRoute, useRouter } from 'vue-router'
 
     const apiUrl = import.meta.env.VITE_API_URL
     const route = useRoute()
+    const router = useRouter()
     const slug = route.params.slug
     const path = (slug === undefined || slug === null || slug === '') ? 'vlogs' : `categories/${slug}` 
     const url = `${apiUrl}${path}`
-
-    // should setup a function to validate page number : undefined, null, less than 1, not an integer ==> become 1
-    if (route.query.page === undefined || 
-        route.query.page === null ||
-        route.query.page < 1 ) 
-        { route.query.page = 1 }  
 
     const vlogs = reactive({
         list: null,
@@ -35,13 +30,9 @@
             vlogs.totalVlogs = response.data.pagination.totalVlogs
             vlogs.totalPages = response.data.pagination.totalPages
         } catch (error) {
-            console.error(error)
+            router.push({ name: 'Not Found' })
         }
     }
-
-    watchEffect(async () => {
-        await getVlogsByCategory()
-    })
 
     await getVlogsByCategory()
         

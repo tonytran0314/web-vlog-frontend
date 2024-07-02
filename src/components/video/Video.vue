@@ -1,7 +1,8 @@
 <script setup>
     import { ref } from 'vue'
     import axios from 'axios'
-    import { useRoute } from 'vue-router'
+    
+    import { useRoute, useRouter } from 'vue-router'
 
     const emit = defineEmits(['categories'])
 
@@ -10,6 +11,7 @@
 
     const apiUrl = import.meta.env.VITE_API_URL
     const route = useRoute()
+    const router = useRouter()
     const path = 'vlogs/'
     const url = `${apiUrl}${path}${route.params.slug}`
     const vlog = ref(null)
@@ -20,7 +22,7 @@
             vlog.value = response.data.data
             emit('categories', response.data.data.categories)
         } catch (error) {
-            console.error(error)
+            router.push({ name: 'Not Found' })
         }
     }
 
@@ -70,9 +72,9 @@
             <div class="reactions"></div>
         </div>
         <div class="video-detail">
-            <h1>{{ vlog.title }}</h1>
-            <p>{{ vlog.date }}</p>
-            <p>{{ vlog.description }}</p>
+            <h1>{{ vlog?.title }}</h1>
+            <p>{{ vlog?.date }}</p>
+            <p>{{ vlog?.description }}</p>
         </div>
     </div>
 </template>

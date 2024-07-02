@@ -63,8 +63,8 @@ const routes = [
     name: 'Category Management',
     component: CategoryManagementView },
   { 
-    path: '/:pathName(.*)',
-    name: '404 Page',
+    path: '/:pathName(.*)*', // the second * is for all routes even vlog/{wrong-slug}
+    name: 'Not Found',
     component: NotFoundView 
   },
 ]
