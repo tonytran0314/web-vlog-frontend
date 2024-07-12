@@ -33,7 +33,7 @@
                 <template #default>
                     <div class="home">
                         <Slides />
-                        <Feature v-for="feature in features" :feature="feature" />
+                        <Feature v-for="feature in features" :feature="feature" :key="feature.id" />
                     </div>
                 </template>
                 <template #fallback>

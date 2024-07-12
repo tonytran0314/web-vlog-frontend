@@ -1,33 +1,17 @@
 <script setup>
     import VideoCard from '@/components/features/VideoCard.vue'
     import SeeMoreButton from '@/components/features/SeeMoreButton.vue'
+    import { useVlogStore } from '@/stores/vlogs'
 
-    import axios from 'axios'
-    import { ref } from 'vue'
+    const vlogStore = useVlogStore()
 
     const props = defineProps({
         feature: {
-            type: Object,
-            required: true
+            type: Object
         }
     })
     
-    const apiUrl = import.meta.env.VITE_API_URL
-    const featurePath = 'feature/'
-    const url = `${apiUrl}${featurePath}${props.feature.slug}`
-    
-    const featuredVlogs = ref(null)
-
-    const getFeaturedVlogs = async () => {
-        try {
-            const response = await axios.get(url)
-            featuredVlogs.value = response.data.data
-        } catch (error) {
-            console.error(error)
-        }
-    }
- 
-    await getFeaturedVlogs()
+    const featuredVlogs = await vlogStore.getFeaturedVlogs(props.feature.slug)
 </script>
 
 <template>
@@ -39,6 +23,7 @@
                 :title="vlog.title"
                 :slug="vlog.slug"
                 :date="vlog.date"
+                :key="vlog.id"
             />
         </div>
         <SeeMoreButton :categorySlug="feature.slug" />
