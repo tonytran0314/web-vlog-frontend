@@ -1,24 +1,12 @@
 <script setup>
     import SlideItem from '@/components/slides/SlideItem.vue'
-
-    import axios from 'axios'
-    import { ref } from 'vue'
+    import { useVlogStore } from '@/stores/vlogs'
     import { register } from 'swiper/element/bundle'
 
     register()
 
-    const latestVlogs = ref(null)
-
-    const getLatestVlogs = async () => {
-        try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/latest-vlogs')
-            latestVlogs.value = response.data.data
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    await getLatestVlogs()
+    const vlogStore = useVlogStore()
+    await vlogStore.getLatestVlogs()
 </script>
 
 <template>
@@ -29,7 +17,7 @@
         :pagination="{ clickable: true }"
         style="--swiper-pagination-color: #EC454F;--swiper-pagination-bullet-size: 12px;"
         >
-        <swiper-slide v-for="vlog in latestVlogs">
+        <swiper-slide v-for="vlog in vlogStore.vlogs">
             <SlideItem
                 :title="vlog.title"
                 :slug="vlog.slug"

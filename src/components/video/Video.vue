@@ -1,9 +1,11 @@
 <script setup>
     import { ref } from 'vue'
     import axios from 'axios'
-    
     import { useRoute, useRouter } from 'vue-router'
+    import { useVlogStore } from '@/stores/vlogs'
 
+    const vlogStore = useVlogStore()
+    
     const emit = defineEmits(['categories'])
 
     const value = ref(50)
