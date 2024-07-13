@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import apiClient from '@/api/apiClient'
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -16,14 +16,11 @@ export const useVlogStore = defineStore('vlog', () => {
         totalPages: null 
     })
 
-    const apiUrl = import.meta.env.VITE_API_URL
-    const featurePath = 'feature/'
-    const vlogPath = 'vlogs/'
     const router = useRouter()
 
     const getLatestVlogs = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/latest-vlogs')
+            const response = await apiClient.get('/latest-vlogs')
             latestVlogs.value = response.data.data
         } catch (error) {
             console.error(error)
@@ -31,9 +28,9 @@ export const useVlogStore = defineStore('vlog', () => {
     }
 
     const getFeaturedVlogs = async (featureSlug) => {
-        const url = `${apiUrl}${featurePath}${featureSlug}`
+        const url = `/feature/${featureSlug}`
         try {
-            const response = await axios.get(url)
+            const response = await apiClient.get(url)
             return response.data.data
         } catch (error) {
             console.error(error)
@@ -41,15 +38,14 @@ export const useVlogStore = defineStore('vlog', () => {
     }
 
     const getVlogsByCategory = async (category) => {
-        const path = (
+        const url = (
             category.slug === undefined ||
             category.slug === null || 
             category.slug === '') ? 
-            'vlogs' : `categories/${category.slug}` 
-        const url = `${apiUrl}${path}`
+            'vlogs' : `categories/${category.slug}`
         
         try {
-            const response = await axios.get(url, { params: { page: category.page } })
+            const response = await apiClient.get(url, { params: { page: category.page } })
             vlogsByCategory.list = response.data.data
             vlogsByCategory.header = response.data.header
             vlogsByCategory.links = response.data.pagination.links
@@ -61,9 +57,9 @@ export const useVlogStore = defineStore('vlog', () => {
     }
 
     const getVlog = async (vlogSlug) => {
-        const url = `${apiUrl}${vlogPath}${vlogSlug}`
+        const url = `/vlogs/${vlogSlug}`
         try {
-            const response = await axios.get(url)
+            const response = await apiClient.get(url)
             vlog.value = response.data.data
             relatedCategories.value = response.data.data.categories
         } catch (error) {
