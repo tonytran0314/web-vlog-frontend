@@ -1,38 +1,18 @@
 <script setup>
-    import { ref } from 'vue'
-    import axios from 'axios'
-    import { useRoute, useRouter } from 'vue-router'
+    import { useRoute } from 'vue-router'
     import { useVlogStore } from '@/stores/vlogs'
+    import { storeToRefs } from 'pinia'
+    import { watch } from 'vue'
 
     const vlogStore = useVlogStore()
-    
-    const emit = defineEmits(['categories'])
-
-    const value = ref(50)
-    const isVideoPlaying = ref(true)
-
-    const apiUrl = import.meta.env.VITE_API_URL
+    const { vlog } = storeToRefs(vlogStore)
     const route = useRoute()
-    const router = useRouter()
-    const path = 'vlogs/'
-    const url = `${apiUrl}${path}${route.params.slug}`
-    const vlog = ref(null)
 
-    const getVideo = async () => {
-        try {
-            const response = await axios.get(url)
-            vlog.value = response.data.data
-            emit('categories', response.data.data.categories)
-        } catch (error) {
-            router.push({ name: 'Not Found' })
-        }
-    }
+    await vlogStore.getVlog(route.params.slug)
 
-    const playPauseToggle = () => {
-        isVideoPlaying.value = !isVideoPlaying.value
-    }
-
-    await getVideo()
+    watch(() => route.params.slug, (newSlug) => {
+        vlogStore.getVlog(newSlug)
+    })
 </script>
 
 <template>
@@ -43,7 +23,7 @@
             </video>
             <div class="controls-container">
                 <div class="timeline-container"></div>
-                <div class="controls">
+                <!-- <div class="controls">
                     <div class="left-controls">
                         <button class="play-pause-button">
                             <font-awesome-icon
@@ -66,7 +46,7 @@
                     <div class="right-controls">
                         <font-awesome-icon :icon="['fas', 'expand']" size="2x" />
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="reaction">

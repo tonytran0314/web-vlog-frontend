@@ -6,13 +6,11 @@
     import SlidesSkeleton from '@/components/skeletons/SlidesSkeleton.vue'
     import FeatureSkeleton from '@/components/skeletons/FeatureSkeleton.vue'
 
-    import { ref } from 'vue'
+    import { useVlogStore } from '@/stores/vlogs'
+    import { storeToRefs } from 'pinia'
 
-    const categories = ref(null)
-
-    const passCategories = (vlogCategories) => {
-        categories.value = vlogCategories
-    }
+    const vlogStore = useVlogStore()
+    const { relatedCategories } = storeToRefs(vlogStore)
 </script>
 
 <template>
@@ -23,8 +21,8 @@
             <Suspense>
                 <template #default>
                     <div class="watch-video">
-                        <Video @categories="passCategories" />
-                        <Feature v-for="category in categories" :feature="category" />
+                        <Video />
+                        <Feature v-for="category in relatedCategories" :feature="category" />
                     </div>
                 </template>
                 <template #fallback>
