@@ -2,58 +2,44 @@
     import VideoCard from '@/components/features/VideoCard.vue'
     import Pagination from '@/components/pagination/Pagination.vue'
 
-    import axios from 'axios'
-    import { reactive } from 'vue'
-    import { useRoute, useRouter } from 'vue-router'
+    import { watch } from 'vue'
+    import { useRoute } from 'vue-router'
+    import { useVlogStore } from '@/stores/vlogs'
+    import { storeToRefs } from 'pinia'
 
-    const apiUrl = import.meta.env.VITE_API_URL
+    const vlogStore = useVlogStore()
+    const { vlogsByCategory } = storeToRefs(vlogStore)
+
     const route = useRoute()
-    const router = useRouter()
-    const slug = route.params.slug
-    const path = (slug === undefined || slug === null || slug === '') ? 'vlogs' : `categories/${slug}` 
-    const url = `${apiUrl}${path}`
-
-    const vlogs = reactive({
-        list: null,
-        header: null,
-        links: null,
-        totalVlogs: null,
-        totalPages: null
-    })
-    
-    const getVlogsByCategory = async () => {
-        try {
-            const response = await axios.get(url, { params: { page: route.query.page } })
-            vlogs.list = response.data.data
-            vlogs.header = response.data.header
-            vlogs.links = response.data.pagination.links
-            vlogs.totalVlogs = response.data.pagination.totalVlogs
-            vlogs.totalPages = response.data.pagination.totalPages
-        } catch (error) {
-            router.push({ name: 'Not Found' })
-        }
+    const category = {
+        slug: route.params.slug,
+        page: route.query.page || 1
     }
+    
+    await vlogStore.getVlogsByCategory(category)
 
-    await getVlogsByCategory()
-        
+    watch(() => route.query.page, (newPage) => {
+        category.page = newPage
+        vlogStore.getVlogsByCategory(category)
+    })
 </script>
 
 <template>
     <div class="features container">
-        <h2>{{ vlogs.header }} (có {{ vlogs.totalVlogs }} vlogs)</h2> 
+        <h2>{{ vlogsByCategory.header }} (có {{ vlogsByCategory.totalVlogs }} vlogs)</h2> 
 
-        <Pagination v-if="vlogs.totalPages > 1" :links="vlogs.links" />
+        <Pagination v-if="vlogsByCategory.totalPages > 1" :links="vlogsByCategory.links" />
         
         <div class="feature-body">
             <VideoCard
-                v-for="vlog in vlogs.list" 
+                v-for="vlog in vlogsByCategory.list" 
                 :title="vlog.title"
                 :slug="vlog.slug"
                 :date="vlog.date"
             />
         </div>
 
-        <Pagination v-if="vlogs.totalPages > 1" :links="vlogs.links" />
+        <Pagination v-if="vlogsByCategory.totalPages > 1" :links="vlogsByCategory.links" />
     </div>
 </template>
 

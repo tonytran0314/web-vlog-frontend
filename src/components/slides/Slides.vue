@@ -17,7 +17,7 @@
         :pagination="{ clickable: true }"
         style="--swiper-pagination-color: #EC454F;--swiper-pagination-bullet-size: 12px;"
         >
-        <swiper-slide v-for="vlog in vlogStore.vlogs">
+        <swiper-slide v-for="vlog in vlogStore.latestVlogs">
             <SlideItem
                 :title="vlog.title"
                 :slug="vlog.slug"
