@@ -2,31 +2,19 @@
     import Menu from '@/components/partials/admin/Menu.vue'
     import Setting from '@/components/partials/admin/Setting.vue'
     import Pagination from '@/components/pagination/Pagination.vue'
-    import AddCategoryModal from '@/components/modals/AddCategoryModal.vue'
-    import EditCategoryModal from '@/components/modals/EditCategoryModal.vue'
 
-    import { ref } from 'vue'
+    import AddCategory from "@/components/modals/AddCategory.vue"
+    import EditCategory from '@/components/modals/EditCategory.vue'
+
+    import { useModalStore } from "@/stores/modals"
+
+    const store = useModalStore()
+
+    const openModal = (component) => {
+        store.openModal({ component: component })
+    }
 
     const test = 10
-
-    const isAddCategoryModalOpen = ref(false)
-    const isEditCategoryModalOpen = ref(false)
-
-    const openAddCategoryModal = () => {
-        isAddCategoryModalOpen.value = true
-    }
-
-    const closeAddCategoryModal = () => {
-        isAddCategoryModalOpen.value = false
-    }
-    
-    const openEditCategoryModal = () => {
-        isEditCategoryModalOpen.value = true
-    }
-
-    const closeEditCategoryModal = () => {
-        isEditCategoryModalOpen.value = false
-    }
 </script>
 
 <template>
@@ -40,9 +28,17 @@
                     <h1>Quản lý Thể loại</h1>
                     <div class="actions">
                         <div class="action-buttons">
-                            <div class="button"><font-awesome-icon :icon="['fas', 'trash']" /><h6>Xoá</h6></div>
-                            <div @click="openEditCategoryModal" class="button"><font-awesome-icon :icon="['fas', 'pen']" /><h6>Sửa</h6></div>
-                            <div @click="openAddCategoryModal" class="button primary-button"><font-awesome-icon :icon="['fas', 'plus']" /><h6>Thêm mới</h6></div>
+                            <div class="button">
+                                <font-awesome-icon :icon="['fas', 'trash']" /><h6>Xoá</h6>
+                            </div>
+
+                            <div @click="openModal(EditCategory)" class="button">
+                                <font-awesome-icon :icon="['fas', 'pen']" /><h6>Sửa</h6>
+                            </div>
+
+                            <div @click="openModal(AddCategory)" class="button primary-button">
+                                <font-awesome-icon :icon="['fas', 'plus']" /><h6>Thêm mới</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,8 +70,6 @@
             </div>
         </div>
     </div>
-    <AddCategoryModal v-show="isAddCategoryModalOpen" @closeModal="closeAddCategoryModal" />
-    <EditCategoryModal v-show="isEditCategoryModalOpen" @closeModal="closeEditCategoryModal" />
 </template>
 
 <style lang="scss" scoped>
