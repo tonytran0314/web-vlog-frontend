@@ -8,7 +8,8 @@
 <template>
     <Teleport to="body">
         <Transition name="modal">
-            <div class="modal-wrapper" @click.self="store.closeModal" v-if="store.modalState?.component">
+            <div  @click.self="store.closeModal" v-if="store.modalState?.component"
+                class="fixed left-0 top-0 z-[500] w-full h-dvh flex justify-center items-center bg-overlay">
                 <component
                     :is="store.modalState?.component"
                     v-bind="store.modalState?.props" />
@@ -17,25 +18,7 @@
     </Teleport>
 </template>
 
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-    .modal-wrapper {
-        position: fixed;
-        left: 0;
-        top: 0;
-
-        z-index: 500;
-
-        width: 100vw;
-        height: 100vh;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background-color: $overlay75Color;
-    }
-
+<style scoped>
     .modal-enter-active,
     .modal-leave-active {
         transition: all 0.25s ease;

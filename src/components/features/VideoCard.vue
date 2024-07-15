@@ -16,57 +16,14 @@
 </script>
 
 <template>
-    <router-link :to="{ name: 'Vlog', params: { slug: slug } }">
-        <div class="cards">
-            <div class="thumbnail">
-                <img src="@/assets/images/11.png" alt="thumbnail">
-            </div>
-            <div class="title">
-                <h6>{{ title }}</h6>
-            </div>
-            <p>{{ date }}</p>
-        </div>
+    <router-link 
+        :to="{ name: 'Vlog', params: { slug: slug } }"
+        class="flex flex-col gap-3 w-[19.25rem] p-4 bg-box"
+    >
+        <img 
+            class="rounded-lg"
+            src="@/assets/images/11.png" alt="thumbnail">
+        <div class="text-lg font-bold line-clamp-2">{{ title }}</div>
+        <p class="text-dark-label">{{ date }}</p>
     </router-link>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';
-
-    .cards {
-        width: 19.875rem;
-        height: 21.25rem;
-        border-radius: .5rem;
-        padding: 1rem;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: .75rem;
-        background-color: $boxColor;
-
-        .thumbnail {
-            width: 100%;
-            height: 12.5rem;
-            border-radius: .5rem;
-
-            img {
-                width: inherit;
-                height: inherit;
-                object-fit: cover;
-                border-radius: .5rem;
-            }
-        }
-
-        .title {
-            width: 100%;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            color: $white;
-        }
-
-        p {
-            color: $darkLabel;
-        }
-    }
-</style>

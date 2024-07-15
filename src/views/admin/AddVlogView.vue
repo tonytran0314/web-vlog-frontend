@@ -4,208 +4,51 @@
 </script>
 
 <template>
-    <div class="admin-container">
-        <Menu />
-        <div class="menu-dummy"></div>
-        <div class="body">
-            <Setting />
-            <div id="new-vlog-container">
-                <div class="body-header">
-                    <h1>Thêm Vlog mới</h1>
+    <Menu />
+    <div class="admin-wrapper">
+        <Setting />
+        <div class="flex flex-col gap-12 p-10">
+            <div class="text-4xl">Thêm Vlog mới</div>
+            <div class="flex gap-8">
+                <div>
+                    <img
+                        class="w-full min-w-40 h-auto rounded-2xl"
+                        src="@/assets/images/11.png" alt="thumbnail">
                 </div>
-                <div id="new-vlog">
-                    <div id="vlog-thumbnail">
-                        <img src="@/assets/images/11.png" alt="">
-                    </div>
-                    <div id="vlog-detail">
-                        <form>
-                            <div class="input-field">
-                                <label for=""><h6>Tiêu đề</h6></label>
-                                <input type="text" name="" id="">
-                            </div>
-                            <div class="input-field">
-                                <label for=""><h6>Mô tả</h6></label>
-                                <textarea name="" id="" cols="30" rows="10"></textarea>
-                            </div>
-                            <div class="input-field">
-                                <label for=""><h6>Thể loại</h6></label>
-                                <div class="categories">
-                                    <div class="category">
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Thể loại 1</label>
-                                    </div>
-                                    <div class="category">
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Thể loại 1</label>
-                                    </div>
-                                    <div class="category">
-                                        <input type="checkbox" id="" name="" value="">
-                                        <label for="">Thể loại 1</label>
-                                    </div>
+                <div class="w-full rounded-2xl p-8 bg-box">
+                    <form class="flex flex-col gap-10">
+                        <div class="flex flex-col gap-4">
+                            <label for=""><div class="text-lg font-bold">Tiêu đề</div></label>
+                            <input class="border-none py-3 px-4 rounded-full bg-secondary-button focus:outline-none" type="text">
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <label for=""><div class="text-lg font-bold">Mô tả</div></label>
+                            <textarea class="border-none py-3 px-4 rounded-2xl bg-secondary-button focus:outline-none" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <label for=""><div class="text-lg font-bold">Thể loại</div></label>
+                            <div class="flex flex-wrap gap-6">
+                                <div class="flex items-center">
+                                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="default-checkbox" class="ms-2 font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="checked-checkbox" class="ms-2 font-medium text-gray-900 dark:text-gray-300">Checked state</label>
                                 </div>
                             </div>
-                            <div class="input-field input-field-row">
-                                <h6>Hiện Vlog</h6>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <button type="submit"><h6>Đăng Vlog</h6></button>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="text-lg font-bold">Hiện Vlog</div>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <button class="bg-my-blue text-lg font-bold rounded-full p-2 border-none" type="submit">Đăng Vlog</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-
-    #new-vlog-container {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-
-        #new-vlog {
-            display: flex;
-            gap: 2rem;
-
-            #vlog-thumbnail {
-                width: 32rem;
-                height: 20rem;
-
-                img {
-                    width: inherit;
-                    height: inherit;
-                    border-radius: 1rem;
-                }
-            }
-
-            #vlog-detail {
-                width: 100%;
-                border-radius: 1rem;
-                padding: 2rem;
-                background-color: $boxColor;
-
-                form {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2.5rem;
-
-                    .input-field {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 1rem;
-                        color: $white;
-
-                        .categories {
-                            display: flex;
-                            gap: 1.5rem;
-                            flex-wrap: wrap;
-                            
-                            .category {
-                                display: flex;
-                                gap: .25rem;
-                            }
-                        }
-
-                        input, textarea {
-                            border: none;
-                            padding: .75rem 1rem;
-                            color: $white;
-                            background-color: $secondaryButton;
-
-                            &:focus {
-                                outline: none;
-                            }
-                        }
-                        
-                        input {
-                            border-radius: 1.5rem;
-                        }
-
-                        textarea {
-                            border-radius: 1rem;
-                        }
-                    }
-
-                    .input-field-row {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                    }
-
-                    button {
-                        cursor: pointer;
-                        border-radius: 1.5rem;
-                        padding: .5rem;
-                        border: none;
-                        color: $white;
-                        background-color: $blue;
-                    }
-                }
-            }
-        }
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 3rem;
-        height: 1.75rem;
-    }
-
-    .switch input { 
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: $darkLabel;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 20px;
-        width: 20px;
-        left: 4px;
-        bottom: 4px;
-        background-color: $white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    input:checked + .slider {
-        background-color: $blue;
-    }
-
-    input:focus + .slider {
-        box-shadow: 0 0 1px $blue;
-    }
-
-    input:checked + .slider:before {
-        -webkit-transform: translateX(1.25rem);
-        -ms-transform: translateX(1.25rem);
-        transform: translateX(1.25rem);
-    }
-
-    .slider.round {
-        border-radius: 1.5rem;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-</style>

@@ -15,39 +15,17 @@
 </script>
 
 <template>
-    <div class="features container">
-        <h2>{{ feature.name }}</h2>
-        <div class="feature-body">
+    <div class="flex flex-col gap-6">
+        <div class="text-3xl font-bold text-main underline capitalize">{{ feature.name }}</div>
+        <div class="flex flex-wrap gap-4 justify-center">
             <VideoCard
                 v-for="vlog in featuredVlogs" 
                 :title="vlog.title"
                 :slug="vlog.slug"
                 :date="vlog.date"
                 :key="vlog.id"
-            />
+            /> 
         </div>
         <SeeMoreButton :categorySlug="feature.slug" />
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-    
-    .features {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-
-        h2 {
-            color: $lightBlue;
-            text-decoration: underline;
-            text-transform: capitalize;
-        }
-
-        .feature-body {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-    }
-</style>

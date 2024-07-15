@@ -25,112 +25,36 @@
 </script>
 
 <template>
-    <div class="slide-item">
-        <div class="background">
-            <img src="@/assets/images/11.png" alt="background">
+    <div class="relative">
+        <div>
+            <img 
+                src="@/assets/images/11.png" 
+                alt="background"
+                class="rounded-2xl w-full h-[38rem] object-cover">
         </div>
-        <div class="slide-info">
-            <div class="info-body">
-                <div class="title">
-                    <h1>{{ title }}</h1>
-                </div>
-                <p class="date">{{ date }}</p>
-                <div class="description">
+        <div class="absolute left-0 top-0 w-96 bg-overlay h-full rounded-l-2xl py-12 px-8 flex flex-col gap-12">
+            <div class="flex flex-col gap-6">
+                <div class="line-clamp-2 text-3xl font-bold">{{ title }}</div>
+                <p class="text-dark-label">{{ date }}</p>
+                <div class="line-clamp-4 ">
                     <p>{{ description }}</p>
                 </div>
-                <div class="categories">
+                <div class="flex gap-2 flex-wrap overflow-hidden max-h-[5.75rem]">
                     <router-link 
                         v-for="category in categories" 
                         :to="{ name: 'Category', params: {slug: category.slug} }"
-                        class="category"
+                        class="py-2 px-4 bg-secondary-button rounded-full"
                         >
                             {{ category.name }}
                     </router-link>
                 </div>
             </div>
             <router-link 
-                class="watch-button" 
+                class="bg-main text-center font-bold py-3 rounded-full" 
                 :to="{ name: 'Vlog', params: { slug: slug } }" 
-                >
-                <h6>Xem ngay</h6>
+            >
+                Xem ngay
             </router-link>
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-
-    .slide-item {
-        position:relative;
-
-        .background {
-            img {
-                width: 82.5rem;
-                height: 38rem;
-                object-fit: cover;
-                border-radius: 1rem;
-            }
-        }
-
-        .slide-info {
-            position: absolute;
-            width: 33rem;
-            height: 38rem;
-            left: 0;
-            top: 0;
-            border-top-left-radius: 1rem;
-            border-bottom-left-radius: 1rem;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-            color: $white;
-            background-color: $overlay65Color;
-
-            .info-body {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-                .title {
-                    overflow: hidden;
-                    width: 29rem;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                }
-
-                .description {
-                    overflow: hidden;
-                    width: 29rem;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 4;
-                    -webkit-box-orient: vertical;
-                }
-
-                .categories {
-                    display: flex;
-                    gap: .5rem;
-                    flex-wrap: wrap;
-                    max-height: 5.75rem;
-                    overflow: hidden;
-
-                    .category {
-                        border-radius: 2rem;
-                        padding: .5rem 1rem;
-                        background-color: $secondaryButton;
-                    }
-                }
-            }
-
-            .watch-button {
-                padding: .75rem;
-                text-align: center;
-                border-radius: 2rem;
-                text-decoration: none;
-                background-color: $red;
-                color: $white;
-            }
-        }
-    }
-</style>

@@ -5,158 +5,56 @@
 </script>
 
 <template>
-    <div class="inner">
-        <div class="modal-header">
-            <h3>Bộ lọc</h3>
-            <div @click="closeModal" class="exit-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+    <div class="p-8 rounded-2xl flex flex-col gap-12 bg-box">
+        <div class="flex justify-between">
+            <div class="text-2xl flex items-center">Bộ lọc</div>
+            <div @click="closeModal" 
+                class="cursor-pointer size-12 p-3 rounded-full bg-secondary-button">
+                <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                     <path fill="#879FBD" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
                 </svg>
             </div>
         </div>
-        <form>
-            <div class="modal-body">
-                <div class="filter-row">
-                    <div id="date-filter" class="input">
-                        <label for="date"><h6>Ngày:</h6></label>
-                        <select name="date" id="date">
+        <form class="flex flex-col gap-12">
+            <div class="flex flex-col gap-12">
+                <div class="flex gap-24">
+                    <div class="flex gap-4 items-center">
+                        <label for="date">Ngày:</label>
+                        <select name="date" id="date" class="py-3 px-4 rounded-full bg-box border-solid border-2 border-my-blue">
                             <option value="all">Tất cả</option>
                             <option value="nearest">Gần nhất</option>
                             <option value="farthest">Xa nhât</option>
                         </select>
                     </div>
-                    <div id="privacy-filter" class="input">
-                        <label for="privacy"><h6>Riêng tư:</h6></label>
-                        <select name="privacy" id="privacy">
+                    <div class="flex gap-4 items-center">
+                        <label for="privacy">Riêng tư:</label>
+                        <select name="privacy" id="privacy" class="py-3 px-4 rounded-full bg-box border-solid border-2 border-my-blue">
                             <option value="all">Tất cả</option>
                             <option value="hide">Video ẩn</option>
                             <option value="show">Video hiện</option>
                         </select>
                     </div>
                 </div>
-                <div id="category-filter" class="filter-column">
-                    <h6>Thể loại:</h6>
+                <div class="flex flex-col gap-2">
+                    <div>Thể loại:</div>
 
-                    <div id="category-filter-body">
-                        <div class="category">
-                            <input type="checkbox" id="" name="" value="">
+                    <div class="flex flex-wrap gap-8">
+                        <div class="flex gap-2 items-center">
+                            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
                             <label for="">Thể loại 1</label>
                         </div>
-                        <div class="category">
-                            <input type="checkbox" id="" name="" value="">
+                        <div class="flex gap-2 items-center">
+                            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
                             <label for="">Thể loại 1</label>
                         </div>
-                        <div class="category">
-                            <input type="checkbox" id="" name="" value="">
+                        <div class="flex gap-2 items-center">
+                            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
                             <label for="">Thể loại 1</label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <h6>Áp dụng</h6>
-            </div>
+            <button type="submit" class="flex justify-center bg-my-blue text-center border-none rounded-full py-2 px-6 hover:bg-blue-600">Áp dụng</button>
         </form>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-
-    .inner {
-        padding: 2rem;
-        border-radius: 1rem;
-        display: flex;
-        gap: 3rem;
-        flex-direction: column;
-        background-color: $boxColor;
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-
-            .exit-button {
-                cursor: pointer;
-                width: 3rem;
-                height: 3rem;
-                padding: .75rem;
-                border-radius: 50%;
-                background-color: $secondaryButton;
-
-                svg {
-                    width: 1.5rem;
-                    height: 1.5rem;
-                }
-            }
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-
-            .modal-body {
-                display: flex;
-                flex-direction: column;
-                gap: 3rem;
-
-                .filter-row {
-                    display: flex;
-                    gap: 6rem;
-
-                    .input {
-                        display: flex;
-                        gap: 1rem;
-                        align-items: center;
-
-                        select {
-                            padding: .75rem 1rem;
-                            border-radius: 1.5rem;
-                            border: 1px solid $darkLabel;
-                            color: $white;
-                            background-color: $boxColor;
-
-                            option {
-                            display: flex;
-                            gap: 1rem;
-                            }
-                        }
-                    }
-                }
-
-                #category-filter {
-                    display: flex;
-                    flex-direction: column;
-                    gap: .5rem;
-
-                    #category-filter-body {
-                        display: flex;
-                        gap: 1.5rem;
-                        flex-wrap: wrap;
-
-                        .category {
-                            display: flex;
-                            gap: .25rem;
-                        }
-                    }
-                }
-            }
-        }
-        
-        .modal-footer {
-            display: flex;
-            align-items: center;
-
-            h6 {
-                width: 100%;
-                text-align: center;
-                border: none;
-                border-radius: 1.5rem;
-                cursor: pointer;
-                padding: .5rem 1.5rem;
-                color: $white;
-                background-color: $blue;
-            }
-        }
-    }
-</style>

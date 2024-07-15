@@ -8,7 +8,7 @@
 
 <template>
     
-    <div class="master-container">
+    <div class="wrapper">
         <Menu />
 
         <main>
@@ -26,8 +26,3 @@
     </div>
 
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';
-
-</style>

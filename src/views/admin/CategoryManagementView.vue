@@ -18,83 +18,77 @@
 </script>
 
 <template>
-    <div class="admin-container">
-        <Menu />
-        <div class="menu-dummy"></div>
-        <div class="body">
-            <Setting />
-            <div id="category-management">
-                <div class="body-header">
-                    <h1>Quản lý Thể loại</h1>
-                    <div class="actions">
-                        <div class="action-buttons">
-                            <div class="button">
-                                <font-awesome-icon :icon="['fas', 'trash']" /><h6>Xoá</h6>
-                            </div>
+    <Menu />
+    <div class="admin-wrapper">
+        <Setting />
+        <div class="space-y-12 p-10">
+            <div class="flex justify-between">
+                <div class="text-4xl">Quản lý Thể loại</div>
+                <div class="flex items-center gap-2">
+                    <button 
+                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
+                        <div>Xoá</div>
+                    </button>
+                    <button @click="openModal(EditCategory)" 
+                        class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
+                        <div>Sửa</div>
+                    </button>
 
-                            <div @click="openModal(EditCategory)" class="button">
-                                <font-awesome-icon :icon="['fas', 'pen']" /><h6>Sửa</h6>
-                            </div>
-
-                            <div @click="openModal(AddCategory)" class="button primary-button">
-                                <font-awesome-icon :icon="['fas', 'plus']" /><h6>Thêm mới</h6>
-                            </div>
-                        </div>
-                    </div>
+                    <button @click="openModal(AddCategory)"
+                        class="cursor-pointer flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
+                        <font-awesome-icon :icon="['fas', 'plus']" /><div>Thêm mới</div>
+                    </button>
                 </div>
-                <div id="category-table">
-                    <table>
-                        <tr>
-                            <th></th>
-                            <th>
-                                <span>Tên thể loại</span>
-                                <font-awesome-icon :icon="['fas', 'arrow-up-short-wide']" />
-                            </th>
-                            <th>
-                                <span>Số lượng vlog</span>
-                                <font-awesome-icon :icon="['fas', 'arrow-down-short-wide']" />
-                            </th>
-                            <th>Ngày tạo</th>
-                            <th></th>
-                        </tr>
-                        <tr v-for="t in test">
-                            <td><input type="checkbox" name="" id=""></td>
-                            <td>Tên thử nghiệm</td>
-                            <td>100</td>
-                            <td>06/20/2024</td>
-                            <td class="options"><font-awesome-icon :icon="['fas', 'ellipsis-h']" /></td>
-                        </tr>
-                    </table>
-                </div>
-                <Pagination />
             </div>
+            
+
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Checkbox</span>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Tên thể loại
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Số lượng
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Ngày tạo
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="t in test"
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                            </td>
+                            <td class="px-6 py-4">
+                                Tên thử nghiệm
+                            </td>
+                            <td class="px-6 py-4">
+                                100
+                            </td>
+                            <td class="px-6 py-4">
+                                06/20/2024
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <font-awesome-icon :icon="['fas', 'ellipsis-h']" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <Pagination />
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-
-    #category-management {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-
-        #category-table {
-            border-radius: 1rem;
-            color: $white;
-            background-color: $boxColor;
-
-            table {
-                width: 100%;
-                border-spacing: 2rem;
-
-                td.options {
-                    svg {
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
-    }
-</style>

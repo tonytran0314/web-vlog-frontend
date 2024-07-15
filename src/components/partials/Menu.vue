@@ -3,45 +3,13 @@
 </script>
 
 <template>
-    <div id="menu" class="container">
-        <div id="logo"></div>
-        <nav>
-            <ul>
-                <li><router-link to="/"><h6>Trang chủ</h6></router-link></li>
-                <li><router-link to="/"><h6>Gia Huy là ai?</h6></router-link></li>
-                <li><router-link to="/category"><h6>Series</h6></router-link></li>
-                <li><router-link to="/admin"><h6>Số Đặc Biệt</h6></router-link></li>
-            </ul>
+    <div class="h-20 flex justify-between items-center">
+        <div></div> <!-- logo -->
+        <nav class="flex gap-14 font-bold">
+            <router-link to="/" class="text-lg">Trang chủ</router-link>
+            <router-link to="/" class="text-lg">Gia Huy là ai?</router-link>
+            <router-link to="/category" class="text-lg">Series</router-link>
+            <router-link to="/admin" class="text-lg">Số Đặc Biệt</router-link>
         </nav>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';
-
-    #menu {
-        height: 5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: $white;
-
-        #logo {}
-
-        nav {
-            ul {
-                display: flex;
-                gap: 3.5rem;
-
-                li {
-                    list-style-type: none;
-
-                    a {
-                        color: $white;
-                        text-decoration: none;
-                    }
-                }
-            }
-        }
-    }
-</style>

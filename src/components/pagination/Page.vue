@@ -22,30 +22,9 @@
     <router-link 
         v-if="page !== null"
         :to="{ name: 'Category', params: { slug: slug}, query: { page: page } }" 
-        class="page" 
-        :class="{ 'current-page': active }"
+        class="py-2 px-4 bg-box text-lg font-bold rounded-lg hover:bg-main duration-300" 
+        :class="{ 'bg-main': active }"
         >
-        <h6>{{ name }}</h6>
+        {{ name }}
     </router-link>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';
-    
-    .page {
-        padding: .5rem 1rem;
-        border-radius: .5rem;
-        cursor: pointer;
-        transition: .3s;
-        color: $white;
-        background-color: $boxColor;
-
-        &:hover {
-            background-color: $red;
-        }
-    }
-
-    .current-page {
-        background-color: $red;
-    }
-</style>

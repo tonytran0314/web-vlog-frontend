@@ -16,10 +16,11 @@
 </script>
 
 <template>
-    <div class="video-container container">
-        <div class="video">
-            <video>
-                <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
+    <div class="flex flex-col gap-4">
+        <div class="video relative w-full h-[38rem]">
+            <video class="w-full h-[38rem] object-cover rounded-2xl" controls>
+                <source
+                    src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
             <div class="controls-container">
                 <div class="timeline-container"></div>
@@ -49,28 +50,20 @@
                 </div> -->
             </div>
         </div>
-        <div class="reaction">
-            <div class="my-reaction"></div>
-            <div class="reactions"></div>
+        <div class="flex gap-4 justify-center">
+            <div class="size-12 rounded-full bg-main"></div>
+            <div class="w-40 h-12 rounded-2xl bg-box"></div>
         </div>
-        <div class="video-detail">
-            <h1>{{ vlog?.title }}</h1>
+        <div class="flex flex-col gap-6 py-4 px-6 rounded-2xl bg-box">
+            <div class="text-3xl font-bold">{{ vlog?.title }}</div>
             <p>{{ vlog?.date }}</p>
             <p>{{ vlog?.description }}</p>
         </div>
     </div>
 </template>
 
-<style lang="scss" scoped>
-    @import '@/assets/variables';
-
-    .video-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .video {
+<style>
+    /* .video {
         position: relative;
         width: 100%;
         height: 38rem;
@@ -145,31 +138,5 @@
                 }
             }
         }
-    }
-
-    .reaction {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-
-        .my-reaction {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            background-color: $blue;
-        }
-
-        .reactions {
-            width: 10rem;
-            height: 3rem;
-            border-radius: 2rem;
-            background-color: $boxColor;
-        }
-    }
-
-    .video-detail {
-        padding: 1rem 1.5rem;
-        border-radius: 1rem;
-        background-color: $boxColor;
-    }
+    } */
 </style>

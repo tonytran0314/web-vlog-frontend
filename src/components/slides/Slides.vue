@@ -11,12 +11,12 @@
 
 <template>
     <swiper-container 
-        id="slides" class="container" 
         speed="500" loop="true"
         :autoplay="{ delay: 8000 }"
         :pagination="{ clickable: true }"
         style="--swiper-pagination-color: #EC454F;--swiper-pagination-bullet-size: 12px;"
-        >
+        class="rounded-2xl h-[38rem]" 
+    >
         <swiper-slide v-for="vlog in vlogStore.latestVlogs">
             <SlideItem
                 :title="vlog.title"
@@ -28,12 +28,3 @@
         </swiper-slide>
     </swiper-container>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';    
-    
-    #slides {
-        height: 38rem;
-        border-radius: 1rem;
-    }
-</style>

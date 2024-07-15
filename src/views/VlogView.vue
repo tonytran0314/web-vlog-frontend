@@ -14,19 +14,19 @@
 </script>
 
 <template>
-    <div class="master-container">
+    <div class="wrapper">
         <Menu />
 
         <main>
             <Suspense>
                 <template #default>
-                    <div class="watch-video">
+                    <div class="space-y-16">
                         <Video />
                         <Feature v-for="category in relatedCategories" :feature="category" />
                     </div>
                 </template>
                 <template #fallback>
-                    <div class="watch-video">
+                    <div class="space-y-16">
                         <SlidesSkeleton />
                         <FeatureSkeleton />
                     </div>
@@ -37,13 +37,3 @@
         <Footer />
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';
-
-    .watch-video {
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-    }
-</style>

@@ -2,12 +2,7 @@
 </script>
 
 <template>
-    <div class="container">
-        <Skeleton width="100%" height="38rem" borderRadius="1rem"></Skeleton>
+    <div class="animate-pulse h-[38rem]">
+        <div class="rounded-2xl bg-slate-700 size-full"></div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';    
-    
-</style>

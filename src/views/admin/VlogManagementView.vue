@@ -16,128 +16,103 @@
 </script>
 
 <template>
-    <div class="admin-container">
-        <Menu />
-        <div class="menu-dummy"></div>
-        <div class="body">
-            <Setting />
-            <div id="vlog-management">
-                <div class="body-header">
-                    <h1>Quản lý Vlogs</h1>
-                    <div class="actions">
-                        <div @click="openModal(Filter)" class="button">
-                            <font-awesome-icon :icon="['fas', 'sliders-h']" /><h6>Bộ lọc</h6>
-                        </div>
-                        <div class="action-buttons">
-                            <div class="button"><font-awesome-icon :icon="['fas', 'eye-slash']" /><h6>Ẩn/Hiện</h6></div>
-                            <div class="button"><font-awesome-icon :icon="['fas', 'trash']" /><h6>Xoá</h6></div>
-                            <div class="button"><font-awesome-icon :icon="['fas', 'pen']" /><h6>Sửa</h6></div>
-                            <router-link to="/admin/vlog/add" class="button primary-button">
-                                <font-awesome-icon :icon="['fas', 'plus']" />
-                                <h6>Thêm mới</h6>
-                            </router-link>
-                        </div>
-                    </div>
+    <Menu />
+    <div class="admin-wrapper">
+        <Setting />
+        <div class="p-10 space-y-12">
+            <div class="flex justify-between">
+                <div class="text-4xl">Quản lý Vlogs</div>
+                <div class="flex items-center gap-2">
+                    <button 
+                        @click="openModal(Filter)" 
+                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <font-awesome-icon :icon="['fas', 'sliders']" /><div>Bộ lọc</div>
+                    </button>
+                
+                    <button 
+                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <font-awesome-icon :icon="['fas', 'eye-slash']" class="w-3 h-3 me-2" />
+                        <div>Ẩn/Hiện</div>
+                    </button>
+                    <button 
+                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
+                        <div>Xoá</div>
+                    </button>
+                    <button  
+                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
+                        <div>Sửa</div>
+                    </button>
+
+                    <router-link to="/admin/vlog/add"
+                        class="flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
+                        <font-awesome-icon :icon="['fas', 'plus']" /><div>Thêm mới</div>
+                    </router-link>
                 </div>
-                <!-- <div id="vlog-table">
-                    <table>
-                        <tr>
-                            <th></th>
-                            <th>Hình nền</th>
-                            <th>Chi tiết</th>
-                            <th>Thể loại</th>
-                            <th>Riêng tư</th>
-                            <th>Ngày đăng</th>
-                            <th></th>
-                        </tr>
-                        <tr v-for="t in test">
-                            <td><input type="checkbox" name="" id=""></td>
-                            <td><img src="@/assets/images/11.png" alt=""></td>
-                            <td class="details">
-                                <div class="title"><p>Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video</p></div>
-                                <div class="description"><span>Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video </span></div>
-                            </td>
-                            <td class="category"><p>Thể loại 1, Thể loại 2, Thể loại 3, Thể loại 4, Thể loại 5, Thể loại 6,
-                                Thể loại 7, Thể loại Thể loại 1, Thể loại 2, Thể loại 3, Thể loại 4, Thể loại 5, Thể loại 6,
-                                Thể loại 7, Thể loại</p></td>
-                            <td><font-awesome-icon :icon="['fas', 'eye']" /></td>
-                            <td>06/20/2024</td>
-                            <td class="options"><font-awesome-icon :icon="['fas', 'ellipsis-h']" /></td>
-                        </tr>
-                    </table>
-                </div> -->
-                <Pagination />
             </div>
+
+
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Checkbox</span>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Hình nền
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Chi tiết
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Thể loại
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Riêng tư
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Ngày đăng
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="t in test"
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4 text-right">
+                                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                            </td>
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <img src="@/assets/images/11.png" alt="thumbnail" class="rounded-xl">
+                            </td>
+                            <td class="px-6 py-4 space-y-4">
+                                <div class="line-clamp-1 font-bold">Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video</div>
+                                <div class="line-clamp-2">Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                Thể loại 1, Thể loại 2, Thể loại 3, Thể loại 4, Thể loại 5, Thể loại 6,
+                                Thể loại 7, Thể loại Thể loại 1, Thể loại 2, Thể loại 3, Thể loại 4, Thể loại 5, Thể loại 6,
+                                Thể loại 7, Thể loại
+                            </td>
+                            <td class="px-6 py-4">
+                                <font-awesome-icon :icon="['fas', 'eye']" />
+                            </td>
+                            <td class="px-6 py-4">
+                                06/20/2024
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <font-awesome-icon :icon="['fas', 'ellipsis-h']" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <Pagination />
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-
-    #vlog-management {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-
-        #vlog-table {
-            border-radius: 1rem;
-            color: $white;
-            background-color: $boxColor;
-
-            table, th, td {
-                // border: 1px solid $white;
-            }
-
-            table {
-                width: 100%;
-                border-spacing: 2rem;
-
-                img {
-                    width: 12rem;
-                    height: 7rem;
-                    border-radius: 1rem;
-                }
-
-                tr {
-                    cursor: pointer;
-                }
-
-                td.details {
-                    display: flex;
-                    flex-direction: column;
-                    gap: .5rem;
-
-                    .title {
-                        overflow: hidden;
-                        width: 33rem;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                    }
-
-                    .description {
-                        overflow: hidden;
-                        width: 33rem;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 3;
-                        -webkit-box-orient: vertical;
-                        color: $darkLabel;
-                    }
-                }
-
-                td.category {
-                    max-width: 12rem;
-                }
-
-                td.options {
-                    svg {
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
-    }
-
-    
-</style>

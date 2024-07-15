@@ -25,19 +25,19 @@
 </script>
 
 <template>  
-    <div class="master-container">
+    <div class="wrapper">
         <Menu />
 
         <main>
             <Suspense>
                 <template #default>
-                    <div class="home">
+                    <div class="space-y-16">
                         <Slides />
                         <Feature v-for="feature in features" :feature="feature" :key="feature.id" />
                     </div>
                 </template>
                 <template #fallback>
-                    <div class="home">
+                    <div class="space-y-16">
                         <SlidesSkeleton />
                         <FeatureSkeleton />
                     </div>
@@ -48,13 +48,3 @@
         <Footer />
     </div>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';    
-    
-    .home {
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-    }
-</style>

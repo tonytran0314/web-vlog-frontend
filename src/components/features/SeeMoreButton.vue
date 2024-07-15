@@ -8,20 +8,10 @@
 </script>
 
 <template>
-    <router-link :to="{ name: 'Category', params: { slug: props.categorySlug }  }" class="see-more">
-        <h6>xem thêm</h6>
+    <router-link 
+        :to="{ name: 'Category', params: { slug: props.categorySlug }  }" 
+        class="bg-secondary-button rounded-full text-center py-3 text-lg font-bold capitalize"
+    >
+        xem thêm
     </router-link>
 </template>
-
-<style lang="scss" scoped>
-    @import '@/assets/variables';  
-    
-    .see-more {
-        border-radius: 1rem;
-        padding: 1rem 0;
-        text-align: center;
-        text-transform: capitalize;
-        background-color: $boxColor;
-        color: $white;
-    }
-</style>

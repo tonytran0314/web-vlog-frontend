@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .wrapper {
+        @apply space-y-8 max-w-7xl mx-auto;
+    } 
+    .admin-wrapper {
+        /* menu width = 16rem */
+        @apply w-[calc(100%-16rem)] ml-64;
+    }
+}
