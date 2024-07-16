@@ -17,12 +17,11 @@
 
 <template>
     <div class="flex flex-col gap-4 text-white">
-        <div class="video relative w-full h-[38rem]">
+        <div class="group relative w-full h-[38rem]">
             <video class="w-full h-[38rem] object-cover rounded-2xl">
-                <source
-                    src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
+                <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
-            <div class="space-y-5 bg-overlay absolute bottom-0 w-full rounded-b-2xl p-4">
+            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
                 <div class="bg-main w-full h-[6px] rounded cursor-pointer"></div>
                 <div class="flex justify-between items-center">
                     <div class="flex gap-6 items-center">
@@ -51,82 +50,3 @@
         </div>
     </div>
 </template>
-
-<style>
-    /* .video {
-        position: relative;
-        width: 100%;
-        height: 38rem;
-
-        &:hover .controls-container {
-            opacity: 1;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            border-radius: 1rem;
-            background-color: $darkLabel;
-        }
-
-        .controls-container {
-            padding: 1.5rem 2rem;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            opacity: 1;
-            transition: opacity 150ms ease-in-out;
-            border-radius: 1rem;
-
-            .controls {
-                display: flex;
-                justify-content: space-between;
-                // background-color: $red;
-
-                svg {
-                    width: 1.5rem;
-                    cursor: pointer;
-                    opacity: .8;
-                    transition: opacity 150ms ease-in-out;
-
-                    &:hover {
-                        opacity: 1;
-                    }
-                }
-
-                .left-controls {
-                    display: flex;
-                    gap: 2rem;
-                    align-items: center;
-
-                    button {
-                        border: none;
-                        background: none;
-                    }
-
-                    .volume {
-                        display: flex;
-                        align-items: center;
-                        gap: 1rem;
-
-                        .volume-slider {
-                            width: 5rem;
-                            display: none;
-                            transition: 150ms ease-in-out;
-
-                            &:hover {
-                                display: block;
-                            }
-                        }
-                        
-                        &:hover .volume-slider {
-                            display: block;
-                        }
-                    }
-                }
-            }
-        }
-    } */
-</style>
