@@ -8,6 +8,6 @@
     } 
     .admin-wrapper {
         /* menu width = 16rem */
-        @apply w-[calc(100%-16rem)] ml-64;
+        @apply w-[calc(100%-16rem)] min-h-dvh ml-64;
     }
 }
