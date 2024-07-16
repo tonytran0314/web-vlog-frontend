@@ -1,34 +1,40 @@
 <script setup>
-    
+    import { useAdminMenuStore } from '@/stores/admin-menu'
+    import { useRoute } from 'vue-router'
+
+    const route = useRoute()
+    const { links } = useAdminMenuStore()
 </script>
 
 <template>
     <div class="bg-box h-dvh py-8 px-0 fixed w-[16rem]">
-        <div class="flex flex-col gap-6 p-8">
-            <p class="text-dark-label text-sm">Admin Menu</p>
-            <nav class="flex flex-col gap-8 text-white">
-                <router-link 
-                    :to="{ name: 'Dashboard' }"
-                    class="flex items-center gap-4"
-                >
-                    <font-awesome-icon :icon="['fas', 'home']" />
-                    <div>Bảng điều khiển</div>
-                </router-link>
-                <router-link 
-                    :to="{ name: 'Vlog Management' }"
-                    class="flex items-center gap-4"
-                >
-                    <font-awesome-icon :icon="['fas', 'video']" />
-                    <div>Quản lý Vlogs</div>
-                </router-link>
-                <router-link 
-                    :to="{ name: 'Category Management' }"
-                    class="flex items-center gap-4"
-                >
-                    <font-awesome-icon :icon="['fas', 'layer-group']" />
-                    <div>Quản lý thể loại</div>
-                </router-link>
-            </nav>
+        <div class="space-y-12 pt-12">
+            <div class="space-y-2">
+                <p class="text-dark-label text-sm uppercase pl-8">Admin Menu</p>
+                <nav class="text-white">
+                    <router-link 
+                        v-for="link in links"
+                        :to="{ name: link.name }"
+                        class="flex items-center gap-4 py-3 pl-12 hover:bg-my-blue"
+                        :class="{ 'bg-my-blue': route.name === link.name || route.name === link.subname }"
+                    >
+                        <font-awesome-icon :icon="['fas', link.icon]" />
+                        <div>{{ link.label }}</div>
+                    </router-link>
+                </nav>
+            </div>
+            <div class="space-y-2">
+                <p class="text-dark-label text-sm uppercase pl-8">Client</p>
+                <nav class="space-y-8 text-white">
+                    <router-link 
+                        :to="{ name: 'Home' }"
+                        class="flex items-center gap-4 py-3 pl-12 hover:bg-my-blue"
+                    >
+                        <font-awesome-icon :icon="['fas', 'home']" />
+                        <div>Trang chủ</div>
+                    </router-link>
+                </nav>
+            </div>
         </div>
     </div>
 </template>
