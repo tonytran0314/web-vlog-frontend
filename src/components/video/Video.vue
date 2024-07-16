@@ -40,10 +40,10 @@
                 </div>
             </div>
         </div>
-        <div class="flex gap-4 justify-center">
+        <!-- <div class="flex gap-4 justify-center">
             <div class="size-12 rounded-full bg-main"></div>
             <div class="w-40 h-12 rounded-2xl bg-box"></div>
-        </div>
+        </div> -->
         <div class="flex flex-col gap-6 py-4 px-6 rounded-2xl bg-box">
             <div class="text-3xl font-bold">{{ vlog?.title }}</div>
             <p>{{ vlog?.date }}</p>
