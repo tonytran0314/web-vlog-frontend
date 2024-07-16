@@ -4,7 +4,7 @@
 
 @layer components {
     .wrapper {
-        @apply space-y-8 max-w-7xl mx-auto;
+        @apply space-y-8 max-w-7xl mx-auto pb-12;
     } 
     .admin-wrapper {
         /* menu width = 16rem */
