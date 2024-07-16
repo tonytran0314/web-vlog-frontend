@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 
 export const useVlogStore = defineStore('vlog', () => {
 
+    const isVlogPlaying = ref(false)
+
     const latestVlogs = ref(null)
     const vlog = ref(null)
     const relatedCategories = ref(null)
@@ -67,7 +69,13 @@ export const useVlogStore = defineStore('vlog', () => {
         }
     }
 
+    const togglePlayPauseVlog = (videoRef) => {
+        videoRef.paused ? videoRef.play() : videoRef.pause()
+        isVlogPlaying.value = !isVlogPlaying.value
+    }
+
     return { 
+        isVlogPlaying,
         latestVlogs,
         vlogsByCategory, 
         vlog,
@@ -75,7 +83,8 @@ export const useVlogStore = defineStore('vlog', () => {
         getLatestVlogs, 
         getFeaturedVlogs,
         getVlogsByCategory,
-        getVlog
+        getVlog,
+        togglePlayPauseVlog
     }
 
 })

@@ -2,23 +2,27 @@
     import { useRoute } from 'vue-router'
     import { useVlogStore } from '@/stores/vlogs'
     import { storeToRefs } from 'pinia'
-    import { watch } from 'vue'
+    import { watch, ref } from 'vue'
 
     const vlogStore = useVlogStore()
-    const { vlog } = storeToRefs(vlogStore)
+    const { vlog, isVlogPlaying } = storeToRefs(vlogStore)
+    const { getVlog, togglePlayPauseVlog } = vlogStore
     const route = useRoute()
-
-    await vlogStore.getVlog(route.params.slug)
+    const videoRef = ref(null)
+    
+    await getVlog(route.params.slug)
 
     watch(() => route.params.slug, (newSlug) => {
-        vlogStore.getVlog(newSlug)
+        getVlog(newSlug)
     })
 </script>
 
 <template>
     <div class="flex flex-col gap-4 text-white">
         <div class="group relative w-full h-[38rem]">
-            <video class="w-full h-[38rem] object-cover rounded-2xl">
+            <video
+                @click="togglePlayPauseVlog(videoRef)" 
+                ref="videoRef" class="w-full h-[38rem] object-cover rounded-2xl" autoplay>
                 <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
@@ -27,7 +31,11 @@
                     <div class="flex gap-6 items-center">
                         <button class="cursor-pointer">
                             <font-awesome-icon
-                                :icon="['fas', 'pause']" size="2x" />
+                                v-if="isVlogPlaying"
+                                :icon="['fas', 'pause']" size="2x" @click="togglePlayPauseVlog(videoRef)" />
+                            <font-awesome-icon 
+                                v-else
+                                :icon="['fas', 'play']" size="2x" @click="togglePlayPauseVlog(videoRef)" />
                         </button>
                         <div class="flex gap-3 items-center">
                             <font-awesome-icon :icon="['fas', 'volume-high']" size="xl" />
