@@ -18,15 +18,15 @@
 <template>
     <div class="flex flex-col gap-4">
         <div class="video relative w-full h-[38rem]">
-            <video class="w-full h-[38rem] object-cover rounded-2xl" controls>
+            <video class="w-full h-[38rem] object-cover rounded-2xl">
                 <source
                     src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
-            <div class="controls-container">
-                <div class="timeline-container"></div>
-                <!-- <div class="controls">
-                    <div class="left-controls">
-                        <button class="play-pause-button">
+            <div class="space-y-5 bg-overlay absolute bottom-0 w-full rounded-b-2xl p-4">
+                <div class="bg-main w-full h-[6px] rounded cursor-pointer"></div>
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-6 items-center">
+                        <button class="cursor-pointer">
                             <font-awesome-icon
                                 v-if="isVideoPlaying" 
                                 :icon="['fas', 'pause']" size="2x"
@@ -36,18 +36,14 @@
                                 :icon="['fas', 'play']" size="2x"
                                 @click="playPauseToggle" />
                         </button>
-                        <div class="volume">
+                        <div class="flex gap-3 items-center">
                             <font-awesome-icon :icon="['fas', 'volume-high']" size="xl" />
-                            <div class="volume-slider">
-                                <Slider v-model="value" class="w-56" />
-                            </div>
+                            <input id="default-range" type="range" value="70" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
                         </div>
                         <span>15:06/1:23:27</span>
                     </div>
-                    <div class="right-controls">
-                        <font-awesome-icon :icon="['fas', 'expand']" size="2x" />
-                    </div>
-                </div> -->
+                    <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="cursor-pointer" />
+                </div>
             </div>
         </div>
         <div class="flex gap-4 justify-center">
