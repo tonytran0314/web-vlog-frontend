@@ -8,7 +8,7 @@
     <div class="admin-wrapper">
         <Setting />
         <div class="space-y-12 p-10">
-            <div class="text-4xl">Bảng điều khiển</div>
+            <div class="text-4xl text-white">Bảng điều khiển</div>
             <img src="@/assets/images/11.png" alt="dashboard background"
                 class="rounded-2xl">
         </div>

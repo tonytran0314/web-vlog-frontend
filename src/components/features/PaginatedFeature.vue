@@ -34,7 +34,7 @@
             v-if="vlogsByCategory.totalPages > 1" 
             :links="vlogsByCategory.links" />
         
-        <div class="flex flex-wrap gap-4 justify-center">
+        <div class="flex flex-wrap gap-4 justify-center text-white">
             <VideoCard
                 v-for="vlog in vlogsByCategory.list" 
                 :title="vlog.title"

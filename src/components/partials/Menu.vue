@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="h-20 flex justify-between items-center">
+    <div class="h-20 flex justify-between items-center text-white">
         <div></div> <!-- logo -->
         <nav class="flex gap-14 font-bold">
             <router-link to="/" class="text-lg">Trang chủ</router-link>

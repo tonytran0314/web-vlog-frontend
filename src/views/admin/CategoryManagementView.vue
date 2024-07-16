@@ -23,7 +23,7 @@
         <Setting />
         <div class="space-y-12 p-10">
             <div class="flex justify-between">
-                <div class="text-4xl">Quản lý Thể loại</div>
+                <div class="text-4xl text-white">Quản lý Thể loại</div>
                 <div class="flex items-center gap-2">
                     <button 
                         type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">

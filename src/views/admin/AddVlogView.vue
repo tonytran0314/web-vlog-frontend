@@ -7,7 +7,7 @@
     <Menu />
     <div class="admin-wrapper">
         <Setting />
-        <div class="flex flex-col gap-12 p-10">
+        <div class="flex flex-col gap-12 p-10 text-white">
             <div class="text-4xl">Thêm Vlog mới</div>
             <div class="flex gap-8">
                 <div>

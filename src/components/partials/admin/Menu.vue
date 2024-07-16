@@ -6,7 +6,7 @@
     <div class="bg-box h-dvh py-8 px-0 fixed w-[16rem]">
         <div class="flex flex-col gap-6 p-8">
             <p class="text-dark-label text-sm">Admin Menu</p>
-            <nav class="flex flex-col gap-8">
+            <nav class="flex flex-col gap-8 text-white">
                 <router-link 
                     :to="{ name: 'Dashboard' }"
                     class="flex items-center gap-4"

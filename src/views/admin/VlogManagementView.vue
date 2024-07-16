@@ -21,7 +21,7 @@
         <Setting />
         <div class="p-10 space-y-12">
             <div class="flex justify-between">
-                <div class="text-4xl">Quản lý Vlogs</div>
+                <div class="text-4xl text-white">Quản lý Vlogs</div>
                 <div class="flex items-center gap-2">
                     <button 
                         @click="openModal(Filter)" 

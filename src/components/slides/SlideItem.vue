@@ -34,12 +34,12 @@
         </div>
         <div class="absolute left-0 top-0 w-96 bg-overlay h-full rounded-l-2xl py-12 px-8 flex flex-col gap-12">
             <div class="flex flex-col gap-6">
-                <div class="line-clamp-2 text-3xl font-bold">{{ title }}</div>
+                <div class="line-clamp-2 text-3xl font-bold text-white">{{ title }}</div>
                 <p class="text-dark-label">{{ date }}</p>
-                <div class="line-clamp-4 ">
+                <div class="line-clamp-4 text-white">
                     <p>{{ description }}</p>
                 </div>
-                <div class="flex gap-2 flex-wrap overflow-hidden max-h-[5.75rem]">
+                <div class="flex gap-2 flex-wrap overflow-hidden max-h-[5.75rem] text-white">
                     <router-link 
                         v-for="category in categories" 
                         :to="{ name: 'Category', params: {slug: category.slug} }"
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <router-link 
-                class="bg-main text-center font-bold py-3 rounded-full" 
+                class="bg-main text-center font-bold py-3 rounded-full text-white" 
                 :to="{ name: 'Vlog', params: { slug: slug } }" 
             >
                 Xem ngay

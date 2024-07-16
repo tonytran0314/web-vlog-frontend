@@ -22,7 +22,7 @@
     <router-link 
         v-if="page !== null"
         :to="{ name: 'Category', params: { slug: slug}, query: { page: page } }" 
-        class="py-2 px-4 bg-box text-lg font-bold rounded-lg hover:bg-main duration-300" 
+        class="py-2 px-4 bg-box text-lg text-white font-bold rounded-lg hover:bg-main duration-300" 
         :class="{ 'bg-main': active }"
         >
         {{ name }}

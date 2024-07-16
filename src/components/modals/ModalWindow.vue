@@ -9,7 +9,7 @@
     <Teleport to="body">
         <Transition name="modal">
             <div  @click.self="store.closeModal" v-if="store.modalState?.component"
-                class="fixed left-0 top-0 z-[500] w-full h-dvh flex justify-center items-center bg-overlay">
+                class="fixed left-0 top-0 z-[500] w-full h-dvh flex justify-center items-center bg-overlay text-white">
                 <component
                     :is="store.modalState?.component"
                     v-bind="store.modalState?.props" />

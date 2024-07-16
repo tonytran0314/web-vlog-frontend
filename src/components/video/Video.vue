@@ -16,7 +16,7 @@
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 text-white">
         <div class="video relative w-full h-[38rem]">
             <video class="w-full h-[38rem] object-cover rounded-2xl">
                 <source
@@ -28,13 +28,7 @@
                     <div class="flex gap-6 items-center">
                         <button class="cursor-pointer">
                             <font-awesome-icon
-                                v-if="isVideoPlaying" 
-                                :icon="['fas', 'pause']" size="2x"
-                                @click="playPauseToggle" />
-                            <font-awesome-icon
-                                v-else
-                                :icon="['fas', 'play']" size="2x"
-                                @click="playPauseToggle" />
+                                :icon="['fas', 'pause']" size="2x" />
                         </button>
                         <div class="flex gap-3 items-center">
                             <font-awesome-icon :icon="['fas', 'volume-high']" size="xl" />
