@@ -15,8 +15,8 @@
                     <router-link 
                         v-for="link in links"
                         :to="{ name: link.name }"
-                        class="flex items-center gap-4 py-3 pl-12 hover:bg-my-blue"
-                        :class="{ 'bg-my-blue': route.name === link.name || route.name === link.subname }"
+                        class="flex items-center gap-4 py-3 pl-12 relative hover:bg-my-blue"
+                        :class="{ 'current-admin-tab': route.name === link.name || route.name === link.subname }"
                     >
                         <font-awesome-icon :icon="['fas', link.icon]" />
                         <div>{{ link.label }}</div>
