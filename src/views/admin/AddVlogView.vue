@@ -10,10 +10,11 @@
         <div class="flex flex-col gap-12 p-10 text-white">
             <div class="text-4xl">Thêm Vlog mới</div>
             <div class="flex gap-8">
-                <div>
+                <div class="space-y-8">
                     <img
                         class="w-full min-w-40 h-auto rounded-2xl"
                         src="@/assets/images/11.png" alt="thumbnail">
+                    <input class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
                 </div>
                 <div class="w-full rounded-2xl p-8 bg-box">
                     <form class="flex flex-col gap-10">
