@@ -54,14 +54,18 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       let minutes = Math.floor((time - 3600*hours) / 60)
       let seconds = Math.floor(time % 60)
 
-      if (hours === 0)  hours = '' 
-      if (hours > 0 && hours < 10)   hours = `0${hours}:`
-      if (hours > 10)   hours = `${hours}:`
+      if (hours === 0)                hours = '' 
+      if (hours > 0 && hours < 10)    hours = `0${hours}:`
+      if (hours > 10)                 hours = `${hours}:`
 
       if (minutes < 10) minutes = `0${minutes}`
       if (seconds < 10) seconds = `0${seconds}`
 
       return `${hours}${minutes}:${seconds}`
+    }
+
+    const toggleMute = (video) => {
+      video.volume = video.volume !== 0 ? 0 : 1
     }
 
     return { 
@@ -70,7 +74,8 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,
-        setDuration
+        setDuration,
+        toggleMute
     }
 
 })

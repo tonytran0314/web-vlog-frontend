@@ -47,8 +47,10 @@
                                 :icon="['fas', 'play']" size="2x" @click="controls.togglePlay(video)" />
                         </button>
                         <div class="flex gap-3 items-center">
-                            <font-awesome-icon :icon="['fas', 'volume-high']" size="xl" />
-                            <input id="default-range" type="range" value="70" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                            <font-awesome-icon 
+                                class="cursor-pointer" @click="controls.toggleMute(video)"
+                                :icon="['fas', 'volume-high']" size="xl" />
+                            <input type="range" value="70" class="w-full h-1 cursor-pointer bg-gray-200 rounded dark:bg-gray-700">
                         </div>
                         <span>15:06/{{ duration }}</span>
                     </div>
