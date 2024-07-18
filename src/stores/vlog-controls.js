@@ -66,12 +66,9 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
     return { 
         isVlogPlaying,
-        isFullscreen,
         duration,
         togglePlay,
         toggleFullscreen,
-        enterFullscreen,
-        exitFullscreen,
         watchExitFullScreenWithESC,
         setDuration
     }
