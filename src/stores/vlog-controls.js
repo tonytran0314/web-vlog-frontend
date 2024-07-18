@@ -68,6 +68,10 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       video.volume = video.volume !== 0 ? 0 : 1
     }
 
+    const setVolume = (video, volume) => {
+      video.volume = volume
+    }
+
     return { 
         isVlogPlaying,
         duration,
@@ -75,7 +79,8 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         toggleFullscreen,
         watchExitFullScreenWithESC,
         setDuration,
-        toggleMute
+        toggleMute,
+        setVolume
     }
 
 })

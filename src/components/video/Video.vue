@@ -50,7 +50,10 @@
                             <font-awesome-icon 
                                 class="cursor-pointer" @click="controls.toggleMute(video)"
                                 :icon="['fas', 'volume-high']" size="xl" />
-                            <input type="range" value="70" class="w-full h-1 cursor-pointer bg-gray-200 rounded dark:bg-gray-700">
+                            <input 
+                                @input="controls.setVolume(video, $event.target.value)"
+                                type="range" min="0" max="1" step="0.01" value="1" 
+                                class="w-full h-1 cursor-pointer bg-gray-200 rounded dark:bg-gray-700">
                         </div>
                         <span>15:06/{{ duration }}</span>
                     </div>
