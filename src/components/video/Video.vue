@@ -22,14 +22,14 @@
 
 <template>
     <div class="flex flex-col gap-4 text-white">
-        <div ref="videoWrapper" class="group relative w-full h-[38rem]">
+        <div ref="videoWrapper" class="group/video relative w-full h-[38rem]">
             <video
                 @loadedmetadata="controls.setDuration(video.duration)"
                 @click="controls.togglePlay(video)" 
                 ref="video" class="size-full object-contain rounded-2xl">
                 <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
-            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
+            <div class="opacity-100 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
                 <div class="w-full h-2 cursor-pointer">
                     <div class="relative size-full bg-[#ccc] rounded-full">
                     <div class="absolute h-full bg-main rounded-full w-1/2"></div>
@@ -46,14 +46,16 @@
                                 v-else
                                 :icon="['fas', 'play']" size="2x" @click="controls.togglePlay(video)" />
                         </button>
-                        <div class="flex gap-3 items-center">
+                        <div class="flex gap-3 items-center group/volume cursor-pointer">
                             <font-awesome-icon 
-                                class="cursor-pointer" @click="controls.toggleMute(video)"
+                                @click="controls.toggleMute(video)"
                                 :icon="['fas', 'volume-high']" size="xl" />
-                            <input 
-                                @input="controls.setVolume(video, $event.target.value)"
-                                type="range" min="0" max="1" step="0.01" value="1" 
-                                class="w-full h-1 cursor-pointer bg-gray-200 rounded dark:bg-gray-700">
+                            <div class="w-0 transform transition-[width] origin-left scale-x-0 group-hover/volume:w-full group-hover/volume:scale-x-100 rounded flex items-center">
+                                <input 
+                                    class="h-[6px] rounded cursor-pointer"
+                                    @input="controls.setVolume(video, $event.target.value)"
+                                    type="range" min="0" max="1" step="0.01" value="1">
+                            </div>
                         </div>
                         <span>15:06/{{ duration }}</span>
                     </div>
