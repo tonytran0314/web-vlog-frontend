@@ -29,7 +29,12 @@
                 <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
-                <div class="bg-main w-full h-[6px] rounded cursor-pointer"></div>
+                <div class="w-full h-2 cursor-pointer">
+                    <div class="relative size-full bg-[#ccc] rounded-full">
+                    <div class="absolute h-full bg-main rounded-full w-1/2"></div>
+                    <div class="absolute top-0 w-2 h-full bg-main cursor-pointer rounded-full left-1/2"></div>
+                    </div>
+                </div>
                 <div class="flex justify-between items-center">
                     <div class="flex gap-6 items-center">
                         <button class="cursor-pointer">
