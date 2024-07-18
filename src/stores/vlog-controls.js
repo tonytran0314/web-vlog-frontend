@@ -64,8 +64,15 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       return `${hours}${minutes}:${seconds}`
     }
 
-    const toggleMute = (video) => {
-      video.volume = video.volume !== 0 ? 0 : 1
+    const toggleMute = (video, volumeBar) => {
+      if(video.volume !== 0) {
+        video.volume = 0
+        volumeBar.value = 0
+      } else {
+        // set them to currentVolume instead
+        video.volume = 1
+        volumeBar.value = 1
+      }
     }
 
     const setVolume = (video, volume) => {
