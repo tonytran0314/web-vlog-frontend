@@ -8,10 +8,15 @@
     const { vlog } = storeToRefs(useVlogStore())
     const { getVlog } = useVlogStore()
 
-    const videoRef = ref(null)
+    const video = ref(null)
     const videoWrapper = ref(null)
-    const { isVlogPlaying } = storeToRefs(useVlogControlsStore())
-    const { togglePlayPauseVlog, toggleFullscreen, watchExitFullScreenWithESC } = useVlogControlsStore()
+    const { isVlogPlaying, duration } = storeToRefs(useVlogControlsStore())
+    const { 
+        togglePlay, 
+        toggleFullscreen, 
+        watchExitFullScreenWithESC,
+        setDuration
+    } = useVlogControlsStore()
 
     const route = useRoute()
     await getVlog(route.params.slug)
@@ -24,8 +29,9 @@
     <div class="flex flex-col gap-4 text-white">
         <div ref="videoWrapper" class="group relative w-full h-[38rem]">
             <video
-                @click="togglePlayPauseVlog(videoRef)" 
-                ref="videoRef" class="size-full object-contain rounded-2xl">
+                @loadedmetadata="setDuration(video.duration)"
+                @click="togglePlay(video)" 
+                ref="video" class="size-full object-contain rounded-2xl">
                 <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
@@ -40,16 +46,16 @@
                         <button class="cursor-pointer">
                             <font-awesome-icon
                                 v-if="isVlogPlaying"
-                                :icon="['fas', 'pause']" size="2x" @click="togglePlayPauseVlog(videoRef)" />
+                                :icon="['fas', 'pause']" size="2x" @click="togglePlay(video)" />
                             <font-awesome-icon 
                                 v-else
-                                :icon="['fas', 'play']" size="2x" @click="togglePlayPauseVlog(videoRef)" />
+                                :icon="['fas', 'play']" size="2x" @click="togglePlay(video)" />
                         </button>
                         <div class="flex gap-3 items-center">
                             <font-awesome-icon :icon="['fas', 'volume-high']" size="xl" />
                             <input id="default-range" type="range" value="70" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
                         </div>
-                        <span>15:06/1:23:27</span>
+                        <span>15:06/{{ duration }}</span>
                     </div>
                     <font-awesome-icon @click="toggleFullscreen(videoWrapper)" :icon="['fas', 'expand']" size="2x" class="cursor-pointer" />
                 </div>
