@@ -32,11 +32,14 @@
                 ref="video" class="size-full object-contain rounded-2xl">
                 <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
-            <div class="opacity-0 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
-                <div class="w-full h-2 cursor-pointer">
-                    <div class="relative size-full bg-[#ccc] rounded-full">
-                    <div class="absolute h-full bg-main rounded-full w-1/2"></div>
-                    <div class="absolute top-0 w-2 h-full bg-main cursor-pointer rounded-full left-1/2"></div>
+            <div class="opacity-100 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
+                <div class="group/timeline h-[7px] rounded cursor-pointer flex items-center">
+                    <div class="bg-[rgba(100,100,100,.5)] h-[3px] w-full rounded relative group-hover/timeline:h-full">
+                        <div class="absolute left-0 top-0 h-full w-1/2 rounded bg-main">
+                            <div class="scale-0 size-4 bg-main rounded-full absolute -right-2 top-1/2 -translate-y-1/2 group-hover/timeline:scale-100"></div>
+                        </div>
+                        <img src="" alt="">
+                        <div></div>
                     </div>
                 </div>
                 <div class="flex justify-between items-center">
