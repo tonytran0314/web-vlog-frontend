@@ -13,7 +13,7 @@
     const volumeBar = ref(null)
 
     const controls = useVlogControlsStore()
-    const { isVlogPlaying, duration, volumeIcon } = storeToRefs(controls)
+    const { isVlogPlaying, duration, volumeIcon, currentTime } = storeToRefs(controls)
 
     const route = useRoute()
     await getVlog(route.params.slug)
@@ -26,12 +26,13 @@
     <div class="flex flex-col gap-4 text-white">
         <div ref="videoWrapper" class="group/video relative w-full h-[38rem]">
             <video
+                @timeupdate="controls.setCurrentTime(video.currentTime)"
                 @loadedmetadata="controls.setDuration(video.duration)"
                 @click="controls.togglePlay(video)" 
                 ref="video" class="size-full object-contain rounded-2xl">
                 <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
             </video>
-            <div class="opacity-100 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
+            <div class="opacity-0 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
                 <div class="w-full h-2 cursor-pointer">
                     <div class="relative size-full bg-[#ccc] rounded-full">
                     <div class="absolute h-full bg-main rounded-full w-1/2"></div>
@@ -60,7 +61,7 @@
                                     type="range" min="0" max="1" step="0.01" value="1">
                             </div>
                         </div>
-                        <span>15:06/{{ duration }}</span>
+                        <span>{{ currentTime }}/{{ duration }}</span>
                     </div>
                     <font-awesome-icon @click="controls.toggleFullscreen(videoWrapper)" :icon="['fas', 'expand']" size="2x" class="cursor-pointer" />
                 </div>

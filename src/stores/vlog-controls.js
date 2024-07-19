@@ -5,12 +5,17 @@ const HIGH_VOLUM_ICON = 'volume-high'
 const LOW_VOLUM_ICON = 'volume-low'
 const MUTE_VOLUM_ICON = 'volume-mute'
 
+const ONE_HOUR = '3600' // seconds
+const HOUR_INITIAL = '00:00:00'
+const MINUTE_INITIAL = '00:00'
+
 export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
     const isVlogPlaying = ref(false)
     const isFullscreen = ref(false)
     const duration = ref(0)
     const volumeIcon = ref(HIGH_VOLUM_ICON)
+    const currentTime = ref(null)
 
     const togglePlay = (video) => {
         video.paused ? video.play() : video.pause()
@@ -52,6 +57,9 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
     const setDuration = (videoDuration) => {
       duration.value = formattedTime(videoDuration)
+
+      // set initial current time 
+      currentTime.value = (videoDuration > ONE_HOUR) ? HOUR_INITIAL : MINUTE_INITIAL
     }
     
     const formattedTime = (time) => {
@@ -93,16 +101,22 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         volumeIcon.value = LOW_VOLUM_ICON 
     }
 
+    const setCurrentTime = (time) => {
+      currentTime.value = formattedTime(time)
+    }
+
     return { 
         isVlogPlaying,
         duration,
         volumeIcon,
+        currentTime,
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,
         setDuration,
         toggleMute,
-        setVolume
+        setVolume,
+        setCurrentTime
     }
 
 })
