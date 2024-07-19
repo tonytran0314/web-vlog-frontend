@@ -12,6 +12,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const duration = ref(0)
     const volumeIcon = ref(HIGH_VOLUM_ICON)
     const currentTime = ref('00:00')
+    const process = ref(0)
 
     const togglePlay = (video) => {
         video.paused ? video.play() : video.pause()
@@ -94,8 +95,17 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         volumeIcon.value = LOW_VOLUM_ICON 
     }
 
-    const setCurrentTime = (time) => {
-      currentTime.value = formattedTime(time)
+    const updateTime = (video) => {
+      setCurrentTime(video)
+      setProcess(video)
+    }
+
+    const setCurrentTime = (video) => {
+      currentTime.value = formattedTime(video.currentTime)
+    }
+
+    const setProcess = (video) => {
+      process.value = video.currentTime * 100 / video.duration
     }
 
     return { 
@@ -103,13 +113,14 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         duration,
         volumeIcon,
         currentTime,
+        process,
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,
         setDuration,
         toggleMute,
         setVolume,
-        setCurrentTime
+        updateTime
     }
 
 })
