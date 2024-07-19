@@ -1,11 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+const HIGH_VOLUM_ICON = 'volume-high'
+const LOW_VOLUM_ICON = 'volume-low'
+const MUTE_VOLUM_ICON = 'volume-mute'
+
 export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
     const isVlogPlaying = ref(false)
     const isFullscreen = ref(false)
     const duration = ref(0)
+    const volumeIcon = ref(HIGH_VOLUM_ICON)
 
     const togglePlay = (video) => {
         video.paused ? video.play() : video.pause()
@@ -68,20 +73,30 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       if(video.volume !== 0) {
         video.volume = 0
         volumeBar.value = 0
+        volumeIcon.value = MUTE_VOLUM_ICON
       } else {
         // set them to currentVolume instead
         video.volume = 1
         volumeBar.value = 1
+        volumeIcon.value = HIGH_VOLUM_ICON
       }
     }
 
     const setVolume = (video, volume) => {
       video.volume = volume
+      
+      if (video.volume === 0) 
+        volumeIcon.value = MUTE_VOLUM_ICON
+      else if (video.volume > 0.5)
+        volumeIcon.value = HIGH_VOLUM_ICON
+      else
+        volumeIcon.value = LOW_VOLUM_ICON 
     }
 
     return { 
         isVlogPlaying,
         duration,
+        volumeIcon,
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,

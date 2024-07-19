@@ -13,7 +13,7 @@
     const volumeBar = ref(null)
 
     const controls = useVlogControlsStore()
-    const { isVlogPlaying, duration } = storeToRefs(controls)
+    const { isVlogPlaying, duration, volumeIcon } = storeToRefs(controls)
 
     const route = useRoute()
     await getVlog(route.params.slug)
@@ -51,7 +51,7 @@
                         <div class="flex gap-3 items-center group/volume cursor-pointer">
                             <font-awesome-icon 
                                 @click="controls.toggleMute(video, volumeBar)"
-                                :icon="['fas', 'volume-high']" size="xl" />
+                                :icon="['fas', volumeIcon]" size="xl" />
                             <div class="w-0 transform transition-[width] origin-left scale-x-0 group-hover/volume:w-full group-hover/volume:scale-x-100 rounded flex items-center">
                                 <input 
                                     ref="volumeBar"
