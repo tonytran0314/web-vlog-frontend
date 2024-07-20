@@ -108,6 +108,15 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       process.value = video.currentTime * 100 / video.duration
     }
 
+    const seek = (video, event) => {
+      const timeline = event.currentTarget;
+      const rect = timeline.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const totalWidth = rect.width;
+      const percentage = offsetX / totalWidth;
+      video.currentTime = percentage * video.duration;
+    }
+
     return { 
         isVlogPlaying,
         duration,
@@ -120,7 +129,8 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         setDuration,
         toggleMute,
         setVolume,
-        updateTime
+        updateTime,
+        seek
     }
 
 })

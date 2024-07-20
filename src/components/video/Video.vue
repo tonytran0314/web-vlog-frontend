@@ -18,7 +18,10 @@
     const route = useRoute()
     await getVlog(route.params.slug)
 
-    onMounted(() => { controls.watchExitFullScreenWithESC() })
+    onMounted(() => {
+        controls.watchExitFullScreenWithESC()
+        controls.setDuration(video.value.duration)
+    })
     watch(() => route.params.slug, (newSlug) => { getVlog(newSlug) })
 </script>
 
@@ -27,13 +30,14 @@
         <div ref="videoWrapper" class="group/video relative w-full h-[38rem]">
             <video
                 @timeupdate="controls.updateTime(video)"
-                @loadedmetadata="controls.setDuration(video.duration)"
                 @click="controls.togglePlay(video)" 
                 ref="video" class="size-full object-contain rounded-2xl">
-                <source src="http://127.0.0.1:8000/storage/videoplayback.mp4"> 
+                <source src="http://localhost:8000/api/v1/video/videoplayback.mp4"> 
             </video>
             <div class="opacity-100 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
-                <div class="group/timeline h-[7px] rounded cursor-pointer flex items-center">
+                <div
+                    @click="controls.seek(video, $event)" 
+                    class="group/timeline h-[7px] rounded cursor-pointer flex items-center">
                     <div class="bg-[rgba(100,100,100,.5)] h-[3px] w-full rounded relative group-hover/timeline:h-full">
                         <div
                             :style="{ width: process + '%' }"
