@@ -5,6 +5,8 @@ const HIGH_VOLUM_ICON = 'volume-high'
 const LOW_VOLUM_ICON = 'volume-low'
 const MUTE_VOLUM_ICON = 'volume-mute'
 
+const PREVIEW_WIDTH = '176' // px
+
 export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
     const isVlogPlaying = ref(false)
@@ -14,6 +16,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const currentTime = ref(0)
     const process = ref(0)
     const previewTime = ref(0)
+    const previewPosition = ref(0)
 
     const togglePlay = (video) => {
         video.paused ? video.play() : video.pause()
@@ -106,7 +109,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const setProcess = (video) => {
-      process.value = video.currentTime * 100 / video.duration
+      process.value = (video.currentTime * 100 / video.duration) + '%'
     }
 
     const seek = (video, event) => {
@@ -123,8 +126,19 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       const offsetX = event.clientX - rect.left
       const totalWidth = rect.width
       const percentage = offsetX / totalWidth
+      setPreviewPostion(offsetX, totalWidth)
 
       return percentage * duration.value
+    }
+
+    const setPreviewPostion = (xCoordinate, totalWidth) => {
+      let left = xCoordinate - PREVIEW_WIDTH/2
+      const maxLeft = totalWidth - PREVIEW_WIDTH
+
+      if (left < 0) left = 0
+      if (left > maxLeft) left = maxLeft
+    
+      previewPosition.value = left + 'px'
     }
 
     return { 
@@ -134,6 +148,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         currentTime,
         process,
         previewTime,
+        previewPosition,
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,
