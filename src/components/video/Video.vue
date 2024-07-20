@@ -13,7 +13,7 @@
     const volumeBar = ref(null)
 
     const controls = useVlogControlsStore()
-    const { isVlogPlaying, duration, volumeIcon, currentTime, process } = storeToRefs(controls)
+    const { isVlogPlaying, duration, volumeIcon, currentTime, process, previewTime } = storeToRefs(controls)
 
     const route = useRoute()
     await getVlog(route.params.slug)
@@ -37,6 +37,7 @@
             <div class="opacity-100 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
                 <div
                     @click="controls.seek(video, $event)" 
+                    @mousemove="controls.preview"
                     class="group/timeline h-[7px] rounded cursor-pointer flex items-center">
                     <div class="bg-[rgba(100,100,100,.5)] h-[3px] w-full rounded relative group-hover/timeline:h-full">
                         <div
@@ -47,8 +48,8 @@
                         <div
                             id="preview"
                             class="hidden space-y-3 absolute right-0 -top-36 w-44 h-auto group-hover/timeline:block">
-                            <img src="@/assets/images/2.png" alt="">
-                            <p class="text-center">00:00</p>
+                            <img src="@/assets/images/2.png" alt="preview image" class="rounded-xl border-2 border-white">
+                            <p class="text-center">{{ controls.formattedTime(previewTime) }}</p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +75,9 @@
                                     type="range" min="0" max="1" step="0.01" value="1">
                             </div>
                         </div>
-                        <span>{{ currentTime }}/{{ duration }}</span>
+                        <span>
+                            {{ controls.formattedTime(currentTime) }}/{{ controls.formattedTime(duration) }}
+                        </span>
                     </div>
                     <font-awesome-icon @click="controls.toggleFullscreen(videoWrapper)" :icon="['fas', 'expand']" size="2x" class="cursor-pointer" />
                 </div>

@@ -11,8 +11,9 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const isFullscreen = ref(false)
     const duration = ref(0)
     const volumeIcon = ref(HIGH_VOLUM_ICON)
-    const currentTime = ref('00:00')
+    const currentTime = ref(0)
     const process = ref(0)
+    const previewTime = ref(0)
 
     const togglePlay = (video) => {
         video.paused ? video.play() : video.pause()
@@ -53,7 +54,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const setDuration = (videoDuration) => {
-      duration.value = formattedTime(videoDuration)
+      duration.value = videoDuration
     }
     
     const formattedTime = (time) => {
@@ -101,7 +102,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const setCurrentTime = (video) => {
-      currentTime.value = formattedTime(video.currentTime)
+      currentTime.value = video.currentTime
     }
 
     const setProcess = (video) => {
@@ -109,12 +110,21 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const seek = (video, event) => {
-      const timeline = event.currentTarget;
-      const rect = timeline.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
-      const totalWidth = rect.width;
-      const percentage = offsetX / totalWidth;
-      video.currentTime = percentage * video.duration;
+      video.currentTime = getNewTime(event)
+    }
+
+    const preview = (event) => {
+      previewTime.value = getNewTime(event)
+    }
+
+    const getNewTime = (event) => {
+      const timeline = event.currentTarget
+      const rect = timeline.getBoundingClientRect()
+      const offsetX = event.clientX - rect.left
+      const totalWidth = rect.width
+      const percentage = offsetX / totalWidth
+
+      return percentage * duration.value
     }
 
     return { 
@@ -123,6 +133,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         volumeIcon,
         currentTime,
         process,
+        previewTime,
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,
@@ -130,7 +141,9 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         toggleMute,
         setVolume,
         updateTime,
-        seek
+        seek,
+        preview,
+        formattedTime
     }
 
 })
