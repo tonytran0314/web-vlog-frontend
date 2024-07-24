@@ -20,8 +20,17 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const isDragging = ref(false)
 
     const togglePlay = (video) => {
-        video.paused ? video.play() : video.pause()
-        isVlogPlaying.value = !isVlogPlaying.value
+      video.paused ? play(video) : pause(video)
+    }
+
+    const play = (video) => {
+      video.play()
+      isVlogPlaying.value = true
+    }
+
+    const pause = (video) => {
+      video.pause()
+      isVlogPlaying.value = false
     }
 
     const toggleFullscreen = (videoContainer = null) => {
@@ -115,6 +124,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
     const seek = (video, event) => {
       video.currentTime = getNewTime(event)
+      play(video)
     }
 
     const preview = (event) => {
@@ -148,17 +158,17 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const startDragging = (video) => {
-      video.pause()
+      pause(video)
       isDragging.value = true
     }
 
     const stopDragging = (video) => {
-      video.play()
+      play(video)
       isDragging.value = false
     }
 
     const replay = (video) => {
-      video.play()
+      play(video)
     }
 
     return { 
