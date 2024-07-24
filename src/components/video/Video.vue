@@ -34,7 +34,7 @@
                 ref="video" class="size-full object-contain rounded-2xl">
                 <source src="http://localhost:8000/api/v1/video/videoplayback.mp4"> 
             </video>
-            <div class="opacity-100 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
+            <div class="opacity-0 group-hover/video:opacity-100 transition-opacity duration-200 space-y-5 bg-gradient-to-b from-transparent to-overlay absolute bottom-0 w-full rounded-b-2xl pt-8 pb-6 px-6">
                 <div
                     @click="controls.seek(video, $event)" 
                     @mousemove="controls.preview"
@@ -59,12 +59,17 @@
                 <div class="flex justify-between items-center">
                     <div class="flex gap-6 items-center">
                         <button class="cursor-pointer">
-                            <font-awesome-icon
-                                v-if="isVlogPlaying"
-                                :icon="['fas', 'pause']" size="2x" @click="controls.togglePlay(video)" />
-                            <font-awesome-icon 
-                                v-else
-                                :icon="['fas', 'play']" size="2x" @click="controls.togglePlay(video)" />
+                            <div v-if="currentTime < duration">
+                                <font-awesome-icon
+                                    v-if="isVlogPlaying"
+                                    :icon="['fas', 'pause']" size="2x" @click="controls.togglePlay(video)" />
+                                <font-awesome-icon 
+                                    v-else
+                                    :icon="['fas', 'play']" size="2x" @click="controls.togglePlay(video)" />
+                            </div>
+                            
+                            <font-awesome-icon v-else
+                                :icon="['fas', 'rotate-left']" size="2x" @click="controls.replay(video)" />
                         </button>
                         <div class="flex gap-3 items-center group/volume cursor-pointer">
                             <div class="w-8">

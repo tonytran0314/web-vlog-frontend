@@ -157,6 +157,10 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       isDragging.value = false
     }
 
+    const replay = (video) => {
+      video.play()
+    }
+
     return { 
         isVlogPlaying,
         duration,
@@ -176,7 +180,8 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         preview,
         formattedTime,
         startDragging,
-        stopDragging
+        stopDragging,
+        replay
     }
 
 })
