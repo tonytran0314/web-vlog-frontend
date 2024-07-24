@@ -67,13 +67,15 @@
                                 :icon="['fas', 'play']" size="2x" @click="controls.togglePlay(video)" />
                         </button>
                         <div class="flex gap-3 items-center group/volume cursor-pointer">
-                            <font-awesome-icon 
-                                @click="controls.toggleMute(video, volumeBar)"
-                                :icon="['fas', volumeIcon]" size="xl" />
-                            <div class="w-0 transform transition-[width] origin-left scale-x-0 group-hover/volume:w-full group-hover/volume:scale-x-100 rounded flex items-center">
+                            <div class="w-8">
+                                <font-awesome-icon 
+                                    @click="controls.toggleMute(video, volumeBar)"
+                                    :icon="['fas', volumeIcon]" size="xl" />
+                            </div>
+                            <div class="w-0 transform transition-[width] origin-left scale-x-0 group-hover/volume:w-28 group-hover/volume:scale-x-100 flex items-center">
                                 <input 
                                     ref="volumeBar"
-                                    class="h-[6px] rounded cursor-pointer"
+                                    class="accent-white w-full h-[6px] rounded cursor-pointer"
                                     @input="controls.setVolume(video, $event.target.value)"
                                     type="range" min="0" max="1" step="0.01" value="1">
                             </div>
