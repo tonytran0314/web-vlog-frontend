@@ -29,7 +29,7 @@
     <div class="flex flex-col gap-4 text-white">
         <div ref="videoWrapper" class="group/video relative w-full h-[38rem]">
             <video
-                @timeupdate="controls.updateTime(video)"
+                @timeupdate="controls.updateTime(video.currentTime)"
                 @click="controls.togglePlay(video)" 
                 ref="video" class="size-full object-contain rounded-2xl">
                 <source src="http://localhost:8000/api/v1/video/videoplayback.mp4"> 
@@ -38,6 +38,8 @@
                 <div
                     @click="controls.seek(video, $event)" 
                     @mousemove="controls.preview"
+                    @mousedown="controls.startDragging(video)"
+                    @mouseup="controls.stopDragging(video)"
                     class="group/timeline h-[7px] rounded cursor-pointer flex items-center">
                     <div class="bg-[rgba(100,100,100,.5)] h-[3px] w-full rounded relative group-hover/timeline:h-full">
                         <div

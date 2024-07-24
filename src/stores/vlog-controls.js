@@ -17,6 +17,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const process = ref(0)
     const previewTime = ref(0)
     const previewPosition = ref(0)
+    const isDragging = ref(false)
 
     const togglePlay = (video) => {
         video.paused ? video.play() : video.pause()
@@ -99,17 +100,17 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         volumeIcon.value = LOW_VOLUM_ICON 
     }
 
-    const updateTime = (video) => {
-      setCurrentTime(video)
-      setProcess(video)
+    const updateTime = (time) => {
+      setCurrentTime(time)
+      setProcess(time)
     }
 
-    const setCurrentTime = (video) => {
-      currentTime.value = video.currentTime
+    const setCurrentTime = (time) => {
+      currentTime.value = time
     }
 
-    const setProcess = (video) => {
-      process.value = (video.currentTime * 100 / video.duration) + '%'
+    const setProcess = (time) => {
+      process.value = (time * 100 / duration.value) + '%'
     }
 
     const seek = (video, event) => {
@@ -117,6 +118,11 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const preview = (event) => {
+      // mouse down on timeline triggers dragging
+      // if dragging, the process bar will be changed by the dragging value
+      if(isDragging.value) {
+        setProcess(getNewTime(event))
+      }
       previewTime.value = getNewTime(event)
     }
 
@@ -141,6 +147,16 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       previewPosition.value = left + 'px'
     }
 
+    const startDragging = (video) => {
+      video.pause()
+      isDragging.value = true
+    }
+
+    const stopDragging = (video) => {
+      video.play()
+      isDragging.value = false
+    }
+
     return { 
         isVlogPlaying,
         duration,
@@ -158,7 +174,9 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         updateTime,
         seek,
         preview,
-        formattedTime
+        formattedTime,
+        startDragging,
+        stopDragging
     }
 
 })
