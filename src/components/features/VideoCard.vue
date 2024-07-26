@@ -18,7 +18,7 @@
 <template>
     <router-link 
         :to="{ name: 'Vlog', params: { slug: slug } }"
-        class="flex flex-col gap-3 w-[19.25rem] p-4 bg-box"
+        class="flex flex-col gap-3 w-[19.25rem] p-4 bg-box rounded-2xl"
     >
         <img 
             class="rounded-lg"
