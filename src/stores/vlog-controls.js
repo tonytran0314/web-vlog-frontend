@@ -18,25 +18,41 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const previewTime = ref(0)
     const previewPosition = ref(0)
     const isDragging = ref(false)
+    const videoElement = ref(null)
+    const videoWrapper = ref(null)
+    const volumeBar = ref(null)
 
-    const togglePlay = (video) => {
-      video.paused ? play(video) : pause(video)
-    }
+    /* -------------------------------------------------------------------------- */
+    /*                               PRIVATE METHODS                              */
+    /* -------------------------------------------------------------------------- */
 
-    const play = (video) => {
-      video.play()
+    const setCurrentTime = () => currentTime.value = videoElement.value.currentTime
+
+    const setProcess = (time) => process.value = (time * 100 / duration.value) + '%'
+
+    const play = () => {
+      videoElement.value.play()
       isVlogPlaying.value = true
     }
 
-    const pause = (video) => {
-      video.pause()
+    const pause = () => {
+      videoElement.value.pause()
       isVlogPlaying.value = false
     }
 
-    const toggleFullscreen = (videoContainer = null) => {
-      isFullscreen.value ? exitFullscreen() : enterFullscreen(videoContainer)
+    const mute = () => {
+      videoElement.value.volume = 0
+      volumeBar.value.value = 0
+      volumeIcon.value = MUTE_VOLUM_ICON
     }
 
+    const unmute = () => {
+      // set them to currentVolume instead
+      videoElement.value.volume = 1
+      volumeBar.value.value = 1
+      volumeIcon.value = HIGH_VOLUM_ICON
+    }
+    
     const enterFullscreen = (videoWrapper) => {
       if (videoWrapper.requestFullscreen) { videoWrapper.requestFullscreen() }
       else if (videoWrapper.mozRequestFullScreen) { videoWrapper.mozRequestFullScreen() } /* Firefox */
@@ -45,7 +61,7 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
       isFullscreen.value = true
     }
-    
+
     const exitFullscreen = () => {
       if (document.exitFullscreen) { document.exitFullscreen() } 
       if (document.mozCancelFullScreen) { document.mozCancelFullScreen() } /* Firefox */
@@ -55,85 +71,8 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       isFullscreen.value = false
     }
 
-    const watchExitFullScreenWithESC = () => {
-      document.addEventListener('fullscreenchange', handleFullscreenChange)
-      document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
-      document.addEventListener('mozfullscreenchange', handleFullscreenChange)
-      document.addEventListener('MSFullscreenChange', handleFullscreenChange)
-    }
-
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) { isFullscreen.value = false }
-    }
-
-    const setDuration = (videoDuration) => {
-      duration.value = videoDuration
-    }
-    
-    const formattedTime = (time) => {
-      let hours = Math.floor(time / 3600)
-      let minutes = Math.floor((time - 3600*hours) / 60)
-      let seconds = Math.floor(time % 60)
-
-      if (hours === 0)                hours = '' 
-      if (hours > 0 && hours < 10)    hours = `0${hours}:`
-      if (hours > 10)                 hours = `${hours}:`
-
-      if (minutes < 10) minutes = `0${minutes}`
-      if (seconds < 10) seconds = `0${seconds}`
-
-      return `${hours}${minutes}:${seconds}`
-    }
-
-    const toggleMute = (video, volumeBar) => {
-      if(video.volume !== 0) {
-        video.volume = 0
-        volumeBar.value = 0
-        volumeIcon.value = MUTE_VOLUM_ICON
-      } else {
-        // set them to currentVolume instead
-        video.volume = 1
-        volumeBar.value = 1
-        volumeIcon.value = HIGH_VOLUM_ICON
-      }
-    }
-
-    const setVolume = (video, volume) => {
-      video.volume = volume
-      
-      if (video.volume === 0) 
-        volumeIcon.value = MUTE_VOLUM_ICON
-      else if (video.volume > 0.5)
-        volumeIcon.value = HIGH_VOLUM_ICON
-      else
-        volumeIcon.value = LOW_VOLUM_ICON 
-    }
-
-    const updateTime = (time) => {
-      setCurrentTime(time)
-      setProcess(time)
-    }
-
-    const setCurrentTime = (time) => {
-      currentTime.value = time
-    }
-
-    const setProcess = (time) => {
-      process.value = (time * 100 / duration.value) + '%'
-    }
-
-    const seek = (video, event) => {
-      video.currentTime = getNewTime(event)
-      play(video)
-    }
-
-    const preview = (event) => {
-      // mouse down on timeline triggers dragging
-      // if dragging, the process bar will be changed by the dragging value
-      if(isDragging.value) {
-        setProcess(getNewTime(event))
-      }
-      previewTime.value = getNewTime(event)
     }
 
     const getNewTime = (event) => {
@@ -157,19 +96,89 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
       previewPosition.value = left + 'px'
     }
 
-    const startDragging = (video) => {
-      pause(video)
+
+    /* -------------------------------------------------------------------------- */
+    /*                               PUBLIC METHODS                               */
+    /* -------------------------------------------------------------------------- */
+    
+    const setVideoElement = (video) => videoElement.value = video
+    const setVideoWrapper = (wrapper) => videoWrapper.value = wrapper
+    const setVolumeBar = (volume) => volumeBar.value = volume
+
+    const setDuration = () => duration.value = videoElement.value.duration
+
+    const replay = () => play()
+
+    const togglePlay = () => videoElement.value.paused ? play() : pause()
+
+    const toggleMute = () => (videoElement.value.volume === 0) ? unmute() : mute()
+
+    const toggleFullscreen = () => isFullscreen.value ? exitFullscreen() : enterFullscreen(videoWrapper.value)
+
+    const setVolume = (event) => {
+      videoElement.value.volume = event.target.value
+      
+      if (videoElement.value.volume === 0) 
+        volumeIcon.value = MUTE_VOLUM_ICON
+      else if (videoElement.value.volume > 0.5)
+        volumeIcon.value = HIGH_VOLUM_ICON
+      else
+        volumeIcon.value = LOW_VOLUM_ICON 
+    }
+
+    const watchExitFullScreenWithESC = () => {
+      document.addEventListener('fullscreenchange', handleFullscreenChange)
+      document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
+      document.addEventListener('mozfullscreenchange', handleFullscreenChange)
+      document.addEventListener('MSFullscreenChange', handleFullscreenChange)
+    }
+
+    const startDragging = () => {
+      pause()
       isDragging.value = true
     }
 
-    const stopDragging = (video) => {
-      play(video)
+    const stopDragging = () => {
+      play()
       isDragging.value = false
     }
 
-    const replay = (video) => {
-      play(video)
+    const updateTime = () => {
+      setCurrentTime()
+      setProcess(videoElement.value.currentTime)
     }
+
+    const seek = (event) => {
+      videoElement.value.currentTime = getNewTime(event)
+      play()
+    }
+
+    const preview = (event) => {
+      // mousedown on timeline to drag, the process bar will be changed by the dragging value
+      if(isDragging.value) setProcess(getNewTime(event))
+
+      previewTime.value = getNewTime(event)
+    }
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                  COMPUTED                                  */
+    /* -------------------------------------------------------------------------- */
+    const formattedTime = (time) => {
+      let hours = Math.floor(time / 3600)
+      let minutes = Math.floor((time - 3600*hours) / 60)
+      let seconds = Math.floor(time % 60)
+
+      if (hours === 0)                hours = '' 
+      if (hours > 0 && hours < 10)    hours = `0${hours}:`
+      if (hours > 10)                 hours = `${hours}:`
+
+      if (minutes < 10) minutes = `0${minutes}`
+      if (seconds < 10) seconds = `0${seconds}`
+
+      return `${hours}${minutes}:${seconds}`
+    }
+
 
     return { 
         isVlogPlaying,
@@ -179,6 +188,12 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
         process,
         previewTime,
         previewPosition,
+        videoElement,
+        videoWrapper,
+        volumeBar,
+        setVideoElement,
+        setVideoWrapper,
+        setVolumeBar,
         togglePlay,
         toggleFullscreen,
         watchExitFullScreenWithESC,

@@ -1,6 +1,6 @@
 <script setup>
     import Menu from '@/components/partials/Menu.vue'
-    import Video from '@/components/video/Video.vue'
+    import VideoWrapper from '@/components/video/VideoWrapper.vue'
     import Feature from '@/components/features/Feature.vue'
     import Footer from '@/components/partials/Footer.vue'
     import SlidesSkeleton from '@/components/skeletons/SlidesSkeleton.vue'
@@ -21,7 +21,7 @@
             <Suspense>
                 <template #default>
                     <div class="space-y-16">
-                        <Video />
+                        <VideoWrapper />
                         <Feature v-for="category in relatedCategories" :feature="category" />
                     </div>
                 </template>
