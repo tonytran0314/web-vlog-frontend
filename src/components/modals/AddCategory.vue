@@ -1,7 +1,11 @@
 <script setup>
     import { useModalStore } from '@/stores/modals'
+    import { useCategoryStore } from '@/stores/categories'
+    import { ref } from 'vue'
 
     const modal = useModalStore()
+    const category = useCategoryStore()
+    const categoryName = ref(null)
 </script>
 
 <template>
@@ -16,8 +20,9 @@
                 </svg>
             </div>
         </div>
-        <form class="flex gap-4">
+        <form @submit.prevent="category.add(categoryName)" class="flex gap-4">
             <input 
+                v-model="categoryName"
                 type="text" name="category-name" id="category-name" placeholder="Tên thể loại ..."
                 class="border-none py-3 px-4 rounded-full w-[16rem] bg-secondary-button focus:outline-none placeholder:text-dark-label">
             <button type="submit" class="flex items-center border-none rounded-full py-2 px-6 bg-my-blue">Thêm</button>
