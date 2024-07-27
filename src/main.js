@@ -10,6 +10,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
+import Toast from "vue-toastification"
+import "vue-toastification/dist/index.css"
+
 const app = createApp(App)
 const pinia = createPinia()
 
@@ -19,4 +22,5 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(pinia)
 app.use(router)
+app.use(Toast)
 app.mount('#app')
