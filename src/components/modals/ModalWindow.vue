@@ -1,18 +1,16 @@
 <script setup>
     import { useModalStore } from "@/stores/modals"
 
-    const store = useModalStore()
+    const modal = useModalStore()
 
 </script>
 
 <template>
     <Teleport to="body">
         <Transition name="modal">
-            <div  @click.self="store.closeModal" v-if="store.modalState?.component"
+            <div  @click.self="modal.close" v-if="modal.content"
                 class="fixed left-0 top-0 z-[500] w-full h-dvh flex justify-center items-center bg-overlay text-white">
-                <component
-                    :is="store.modalState?.component"
-                    v-bind="store.modalState?.props" />
+                <component :is="modal.content" />
             </div>
         </Transition>
     </Teleport>

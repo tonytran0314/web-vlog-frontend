@@ -2,15 +2,10 @@
     import Menu from '@/components/partials/admin/Menu.vue'
     import Setting from '@/components/partials/admin/Setting.vue'
     import Pagination from '@/components/pagination/Pagination.vue'
-
     import Filter from '@/components/modals/Filter.vue'
-
     import { useModalStore } from '@/stores/modals'
-    const store = useModalStore() 
 
-    const openModal = (component) => {
-        store.openModal({ component: component })
-    }
+    const modal = useModalStore() 
 
     const test = 10
 </script>
@@ -24,7 +19,7 @@
                 <div class="text-4xl text-white">Quản lý Vlogs</div>
                 <div class="flex items-center gap-2">
                     <button 
-                        @click="openModal(Filter)" 
+                        @click="modal.open(Filter)" 
                         type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <font-awesome-icon :icon="['fas', 'sliders']" /><div>Bộ lọc</div>
                     </button>

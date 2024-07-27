@@ -8,11 +8,7 @@
 
     import { useModalStore } from "@/stores/modals"
 
-    const store = useModalStore()
-
-    const openModal = (component) => {
-        store.openModal({ component: component })
-    }
+    const modal = useModalStore()
 
     const test = 10
 </script>
@@ -30,13 +26,13 @@
                         <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
                         <div>Xoá</div>
                     </button>
-                    <button @click="openModal(EditCategory)" 
+                    <button @click="modal.open(EditCategory)" 
                         class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
                         <div>Sửa</div>
                     </button>
 
-                    <button @click="openModal(AddCategory)"
+                    <button @click="modal.open(AddCategory)"
                         class="cursor-pointer flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
                         <font-awesome-icon :icon="['fas', 'plus']" /><div>Thêm mới</div>
                     </button>

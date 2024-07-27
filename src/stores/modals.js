@@ -1,35 +1,31 @@
 import { defineStore } from "pinia"
-import { reactive, markRaw } from "vue"
+import { ref, markRaw } from "vue"
 
 export const useModalStore = defineStore('modals', () => {
 
-    const basicState = { component: null, props: null }
-    let modalState = reactive(basicState)
+    const content = ref(null)
 
-    const openModal = (payload) => {
-
+    const open = (modal) => {
         // prevent scrolling when the modal is opened
         const body = document.body
         if (body) body.style.overflow = "hidden"
 
-        modalState.component = markRaw(payload.component)
-        modalState.props = payload.props || {} 
+        content.value = markRaw(modal)
     }
 
-    const closeModal = () => {
+    const close = () => {
 
-        // reset (allow scrolling when the modal is closed
+        // reset (allow scrolling when the modal is closed)
         const body = document.body
         if (body) body.style.overflow = "auto"
 
-        modalState.component = null
-        modalState.props = null
+        content.value = null
     }
 
     return {
-        modalState,
-        openModal,
-        closeModal
+        content,
+        open,
+        close
     }
 
 })
