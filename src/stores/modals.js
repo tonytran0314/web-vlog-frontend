@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { reactive } from "vue"
+import { reactive, markRaw } from "vue"
 
 export const useModalStore = defineStore('modals', () => {
 
@@ -12,7 +12,7 @@ export const useModalStore = defineStore('modals', () => {
         const body = document.body
         if (body) body.style.overflow = "hidden"
 
-        modalState.component = payload.component 
+        modalState.component = markRaw(payload.component)
         modalState.props = payload.props || {} 
     }
 
