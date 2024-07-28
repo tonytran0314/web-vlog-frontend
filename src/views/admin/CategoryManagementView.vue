@@ -8,8 +8,10 @@
     import { useModalStore } from "@/stores/modals"
     import { useCategoryStore } from '@/stores/categories'
     import { storeToRefs } from 'pinia'
-    import { onMounted } from 'vue'
+    import { onMounted, watch } from 'vue'
+    import { useRoute } from 'vue-router'
 
+    const route = useRoute()
     const modal = useModalStore()
     const category = useCategoryStore()
     const { categories } = storeToRefs(category)
@@ -18,6 +20,9 @@
         category.all()
     })
 
+    watch(() => route.query.page, (newPage) => {
+        category.all(newPage || 1)
+    })
 </script>
 
 <template>
@@ -69,7 +74,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="category in categories"
+                        <tr v-for="category in categories.list"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
@@ -91,7 +96,9 @@
                 </table>
             </div>
 
-            <Pagination />
+            <Pagination 
+                v-if="categories.totalPages > 1" 
+                :links="categories.links" />
         </div>
     </div>
 </template>
