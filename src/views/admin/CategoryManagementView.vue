@@ -2,15 +2,22 @@
     import Menu from '@/components/partials/admin/Menu.vue'
     import Setting from '@/components/partials/admin/Setting.vue'
     import Pagination from '@/components/pagination/Pagination.vue'
-
     import AddCategory from "@/components/modals/AddCategory.vue"
     import EditCategory from '@/components/modals/EditCategory.vue'
 
     import { useModalStore } from "@/stores/modals"
+    import { useCategoryStore } from '@/stores/categories'
+    import { storeToRefs } from 'pinia'
+    import { onMounted } from 'vue'
 
     const modal = useModalStore()
+    const category = useCategoryStore()
+    const { categories } = storeToRefs(category)
 
-    const test = 10
+    onMounted(() => {
+        category.all()
+    })
+
 </script>
 
 <template>
@@ -62,19 +69,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="t in test"
+                        <tr v-for="category in categories"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
                             </td>
                             <td class="px-6 py-4">
-                                Tên thử nghiệm
+                                {{ category.name }}
                             </td>
                             <td class="px-6 py-4">
-                                100
+                                {{ category.totalVlogs }}
                             </td>
                             <td class="px-6 py-4">
-                                06/20/2024
+                                {{ category.date }}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <font-awesome-icon :icon="['fas', 'ellipsis-h']" />
