@@ -36,7 +36,9 @@ export const useCategoryStore = defineStore('categories', () => {
         modal.close()
 
         try {
-            await apiClient.post('/categories', newCategory)
+            const response = await apiClient.post('/categories', newCategory)
+            
+            categories.list.unshift(response.data.data)
             
             toast.success(ADDED_MESSAGE)
         } catch (error) {
