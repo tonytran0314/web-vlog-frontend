@@ -1,7 +1,9 @@
 <script setup>
     import { useModalStore } from '@/stores/modals'
+    import { storeToRefs } from 'pinia'
 
     const modal = useModalStore()
+    const { propsData } = storeToRefs(modal)
 </script>
 
 <template>
@@ -19,7 +21,8 @@
         </div>
         <form class="flex gap-4">
             <input 
-                type="text" name="category-name" id="category-name" placeholder="Tên thể loại ..."
+                type="text" name="category-name" id="category-name" 
+                placeholder="Tên thể loại ..." :value="propsData"
                 class="border-none py-3 px-4 rounded-full w-[16rem] bg-secondary-button focus:outline-none placeholder:text-dark-label">
             <button type="submit" class="flex items-center border-none rounded-full py-2 px-6 bg-my-blue">Lưu</button>
         </form>
