@@ -10,11 +10,14 @@
     import { storeToRefs } from 'pinia'
     import { onMounted, watch } from 'vue'
     import { useRoute } from 'vue-router'
+    import { useTableActionStore } from '@/stores/table-actions'
 
     const route = useRoute()
     const modal = useModalStore()
     const category = useCategoryStore()
     const { categories } = storeToRefs(category)
+    const tableActions = useTableActionStore()
+    const { dropdownIndex } = storeToRefs(tableActions)
 
     onMounted(() => {
         category.all()
@@ -63,7 +66,7 @@
                                 Tên thể loại
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Số lượng
+                                Số lượng vlogs
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Ngày tạo
@@ -89,8 +92,23 @@
                             <td class="px-6 py-4">
                                 {{ category.date }}
                             </td>
-                            <td class="px-6 py-4 text-right">
-                                <font-awesome-icon :icon="['fas', 'ellipsis-h']" />
+                            <td class="px-6 py-4 text-center relative">
+                                <font-awesome-icon 
+                                    @click="tableActions.toggleDropdown(category.id)" 
+                                    :icon="['fas', 'ellipsis-h']"
+                                    class="cursor-pointer" />
+                                <div
+                                    v-if="dropdownIndex === category.id"
+                                    class="bg-gray-700 rounded absolute z-50 -left-11 top-5">
+                                    <div class="flex gap-1 items-center rounded cursor-pointer py-2 px-4 dark:hover:bg-gray-500">
+                                        <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
+                                        <span>Sửa</span>
+                                    </div>
+                                    <div class="flex gap-1 items-center cursor-pointer rounded py-2 px-4 dark:hover:bg-gray-600">
+                                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
+                                        <span>Xoá</span>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
