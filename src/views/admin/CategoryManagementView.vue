@@ -19,6 +19,11 @@
     const tableActions = useTableActionStore()
     const { dropdownIndex } = storeToRefs(tableActions)
 
+    const edit = (category) => {
+        modal.open(EditCategory, category)
+        tableActions.toggleDropdown(null)
+    }
+
     onMounted(() => {
         category.all()
     })
@@ -95,7 +100,7 @@
                                     v-if="dropdownIndex === category.id"
                                     class="bg-gray-700 rounded absolute z-50 -left-16 top-5">
                                     <div 
-                                        @click="modal.open(EditCategory, category)"
+                                        @click="edit(category)"
                                         class="flex gap-1 items-center rounded cursor-pointer py-3 px-6 dark:hover:bg-gray-500">
                                         <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
                                         <span>Sửa</span>
