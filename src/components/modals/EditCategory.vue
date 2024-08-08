@@ -1,9 +1,15 @@
 <script setup>
     import { useModalStore } from '@/stores/modals'
+    import { useCategoryStore } from '@/stores/categories'
     import { storeToRefs } from 'pinia'
+    import { ref } from 'vue'
 
     const modal = useModalStore()
     const { propsData } = storeToRefs(modal)
+
+    const category = useCategoryStore()
+
+    const currentCategory = ref(propsData)
 </script>
 
 <template>
@@ -19,10 +25,11 @@
                 </svg>
             </div>
         </div>
-        <form class="flex gap-4">
+        <form @submit.prevent="category.edit(currentCategory)" class="flex gap-4">
             <input 
+                v-model="currentCategory"
                 type="text" name="category-name" id="category-name" 
-                placeholder="Tên thể loại ..." :value="propsData"
+                placeholder="Tên thể loại ..."
                 class="border-none py-3 px-4 rounded-full w-[16rem] bg-secondary-button focus:outline-none placeholder:text-dark-label">
             <button type="submit" class="flex items-center border-none rounded-full py-2 px-6 bg-my-blue">Lưu</button>
         </form>
