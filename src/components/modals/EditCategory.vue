@@ -2,14 +2,18 @@
     import { useModalStore } from '@/stores/modals'
     import { useCategoryStore } from '@/stores/categories'
     import { storeToRefs } from 'pinia'
-    import { ref } from 'vue'
+    import { reactive, ref } from 'vue'
 
     const modal = useModalStore()
     const { propsData } = storeToRefs(modal)
 
     const category = useCategoryStore()
 
-    const currentCategory = ref(propsData)
+    const currentCategory = ref(propsData.value.name)
+    const updatedCategory = reactive({
+        'id': propsData.value.id,
+        'name': currentCategory
+    })
 </script>
 
 <template>
@@ -25,7 +29,7 @@
                 </svg>
             </div>
         </div>
-        <form @submit.prevent="category.edit(currentCategory)" class="flex gap-4">
+        <form @submit.prevent="category.edit(updatedCategory)" class="flex gap-4">
             <input 
                 v-model="currentCategory"
                 type="text" name="category-name" id="category-name" 

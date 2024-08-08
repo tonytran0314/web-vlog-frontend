@@ -95,7 +95,7 @@
                                     v-if="dropdownIndex === category.id"
                                     class="bg-gray-700 rounded absolute z-50 -left-11 top-5">
                                     <div 
-                                        @click="modal.open(EditCategory, category.name)"
+                                        @click="modal.open(EditCategory, category)"
                                         class="flex gap-1 items-center rounded cursor-pointer py-2 px-4 dark:hover:bg-gray-500">
                                         <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
                                         <span>Sửa</span>

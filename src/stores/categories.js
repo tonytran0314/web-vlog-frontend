@@ -47,14 +47,14 @@ export const useCategoryStore = defineStore('categories', () => {
         }
     }
 
-    // THE PARAM SHOULD BE AN OBJECT: CATEGORY{ID,UPDATED-CATEGORY}
-    const edit = async (categoryName) => {
-        const updatedCategory = { name: categoryName }
-
+    const edit = async (category) => {
+        const updatedCategory = { name: category.name }
+        const endpoint = `${PATH}/${category.id}`
+        
         modal.close()
 
         try {
-            await apiClient.put(PATH + '/295', updatedCategory) // REPLACE 295 WITH CATEGORY ID,
+            await apiClient.put(endpoint, updatedCategory)
             
             toast.success(UPDATED_MESSAGE)
         } catch (error) {
