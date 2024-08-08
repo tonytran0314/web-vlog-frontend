@@ -50,11 +50,14 @@ export const useCategoryStore = defineStore('categories', () => {
     const edit = async (category) => {
         const updatedCategory = { name: category.name }
         const endpoint = `${PATH}/${category.id}`
+        const categoryToUpdate = categories.list.find(cate => cate.id === category.id)
         
         modal.close()
 
         try {
             await apiClient.put(endpoint, updatedCategory)
+
+            categoryToUpdate.name = category.name
             
             toast.success(UPDATED_MESSAGE)
         } catch (error) {
