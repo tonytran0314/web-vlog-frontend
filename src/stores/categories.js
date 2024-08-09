@@ -67,18 +67,17 @@ export const useCategoryStore = defineStore('categories', () => {
     }
 
     const remove = async (id) => {
-        // const updatedCategory = { name: category.name }
         const endpoint = `${PATH}/${id}`
-        // const categoryToUpdate = categories.list.find(cate => cate.id === category.id)
+        const index = categories.list.findIndex(category => category.id === id);
         
         modal.close()
 
         try {
             await apiClient.delete(endpoint)
 
-            // categoryToUpdate.name = category.name
+            if(index !== -1) categories.list.splice(index, 1)
             
-            toast.success(UPDATED_MESSAGE)
+            toast.success(DELETED_MESSAGE)
         } catch (error) {
             toast.error(error.response.data.message)
         }
