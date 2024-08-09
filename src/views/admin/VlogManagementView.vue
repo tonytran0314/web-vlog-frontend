@@ -29,16 +29,6 @@
                         <font-awesome-icon :icon="['fas', 'eye-slash']" class="w-3 h-3 me-2" />
                         <div>Ẩn/Hiện</div>
                     </button>
-                    <button 
-                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
-                        <div>Xoá</div>
-                    </button>
-                    <button  
-                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
-                        <div>Sửa</div>
-                    </button>
 
                     <router-link to="/admin/vlog/add"
                         class="flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
