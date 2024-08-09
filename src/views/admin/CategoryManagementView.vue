@@ -46,27 +46,16 @@
         <div class="space-y-12 p-10">
             <div class="flex justify-between">
                 <div class="text-4xl text-white">Quản lý Thể loại</div>
-                <div class="flex items-center gap-2">
-                    <button 
-                        type="button" class="flex items-center gap-2 text-white bg-gray-800 hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
-                        <div>Xoá</div>
-                    </button>
-                    <button @click="modal.open(AddCategory)"
-                        class="cursor-pointer flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
-                        <font-awesome-icon :icon="['fas', 'plus']" /><div>Thêm mới</div>
-                    </button>
-                </div>
+                <button @click="modal.open(AddCategory)"
+                    class="cursor-pointer flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
+                    <font-awesome-icon :icon="['fas', 'plus']" /><div>Thêm mới</div>
+                </button>
             </div>
             
-
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Checkbox</span>
-                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Tên thể loại
                             </th>
@@ -85,9 +74,6 @@
                         <tr v-for="category in categories.list"
                             :key="category.id"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                            </td>
                             <td class="px-6 py-4">
                                 {{ category.name }}
                             </td>
