@@ -1,7 +1,11 @@
 <script setup>
+    import { storeToRefs } from 'pinia'
     import { useModalStore } from '@/stores/modals'
+    import { useCategoryStore } from '@/stores/categories'
 
     const modal = useModalStore()
+    const category = useCategoryStore()
+    const { propsData } = storeToRefs(modal)
 </script>
 
 <template>
@@ -17,7 +21,7 @@
             </div>
         </div>
         <p>Bạn có chắc muốn xoá thể loại này không ?</p>
-        <form class="flex justify-end gap-4">
+        <form @submit.prevent="category.remove(propsData.id)" class="flex justify-end gap-4">
             <div @click="modal.close" class="flex items-center border-none rounded-full py-2 px-6 bg-secondary-button cursor-pointer">Huỷ</div>
             <button type="submit" class="flex items-center border-none rounded-full py-2 px-6 bg-main">Xoá</button>
         </form>

@@ -4,6 +4,7 @@
     import Pagination from '@/components/pagination/Pagination.vue'
     import AddCategory from "@/components/modals/AddCategory.vue"
     import EditCategory from '@/components/modals/EditCategory.vue'
+    import ConfirmDeleteCategory from '@/components/modals/ConfirmDeleteCategory.vue'
 
     import { useModalStore } from "@/stores/modals"
     import { useCategoryStore } from '@/stores/categories'
@@ -21,6 +22,11 @@
 
     const edit = (category) => {
         modal.open(EditCategory, category)
+        tableActions.toggleDropdown(null)
+    }
+    
+    const remove = (category) => {
+        modal.open(ConfirmDeleteCategory, category)
         tableActions.toggleDropdown(null)
     }
 
@@ -105,7 +111,9 @@
                                         <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
                                         <span>Sửa</span>
                                     </div>
-                                    <div class="flex gap-1 items-center cursor-pointer rounded py-3 px-6 dark:hover:bg-gray-600">
+                                    <div
+                                        @click="remove(category)" 
+                                        class="flex gap-1 items-center cursor-pointer rounded py-3 px-6 dark:hover:bg-gray-600">
                                         <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
                                         <span>Xoá</span>
                                     </div>

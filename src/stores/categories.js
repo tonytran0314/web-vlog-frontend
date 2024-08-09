@@ -7,6 +7,7 @@ import { reactive } from 'vue'
 const toast = useToast()
 const ADDED_MESSAGE = 'Added Category'
 const UPDATED_MESSAGE = 'Updated Category'
+const DELETED_MESSAGE = 'Deleted Category'
 const PATH = '/categories'
 
 export const useCategoryStore = defineStore('categories', () => {
@@ -65,10 +66,29 @@ export const useCategoryStore = defineStore('categories', () => {
         }
     }
 
+    const remove = async (id) => {
+        // const updatedCategory = { name: category.name }
+        const endpoint = `${PATH}/${id}`
+        // const categoryToUpdate = categories.list.find(cate => cate.id === category.id)
+        
+        modal.close()
+
+        try {
+            await apiClient.delete(endpoint)
+
+            // categoryToUpdate.name = category.name
+            
+            toast.success(UPDATED_MESSAGE)
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+
     return {
         categories,
         all,
         add,
-        edit
+        edit,
+        remove
     }
 })
