@@ -43,9 +43,6 @@
                     <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Checkbox</span>
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Hình nền
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -68,9 +65,6 @@
                     <tbody>
                         <tr v-for="t in test"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4 text-right">
-                                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                            </td>
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <img src="@/assets/images/11.png" alt="thumbnail" class="rounded-xl">
                             </td>
