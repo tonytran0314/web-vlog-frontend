@@ -88,7 +88,7 @@ export const useVlogStore = defineStore('vlog', () => {
         newVlogData.append('description', newVlog.description)
         newVlogData.append('video', newVlog.video)
         newVlogData.append('thumbnail', newVlog.thumbnail)
-        newVlogData.append('categories', newVlog.categories)
+        newVlogData.append('categories', JSON.stringify(newVlog.categories))
         newVlogData.append('public', newVlog.public ? 1 : 0)
 
         try {
