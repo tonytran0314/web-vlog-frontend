@@ -19,11 +19,11 @@
             <div class="text-4xl">Thêm Vlog mới</div>
             <div class="w-full rounded-2xl p-8 bg-box space-y-10">
                 <div class="flex gap-10">
-                    <div class="space-y-4">
+                    <div class="space-y-4 w-full">
                         <label for="video" class="text-lg font-bold">Chọn video</label>
                         <input class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="video" name="video" type="file" accept="video/mp4">
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-4 w-full">
                         <label for="thumbnail" class="text-lg font-bold">Chọn thumbnail</label>
                         <input class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="thumbnail" name="thumbnail" type="file" accept="image/png, image/jpeg">
                     </div>
