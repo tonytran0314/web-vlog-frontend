@@ -95,6 +95,13 @@ export const useVlogStore = defineStore('vlog', () => {
             await apiClient.post('/vlogs', newVlogData)
             router.push({ name: 'Vlog Management' })
             toast.success(ADDED_MESSAGE)
+
+            newVlog.title = null,
+            newVlog.description = null,
+            newVlog.video = null,
+            newVlog.thumbnail = null,
+            newVlog.categories = [],
+            newVlog.public = true
         } catch (error) {
             toast.error(error.response.data.message)
         }
