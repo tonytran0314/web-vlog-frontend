@@ -2,17 +2,19 @@ import { defineStore } from 'pinia'
 import apiClient from '@/api/apiClient' 
 import { useToast } from "vue-toastification"
 import { useModalStore } from '@/stores/modals'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 const toast = useToast()
 const ADDED_MESSAGE = 'Added Category'
 const UPDATED_MESSAGE = 'Updated Category'
 const DELETED_MESSAGE = 'Deleted Category'
 const PATH = '/categories'
+const CATEGORY_PATH_WITHOUT_PAGINATION = '/list/category'
 
 export const useCategoryStore = defineStore('categories', () => {
 
     const modal = useModalStore()
+    const categoriesWithoutPagination = ref(null)
     const categories = reactive({
         list: null,
         links: null,
@@ -27,6 +29,16 @@ export const useCategoryStore = defineStore('categories', () => {
             categories.links = response.data.pagination.links
             categories.totalCategories = response.data.pagination.totalCategories
             categories.totalPages = response.data.pagination.totalPages
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    // list all categories without pagination
+    const list = async () => {
+        try {
+            const response = await apiClient.get(CATEGORY_PATH_WITHOUT_PAGINATION)
+            categoriesWithoutPagination.value = response.data.data
         } catch (error) {
             console.error(error)
         }
@@ -85,7 +97,9 @@ export const useCategoryStore = defineStore('categories', () => {
 
     return {
         categories,
+        categoriesWithoutPagination,
         all,
+        list,
         add,
         edit,
         remove

@@ -1,6 +1,14 @@
 <script setup>
     import Menu from '@/components/partials/admin/Menu.vue'
     import Setting from '@/components/partials/admin/Setting.vue'
+    import { useCategoryStore } from '@/stores/categories'
+    import { storeToRefs } from 'pinia'
+    import { onMounted } from 'vue'
+
+    const category = useCategoryStore()
+    const { categoriesWithoutPagination } = storeToRefs(category)
+
+    onMounted(() => { category.list() })
 </script>
 
 <template>
@@ -32,13 +40,9 @@
                     <div class="flex flex-col gap-4">
                         <label for=""><div class="text-lg font-bold">Thể loại</div></label>
                         <div class="flex flex-wrap gap-6">
-                            <div class="flex items-center">
+                            <div v-for="category in categoriesWithoutPagination" class="flex items-center">
                                 <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                <label for="default-checkbox" class="ms-2 font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checked-checkbox" class="ms-2 font-medium text-gray-900 dark:text-gray-300">Checked state</label>
+                                <label for="default-checkbox" class="ms-2 font-medium text-gray-900 dark:text-gray-300">{{ category.name }}</label>
                             </div>
                         </div>
                     </div>
