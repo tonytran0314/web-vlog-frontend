@@ -2,6 +2,10 @@ import { defineStore } from 'pinia'
 import apiClient from '@/api/apiClient'
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from "vue-toastification"
+
+const toast = useToast()
+const ADDED_MESSAGE = 'Added Vlog'
 
 export const useVlogStore = defineStore('vlog', () => {
 
@@ -14,6 +18,14 @@ export const useVlogStore = defineStore('vlog', () => {
         links: null,
         totalVlogs: null,
         totalPages: null 
+    })
+    const newVlog = reactive({
+        title: null,
+        description: null,
+        video: null,
+        thumbnail: null,
+        categories: [],
+        public: true
     })
 
     const router = useRouter()
@@ -67,15 +79,43 @@ export const useVlogStore = defineStore('vlog', () => {
         }
     }
 
+    const add = async () => {
+
+        const newVlogData = new FormData()
+
+        // use append when sending HTTP request with files
+        newVlogData.append('title', newVlog.title)
+        newVlogData.append('description', newVlog.description)
+        newVlogData.append('video', newVlog.video)
+        newVlogData.append('thumbnail', newVlog.thumbnail)
+        newVlogData.append('categories', newVlog.categories)
+        newVlogData.append('public', newVlog.public ? 1 : 0)
+
+        try {
+            await apiClient.post('/vlogs', newVlogData)
+            router.push({ name: 'Vlog Management' })
+            toast.success(ADDED_MESSAGE)
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+
+    const setFile = (field, event) => {
+        newVlog[field] = event.target.files[0]
+    }
+
     return { 
         latestVlogs,
         vlogsByCategory, 
         vlog,
         relatedCategories,
+        newVlog,
         getLatestVlogs, 
         getFeaturedVlogs,
         getVlogsByCategory,
-        getVlog
+        getVlog,
+        add,
+        setFile
     }
 
 })
