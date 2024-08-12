@@ -4,10 +4,29 @@
     import Pagination from '@/components/pagination/Pagination.vue'
     import Filter from '@/components/modals/Filter.vue'
     import { useModalStore } from '@/stores/modals'
+    import { useVlogStore } from '@/stores/vlogs'
+    import { storeToRefs } from 'pinia'
+    import { onMounted, watch } from 'vue'
+    import { useRoute } from 'vue-router'
+
+    const route = useRoute()
 
     const modal = useModalStore() 
+    
+    const vlogStore = useVlogStore()
+    const { vlogsByCategory } = storeToRefs(vlogStore)
 
-    const test = 10
+    const category = {
+        slug: null,
+        page: route.query.page || 1
+    }
+    
+    onMounted(() => vlogStore.getVlogsByCategory(category))
+
+    watch(() => route.query.page, (newPage) => {
+        category.page = newPage
+        vlogStore.getVlogsByCategory(category)
+    })
 </script>
 
 <template>
@@ -46,7 +65,7 @@
                                 Thể loại
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Riêng tư
+                                Công khai
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Ngày đăng
@@ -57,25 +76,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="t in test"
+                        <tr v-for="vlog in vlogsByCategory.list"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 <img src="@/assets/images/11.png" alt="thumbnail" class="rounded-xl">
                             </td>
                             <td class="px-6 py-4 space-y-4">
-                                <div class="line-clamp-1 font-bold">Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video Tiêu đề video. Tiêu đề video. Tiêu đề video. Tiêu đề video</div>
-                                <div class="line-clamp-2">Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video, Mô tả video, mô tả video, mô tả video</div>
+                                <div class="line-clamp-1 font-bold">{{ vlog.title }}</div>
+                                <div class="line-clamp-2">{{ vlog.description }}</div>
                             </td>
                             <td class="px-6 py-4">
-                                Thể loại 1, Thể loại 2, Thể loại 3, Thể loại 4, Thể loại 5, Thể loại 6,
-                                Thể loại 7, Thể loại Thể loại 1, Thể loại 2, Thể loại 3, Thể loại 4, Thể loại 5, Thể loại 6,
-                                Thể loại 7, Thể loại
+                                <p v-for="category in vlog.categories">{{ category.name }}</p>
                             </td>
                             <td class="px-6 py-4">
-                                <font-awesome-icon :icon="['fas', 'eye']" />
+                                <font-awesome-icon v-if="vlog.public" :icon="['fas', 'eye']" />
+                                <font-awesome-icon v-else :icon="['fas', 'eye-slash']" />
                             </td>
                             <td class="px-6 py-4">
-                                06/20/2024
+                                {{ vlog.date }}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <font-awesome-icon :icon="['fas', 'ellipsis-h']" />
@@ -85,7 +103,9 @@
                 </table>
             </div>
 
-            <Pagination />
+            <Pagination 
+                v-if="vlogsByCategory.totalPages > 1" 
+                :links="vlogsByCategory.links" />
         </div>
     </div>
 </template>
