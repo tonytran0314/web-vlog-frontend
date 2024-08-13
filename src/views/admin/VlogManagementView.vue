@@ -8,17 +8,35 @@
     import { storeToRefs } from 'pinia'
     import { onMounted, watch } from 'vue'
     import { useRoute } from 'vue-router'
+    import { useTableActionStore } from '@/stores/table-actions'
 
     const route = useRoute()
-
     const modal = useModalStore() 
-    
     const vlogStore = useVlogStore()
     const { vlogsByCategory } = storeToRefs(vlogStore)
-
+    const tableActions = useTableActionStore()
+    const table = 'vlog'
     const category = {
         slug: null,
         page: route.query.page || 1
+    }
+
+    const toggleDropdown = (categoryId) => {
+        tableActions.toggleDropdown(table, categoryId)
+    }
+
+    const isDropdownOpen = (categoryId) => {
+        return tableActions.isDropdownOpen(table, categoryId)
+    }
+
+    const edit = (category) => {
+        // modal.open(EditCategory, category)
+        tableActions.toggleDropdown(table)
+    }
+    
+    const remove = (category) => {
+        // modal.open(ConfirmDeleteCategory, category)
+        tableActions.toggleDropdown(table)
     }
     
     onMounted(() => vlogStore.getVlogsByCategory(category))
@@ -95,8 +113,27 @@
                             <td class="px-6 py-4">
                                 {{ vlog.date }}
                             </td>
-                            <td class="px-6 py-4 text-right">
-                                <font-awesome-icon :icon="['fas', 'ellipsis-h']" />
+                            <td class="px-6 py-4 text-center relative">
+                                <font-awesome-icon 
+                                    @click="toggleDropdown(vlog.id)" 
+                                    :icon="['fas', 'ellipsis-h']"
+                                    class="cursor-pointer" />
+                                <div
+                                    v-if="isDropdownOpen(vlog.id)"
+                                    class="bg-gray-700 rounded absolute z-50 -left-16 top-5">
+                                    <div 
+                                        @click="edit(vlog)"
+                                        class="flex gap-1 items-center rounded cursor-pointer py-3 px-6 dark:hover:bg-gray-500">
+                                        <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
+                                        <span>Sửa</span>
+                                    </div>
+                                    <div
+                                        @click="remove(vlog)" 
+                                        class="flex gap-1 items-center cursor-pointer rounded py-3 px-6 dark:hover:bg-gray-600">
+                                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
+                                        <span>Xoá</span>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

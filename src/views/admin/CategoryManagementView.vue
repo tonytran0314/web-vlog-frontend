@@ -18,21 +18,27 @@
     const category = useCategoryStore()
     const { categories } = storeToRefs(category)
     const tableActions = useTableActionStore()
-    const { dropdownIndex } = storeToRefs(tableActions)
+    const table = 'category'
+
+    const toggleDropdown = (categoryId) => {
+        tableActions.toggleDropdown(table, categoryId)
+    }
+
+    const isDropdownOpen = (categoryId) => {
+        return tableActions.isDropdownOpen(table, categoryId)
+    }
 
     const edit = (category) => {
         modal.open(EditCategory, category)
-        tableActions.toggleDropdown(null)
+        tableActions.toggleDropdown(table)
     }
     
     const remove = (category) => {
         modal.open(ConfirmDeleteCategory, category)
-        tableActions.toggleDropdown(null)
+        tableActions.toggleDropdown(table)
     }
 
-    onMounted(() => {
-        category.all()
-    })
+    onMounted(() => { category.all() })
 
     watch(() => route.query.page, (newPage) => {
         category.all(newPage || 1)
@@ -85,11 +91,11 @@
                             </td>
                             <td class="px-6 py-4 text-center relative">
                                 <font-awesome-icon 
-                                    @click="tableActions.toggleDropdown(category.id)" 
+                                    @click="toggleDropdown(category.id)" 
                                     :icon="['fas', 'ellipsis-h']"
                                     class="cursor-pointer" />
                                 <div
-                                    v-if="dropdownIndex === category.id"
+                                    v-if="isDropdownOpen(category.id)"
                                     class="bg-gray-700 rounded absolute z-50 -left-16 top-5">
                                     <div 
                                         @click="edit(category)"
