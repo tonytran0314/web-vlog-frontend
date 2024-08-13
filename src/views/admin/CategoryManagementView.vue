@@ -5,6 +5,7 @@
     import AddCategory from "@/components/modals/AddCategory.vue"
     import EditCategory from '@/components/modals/EditCategory.vue'
     import ConfirmDeleteCategory from '@/components/modals/ConfirmDeleteCategory.vue'
+    import Dropdown from '@/components/table/Dropdown.vue'
 
     import { useModalStore } from "@/stores/modals"
     import { useCategoryStore } from '@/stores/categories'
@@ -94,22 +95,10 @@
                                     @click="toggleDropdown(category.id)" 
                                     :icon="['fas', 'ellipsis-h']"
                                     class="cursor-pointer" />
-                                <div
-                                    v-if="isDropdownOpen(category.id)"
-                                    class="bg-gray-700 rounded absolute z-50 -left-16 top-5">
-                                    <div 
-                                        @click="edit(category)"
-                                        class="flex gap-1 items-center rounded cursor-pointer py-3 px-6 dark:hover:bg-gray-500">
-                                        <font-awesome-icon :icon="['fas', 'pen']" class="w-3 h-3 me-2" />
-                                        <span>Sửa</span>
-                                    </div>
-                                    <div
-                                        @click="remove(category)" 
-                                        class="flex gap-1 items-center cursor-pointer rounded py-3 px-6 dark:hover:bg-gray-600">
-                                        <font-awesome-icon :icon="['fas', 'trash']" class="w-3 h-3 me-2" />
-                                        <span>Xoá</span>
-                                    </div>
-                                </div>
+                                <Dropdown 
+                                    v-if="isDropdownOpen(category.id)" 
+                                    @edit="edit(category)"
+                                    @remove="remove(category)" />
                             </td>
                         </tr>
                     </tbody>
