@@ -13,10 +13,15 @@ export const useTableActionStore = defineStore('table-actions', () => {
         return dropdown.value[table] === index
     }
 
+    const closeAllDropdown = () => {
+        dropdown.value = {}
+    }
+
     return {
         dropdown,
         toggleDropdown,
-        isDropdownOpen
+        isDropdownOpen,
+        closeAllDropdown
     }
 
 })

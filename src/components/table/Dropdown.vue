@@ -1,11 +1,21 @@
 <script setup>
+    import { ref } from 'vue'
+    import { onClickOutside } from '@vueuse/core'
+    import { useTableActionStore } from '@/stores/table-actions'
+
+    const dropdown = ref(null)
+    const tableActions = useTableActionStore()
     const emit = defineEmits(['edit', 'remove'])
 
     const handle = (action) => emit(action)
+
+    onClickOutside(dropdown, () => {
+        tableActions.closeAllDropdown()
+    })
 </script>
 
 <template>
-    <div class="bg-gray-700 rounded absolute z-50 -left-16 top-5">
+    <div ref="dropdown" class="bg-gray-700 rounded absolute z-50 -left-16 top-5">
         <div 
             @click="handle('edit')"
             class="flex gap-1 items-center rounded cursor-pointer py-3 px-6 dark:hover:bg-gray-500">

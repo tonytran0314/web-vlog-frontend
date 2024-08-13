@@ -31,12 +31,12 @@
 
     const edit = (category) => {
         modal.open(EditCategory, category)
-        tableActions.toggleDropdown(table)
+        tableActions.closeAllDropdown()
     }
     
     const remove = (category) => {
         modal.open(ConfirmDeleteCategory, category)
-        tableActions.toggleDropdown(table)
+        tableActions.closeAllDropdown()
     }
 
     onMounted(() => { category.all() })
@@ -93,8 +93,13 @@
                             <td class="px-6 py-4 text-center relative">
                                 <font-awesome-icon 
                                     @click="toggleDropdown(category.id)" 
+                                    v-if="!isDropdownOpen(category.id)" 
                                     :icon="['fas', 'ellipsis-h']"
-                                    class="cursor-pointer" />
+                                    class="cursor-pointer size-5 rounded-full p-1 hover:bg-gray-500" />
+                                <font-awesome-icon
+                                    v-if="isDropdownOpen(category.id)"  
+                                    :icon="['fas', 'x']"
+                                    class="cursor-pointer size-5 rounded-full p-1 hover:bg-gray-500" />
                                 <Dropdown 
                                     v-if="isDropdownOpen(category.id)" 
                                     @edit="edit(category)"
