@@ -98,7 +98,7 @@
                                     class="cursor-pointer size-5 rounded-full p-1 hover:bg-gray-500" />
                                 <font-awesome-icon
                                     v-if="isDropdownOpen(category.id)"  
-                                    :icon="['fas', 'x']"
+                                    :icon="['fas', 'xmark']"
                                     class="cursor-pointer size-5 rounded-full p-1 hover:bg-gray-500" />
                                 <Dropdown 
                                     v-if="isDropdownOpen(category.id)" 
