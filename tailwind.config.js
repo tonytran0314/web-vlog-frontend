@@ -2,7 +2,8 @@
 export default {
   content: [
     './index.html',
-    './src/**/*.{vue,js,ts,jsx,tsx}'
+    './src/**/*.{vue,js,ts,jsx,tsx}',
+    './node_modules/preline/preline.js',
   ],
   theme: {
     fontFamily: {
@@ -20,6 +21,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('preline/plugin'),
+  ],
 }
 

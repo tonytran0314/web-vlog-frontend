@@ -13,6 +13,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import Toast from "vue-toastification"
 import "vue-toastification/dist/index.css"
 
+import "preline/preline"
+
 const app = createApp(App)
 const pinia = createPinia()
 
