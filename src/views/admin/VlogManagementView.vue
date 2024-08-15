@@ -1,16 +1,18 @@
 <script setup>
-    import Menu from '@/components/partials/admin/Menu.vue'
-    import Setting from '@/components/partials/admin/Setting.vue'
-    import Pagination from '@/components/pagination/Pagination.vue'
-    import Filter from '@/components/modals/Filter.vue'
-    import EditVlog from '@/components/modals/EditVlog.vue'
-    import Dropdown from '@/components/table/Dropdown.vue'
-    import { useModalStore } from '@/stores/modals'
-    import { useVlogStore } from '@/stores/vlogs'
-    import { storeToRefs } from 'pinia'
-    import { onMounted, watch } from 'vue'
-    import { useRoute } from 'vue-router'
-    import { useTableActionStore } from '@/stores/table-actions'
+    import Filter       from '@/components/modals/Filter.vue'
+    import AddVlog      from '@/components/modals/AddVlog.vue'
+    import Dropdown     from '@/components/table/Dropdown.vue'
+    import EditVlog     from '@/components/modals/EditVlog.vue'
+    import Menu         from '@/components/partials/admin/Menu.vue'
+    import Setting      from '@/components/partials/admin/Setting.vue'
+    import Pagination   from '@/components/pagination/Pagination.vue'
+
+    import { storeToRefs }          from 'pinia'
+    import { useRoute }             from 'vue-router'
+    import { onMounted, watch }     from 'vue'
+    import { useVlogStore }         from '@/stores/vlogs'
+    import { useModalStore }        from '@/stores/modals'
+    import { useTableActionStore }  from '@/stores/table-actions'
 
     const route = useRoute()
     const modal = useModalStore() 
@@ -65,10 +67,10 @@
                         <font-awesome-icon :icon="['fas', 'sliders']" /><div>Bộ lọc</div>
                     </button>
 
-                    <router-link to="/admin/vlog/add"
+                    <div @click="modal.open(AddVlog)"
                         class="flex items-center gap-2 text-white bg-my-blue hover:bg-gray-900 rounded-full px-5 py-2.5 me-2 mb-2 dark:bg-my-blue dark:hover:bg-blue-600">
                         <font-awesome-icon :icon="['fas', 'plus']" /><div>Thêm mới</div>
-                    </router-link>
+                    </div>
                 </div>
             </div>
 
