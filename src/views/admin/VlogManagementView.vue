@@ -3,6 +3,7 @@
     import Setting from '@/components/partials/admin/Setting.vue'
     import Pagination from '@/components/pagination/Pagination.vue'
     import Filter from '@/components/modals/Filter.vue'
+    import EditVlog from '@/components/modals/EditVlog.vue'
     import Dropdown from '@/components/table/Dropdown.vue'
     import { useModalStore } from '@/stores/modals'
     import { useVlogStore } from '@/stores/vlogs'
@@ -22,25 +23,27 @@
         page: route.query.page || 1
     }
 
-    const toggleDropdown = (categoryId) => {
-        tableActions.toggleDropdown(table, categoryId)
+    const toggleDropdown = (vlogId) => {
+        tableActions.toggleDropdown(table, vlogId)
     }
 
-    const isDropdownOpen = (categoryId) => {
-        return tableActions.isDropdownOpen(table, categoryId)
+    const isDropdownOpen = (vlogId) => {
+        return tableActions.isDropdownOpen(table, vlogId)
     }
 
-    const edit = (category) => {
-        // modal.open(EditCategory, category)
+    const edit = (vlog) => {
+        modal.open(EditVlog, vlog)
         tableActions.closeAllDropdown()
     }
     
-    const remove = (category) => {
-        // modal.open(ConfirmDeleteCategory, category)
+    const remove = (vlog) => {
+        // modal.open(ConfirmDeleteCategory, vlog)
         tableActions.closeAllDropdown()
     }
     
-    onMounted(() => vlogStore.getVlogsByCategory(category))
+    onMounted(() => {
+        vlogStore.getVlogsByCategory(category)
+    })
 
     watch(() => route.query.page, (newPage) => {
         category.page = newPage
@@ -68,7 +71,6 @@
                     </router-link>
                 </div>
             </div>
-
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
