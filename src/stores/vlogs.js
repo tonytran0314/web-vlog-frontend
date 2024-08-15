@@ -107,6 +107,10 @@ export const useVlogStore = defineStore('vlog', () => {
         }
     }
 
+    const edit = (updatedVlog) => {
+        console.log(updatedVlog)
+    }
+
     const setFile = (field, event) => {
         newVlog[field] = event.target.files[0]
     }
@@ -122,6 +126,7 @@ export const useVlogStore = defineStore('vlog', () => {
         getVlogsByCategory,
         getVlog,
         add,
+        edit,
         setFile
     }
 
