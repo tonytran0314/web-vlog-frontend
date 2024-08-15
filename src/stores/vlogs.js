@@ -1,14 +1,17 @@
-import { defineStore } from 'pinia'
-import apiClient from '@/api/apiClient'
-import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import { useToast } from "vue-toastification"
+import { useToast }         from "vue-toastification"
+import { useRouter }        from 'vue-router'
+import { defineStore }      from 'pinia'
+import { ref, reactive }    from 'vue'
+import { useModalStore }    from '@/stores/modals'
+
+import apiClient            from '@/api/apiClient'
 
 const toast = useToast()
 const ADDED_MESSAGE = 'Added Vlog'
 
 export const useVlogStore = defineStore('vlog', () => {
 
+    const modal = useModalStore()
     const latestVlogs = ref(null)
     const vlog = ref(null)
     const relatedCategories = ref(null)
@@ -80,7 +83,7 @@ export const useVlogStore = defineStore('vlog', () => {
     }
 
     const add = async () => {
-
+        const selectedCategories = newVlog.categories.map(category => category.id)
         const newVlogData = new FormData()
 
         // use append when sending HTTP request with files
@@ -88,13 +91,13 @@ export const useVlogStore = defineStore('vlog', () => {
         newVlogData.append('description', newVlog.description)
         newVlogData.append('video', newVlog.video)
         newVlogData.append('thumbnail', newVlog.thumbnail)
-        newVlogData.append('categories', JSON.stringify(newVlog.categories))
+        newVlogData.append('categories', JSON.stringify(selectedCategories))
         newVlogData.append('public', newVlog.public ? 1 : 0)
 
+        modal.close()
+
         try {
-            await apiClient.post('/vlogs', newVlogData)
-            router.push({ name: 'Vlog Management' })
-            toast.success(ADDED_MESSAGE)
+            const response = await apiClient.post('/vlogs', newVlogData)
 
             newVlog.title = null,
             newVlog.description = null,
@@ -102,6 +105,10 @@ export const useVlogStore = defineStore('vlog', () => {
             newVlog.thumbnail = null,
             newVlog.categories = [],
             newVlog.public = true
+
+            vlogsByCategory.list.unshift(response.data.data)
+
+            toast.success(ADDED_MESSAGE)
         } catch (error) {
             toast.error(error.response.data.message)
         }
