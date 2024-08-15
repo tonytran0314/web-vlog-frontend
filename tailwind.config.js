@@ -3,7 +3,7 @@ export default {
   content: [
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
-    './node_modules/preline/preline.js',
+    "./presets/**/*.{js,vue,ts}",
   ],
   theme: {
     fontFamily: {
@@ -21,8 +21,6 @@ export default {
       }
     },
   },
-  plugins: [
-    require('preline/plugin'),
-  ],
+  plugins: [require('tailwindcss-primeui')]
 }
 

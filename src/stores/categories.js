@@ -95,11 +95,12 @@ export const useCategoryStore = defineStore('categories', () => {
         }
     }
 
+    list()
+
     return {
         categories,
         categoriesWithoutPagination,
         all,
-        list,
         add,
         edit,
         remove

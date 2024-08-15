@@ -13,7 +13,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import Toast from "vue-toastification"
 import "vue-toastification/dist/index.css"
 
-import "preline/preline"
+import PrimeVue from 'primevue/config'
+import Lara from '@/presets/lara'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -25,4 +26,9 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(pinia)
 app.use(router)
 app.use(Toast)
+app.use(PrimeVue, {
+    unstyled: true,
+    pt: Lara
+})
+
 app.mount('#app')
