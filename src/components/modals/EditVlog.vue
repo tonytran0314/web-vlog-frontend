@@ -76,7 +76,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .hide-scrollbar {
         scrollbar-width: none; /* For Firefox */
         -ms-overflow-style: none; /* For Internet Explorer and Edge */
