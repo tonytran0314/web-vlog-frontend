@@ -6,7 +6,6 @@ import CategoryView from '@/views/CategoryView.vue'
 
 import DashboardView from '@/views/admin/DashboardView.vue'
 import VlogManagementView from '@/views/admin/VlogManagementView.vue'
-import AddVlogView from '@/views/admin/AddVlogView.vue'
 import CategoryManagementView from '@/views/admin/CategoryManagementView.vue'
 
 import NotFoundView from '@/views/NotFoundView.vue'
@@ -55,10 +54,6 @@ const routes = [
     name: 'Vlog Management',
     component: VlogManagementView },
   { 
-    path: '/admin/vlog/add',
-    name: 'New Vlog',
-    component: AddVlogView },
-  { 
     path: '/admin/category',
     name: 'Category Management',
     component: CategoryManagementView },
@@ -76,6 +71,14 @@ const router = createRouter({
     // Always scroll to the top of the page when navigating to a new route
     return { top: 0 };
   },
+})
+
+router.afterEach((to, from, failure) => {
+  if (!failure) {
+    setTimeout(() => {
+      window.HSStaticMethods.autoInit()
+    }, 100)
+  }
 })
 
 export default router
