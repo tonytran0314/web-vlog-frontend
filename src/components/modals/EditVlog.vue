@@ -32,8 +32,9 @@
             </div>
         </div>
         <form @submit.prevent="updateVlog" class="w-full rounded-2xl px-6 bg-box space-y-10">
+            <img class="w-1/2 m-auto rounded-2xl" src="http://localhost:8000/api/v1/thumbnail/cFdJz4A69uLbNMMIAijzZEGQd2N3HuCKkp2bqP9a.jpg">
             <div class="space-y-4 w-full">
-                <label for="thumbnail" class="text-lg font-bold">Chọn thumbnail</label>
+                <label for="thumbnail" class="text-lg font-bold">Chọn thumbnail mới</label>
                 <input
                     class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="thumbnail" type="file" accept="image/png, image/jpeg">
             </div>
