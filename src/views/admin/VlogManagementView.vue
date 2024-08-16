@@ -102,7 +102,7 @@
                         <tr v-for="vlog in vlogsByCategory.list"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <img src="@/assets/images/11.png" alt="thumbnail" class="rounded-xl">
+                                <img :src="vlog.thumbnail" alt="thumbnail" class="rounded-xl">
                             </td>
                             <td class="px-6 py-4 space-y-4">
                                 <div class="line-clamp-1 font-bold">{{ vlog.title }}</div>
