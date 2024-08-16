@@ -1,9 +1,10 @@
 <script setup>
-    import { onMounted } from 'vue'
-    import { storeToRefs } from 'pinia'
-    import { useVlogStore } from '@/stores/vlogs'
-    import { useModalStore } from '@/stores/modals'
+    import { storeToRefs }      from 'pinia'
+    import { useVlogStore }     from '@/stores/vlogs'
+    import { useModalStore }    from '@/stores/modals'
     import { useCategoryStore } from '@/stores/categories'
+    
+    import MultiSelect          from 'primevue/multiselect'
 
     const modal = useModalStore()
     const { propsData } = storeToRefs(modal)
@@ -16,12 +17,6 @@
     const updateVlog = () => {
         vlog.edit(propsData.value)
     }
-
-    const isCategorySelected = (id) => {
-        return propsData.value.categories.some(category => category.id === id)
-    }
-
-    onMounted(() => { category.list() })
 </script>
 
 <template>
@@ -52,17 +47,7 @@
             </div>
             <div class="flex flex-col gap-4">
                 <div class="text-lg font-bold">Thể loại</div>
-                <div class="flex flex-wrap gap-6">
-                    <div v-for="category in categoriesWithoutPagination" :key="category.id" class="flex items-center">
-                        <input 
-                            :checked="isCategorySelected(category.id)"
-                            :value="category.id"
-                            :id="'category-' + category.id" 
-                            type="checkbox" 
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                        <label :for="'category-' + category.id" class="ms-2 font-medium text-gray-900 dark:text-gray-300">{{ category.name }}</label>
-                    </div>
-                </div>
+                <MultiSelect v-model="propsData.categories" :options="categoriesWithoutPagination" optionLabel="name" filter placeholder="Chọn thể loại ..." class="w-full" />
             </div>
             <div class="flex gap-4 items-center">
                 <div class="text-lg font-bold">Hiện Vlog</div>
