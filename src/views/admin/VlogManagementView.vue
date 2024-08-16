@@ -112,8 +112,8 @@
                                 <p v-for="category in vlog.categories">{{ category.name }}</p>
                             </td>
                             <td class="px-6 py-4">
-                                <font-awesome-icon v-if="vlog.public" :icon="['fas', 'eye']" />
-                                <font-awesome-icon v-else :icon="['fas', 'eye-slash']" />
+                                <font-awesome-icon v-if="vlog.public" :icon="['fas', 'eye']" class="text-green-500" />
+                                <font-awesome-icon v-else :icon="['fas', 'eye-slash']" class="text-red-500" />
                             </td>
                             <td class="px-6 py-4">
                                 {{ vlog.date }}
