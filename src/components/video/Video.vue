@@ -1,9 +1,13 @@
 <script setup>
-    import { onMounted, ref } from 'vue'
+    import { storeToRefs }          from 'pinia'
+    import { useVlogStore }         from '@/stores/vlogs'
+    import { onMounted, ref }       from 'vue'
     import { useVlogControlsStore } from '@/stores/vlog-controls'
 
     const video = ref(null)
     const controls = useVlogControlsStore()
+
+    const { vlog } = storeToRefs(useVlogStore())
 
     onMounted(() => {
         controls.setVideoElement(video.value)
@@ -19,7 +23,7 @@
         @timeupdate="controls.updateTime"
         class="size-full object-contain rounded-2xl">
 
-            <source src="http://localhost:8000/api/v1/video/videoplayback.mp4"> 
+            <source :src="vlog.video"> 
 
     </video>
     
