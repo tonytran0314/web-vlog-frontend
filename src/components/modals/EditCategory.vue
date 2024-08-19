@@ -9,6 +9,7 @@
 
     const category = useCategoryStore()
 
+    // cân nhắc sửa lại giống bên editVlog xem có bị lỗi gì k
     const currentCategory = ref(propsData.value.name)
     const updatedCategory = reactive({
         'id': propsData.value.id,

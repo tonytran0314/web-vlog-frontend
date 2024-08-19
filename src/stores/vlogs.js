@@ -8,6 +8,8 @@ import apiClient            from '@/api/apiClient'
 
 const toast = useToast()
 const ADDED_MESSAGE = 'Added Vlog'
+const UPDATED_MESSAGE = 'Updated Vlog'
+const PATH = '/vlogs' // apply for methods below
 
 export const useVlogStore = defineStore('vlog', () => {
 
@@ -22,7 +24,7 @@ export const useVlogStore = defineStore('vlog', () => {
         totalVlogs: null,
         totalPages: null 
     })
-    const newVlog = reactive({
+    const vlogData = reactive({
         title: null,
         description: null,
         video: null,
@@ -83,28 +85,28 @@ export const useVlogStore = defineStore('vlog', () => {
     }
 
     const add = async () => {
-        const selectedCategories = newVlog.categories.map(category => category.id)
+        const selectedCategories = vlogData.categories.map(category => category.id)
         const newVlogData = new FormData()
 
         // use append when sending HTTP request with files
-        newVlogData.append('title', newVlog.title)
-        newVlogData.append('description', newVlog.description)
-        newVlogData.append('video', newVlog.video)
-        newVlogData.append('thumbnail', newVlog.thumbnail)
-        newVlogData.append('categories', JSON.stringify(selectedCategories))
-        newVlogData.append('public', newVlog.public ? 1 : 0)
+        newVlogData.append('title',         vlogData.title ?? '')
+        newVlogData.append('description',   vlogData.description ?? '')
+        newVlogData.append('video',         vlogData.video ?? '')
+        newVlogData.append('thumbnail',     vlogData.thumbnail ?? '')
+        newVlogData.append('public',        vlogData.public ? 1 : 0)
+        newVlogData.append('categories',    (vlogData.categories.length !== 0) ? JSON.stringify(selectedCategories) : '')
 
         modal.close()
 
         try {
             const response = await apiClient.post('/vlogs', newVlogData)
 
-            newVlog.title = null,
-            newVlog.description = null,
-            newVlog.video = null,
-            newVlog.thumbnail = null,
-            newVlog.categories = [],
-            newVlog.public = true
+            vlogData.title = null,
+            vlogData.description = null,
+            vlogData.video = null,
+            vlogData.thumbnail = null,
+            vlogData.categories = [],
+            vlogData.public = true
 
             vlogsByCategory.list.unshift(response.data.data)
 
@@ -114,12 +116,41 @@ export const useVlogStore = defineStore('vlog', () => {
         }
     }
 
-    const edit = (updatedVlog) => {
-        console.log(updatedVlog)
+    const edit = async (updatedVlog) => {
+        const selectedCategories = updatedVlog.categories.map(category => category.id)
+        const endpoint = `${PATH}/${updatedVlog.id}`
+        const vlogToUpdate = vlogsByCategory.list.find(vlog => vlog.id === updatedVlog.id)
+        const updatedVlogData = new FormData() 
+
+        updatedVlogData.append('_method',       'PUT')
+        updatedVlogData.append('title',         updatedVlog.title ?? '')
+        updatedVlogData.append('description',   updatedVlog.description ?? '')
+        updatedVlogData.append('public',        updatedVlog.public ? 1 : 0)
+        updatedVlogData.append('categories',    (updatedVlog.categories.length !== 0) ? JSON.stringify(selectedCategories) : '')
+
+        if(vlogData.thumbnail) updatedVlogData.append('thumbnail', vlogData.thumbnail)
+
+        modal.close()
+
+        try {
+            const res = await apiClient.post(endpoint, updatedVlogData)
+
+            vlogToUpdate.title          = res.data.data.title
+            vlogToUpdate.description    = res.data.data.description
+            vlogToUpdate.public         = res.data.data.public
+            vlogToUpdate.categories     = res.data.data.categories
+            vlogToUpdate.thumbnail      = res.data.data.thumbnail
+
+            vlogData.thumbnail = null
+
+            toast.success(UPDATED_MESSAGE)
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
     }
 
     const setFile = (field, event) => {
-        newVlog[field] = event.target.files[0]
+        vlogData[field] = event.target.files[0]
     }
 
     return { 
@@ -127,7 +158,7 @@ export const useVlogStore = defineStore('vlog', () => {
         vlogsByCategory, 
         vlog,
         relatedCategories,
-        newVlog,
+        vlogData,
         getLatestVlogs, 
         getFeaturedVlogs,
         getVlogsByCategory,

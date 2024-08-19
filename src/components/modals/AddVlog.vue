@@ -6,7 +6,7 @@
     import MultiSelect          from 'primevue/multiselect'
 
     const vlog = useVlogStore()
-    const { newVlog } = storeToRefs(vlog)
+    const { vlogData } = storeToRefs(vlog)
 
     const category = useCategoryStore()
     const { categoriesWithoutPagination } = storeToRefs(category)
@@ -42,20 +42,20 @@
             <form @submit.prevent="vlog.add" class="flex flex-col gap-10">
                 <div class="flex flex-col gap-4">
                     <label for="title" class="text-lg font-bold">Tiêu đề</label>
-                    <input v-model="newVlog.title" class="border-none py-3 px-4 rounded-full bg-secondary-button focus:outline-none" id="title" type="text">
+                    <input v-model="vlogData.title" class="border-none py-3 px-4 rounded-full bg-secondary-button focus:outline-none" id="title" type="text">
                 </div>
                 <div class="flex flex-col gap-4">
                     <label for="description" class="text-lg font-bold">Mô tả</label>
-                    <textarea v-model="newVlog.description" class="border-none py-3 px-4 rounded-2xl bg-secondary-button focus:outline-none" cols="30" rows="10" id="description"></textarea>
+                    <textarea v-model="vlogData.description" class="border-none py-3 px-4 rounded-2xl bg-secondary-button focus:outline-none" cols="30" rows="10" id="description"></textarea>
                 </div>
                 <div class="flex flex-col gap-4">
                     <div class="text-lg font-bold">Thể loại</div>
-                    <MultiSelect v-model="newVlog.categories" :options="categoriesWithoutPagination" optionLabel="name" filter placeholder="Chọn thể loại ..." class="w-full" />
+                    <MultiSelect v-model="vlogData.categories" :options="categoriesWithoutPagination" optionLabel="name" filter placeholder="Chọn thể loại ..." class="w-full" />
                 </div>
                 <div class="flex gap-4 items-center">
                     <div class="text-lg font-bold">Hiện Vlog</div>
                     <label class="inline-flex items-center cursor-pointer">
-                        <input v-model="newVlog.public" type="checkbox" class="sr-only peer" checked>
+                        <input v-model="vlogData.public" type="checkbox" class="sr-only peer" checked>
                         <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                     </label>
                 </div>
