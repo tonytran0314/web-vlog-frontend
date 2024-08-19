@@ -1,11 +1,12 @@
 <script setup>
-    import Filter       from '@/components/modals/Filter.vue'
-    import AddVlog      from '@/components/modals/AddVlog.vue'
-    import Dropdown     from '@/components/table/Dropdown.vue'
-    import EditVlog     from '@/components/modals/EditVlog.vue'
-    import Menu         from '@/components/partials/admin/Menu.vue'
-    import Setting      from '@/components/partials/admin/Setting.vue'
-    import Pagination   from '@/components/pagination/Pagination.vue'
+    import Filter               from '@/components/modals/Filter.vue'
+    import AddVlog              from '@/components/modals/AddVlog.vue'
+    import Dropdown             from '@/components/table/Dropdown.vue'
+    import EditVlog             from '@/components/modals/EditVlog.vue'
+    import Menu                 from '@/components/partials/admin/Menu.vue'
+    import Setting              from '@/components/partials/admin/Setting.vue'
+    import Pagination           from '@/components/pagination/Pagination.vue'
+    import ConfirmDeleteVlog    from '@/components/modals/ConfirmDeleteVlog.vue'
 
     import { storeToRefs }          from 'pinia'
     import { useRoute }             from 'vue-router'
@@ -39,7 +40,7 @@
     }
     
     const remove = (vlog) => {
-        // modal.open(ConfirmDeleteCategory, vlog)
+        modal.open(ConfirmDeleteVlog, vlog)
         tableActions.closeAllDropdown()
     }
     

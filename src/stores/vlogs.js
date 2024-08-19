@@ -149,6 +149,25 @@ export const useVlogStore = defineStore('vlog', () => {
         }
     }
 
+    const remove = async (id) => {
+        const endpoint = `${PATH}/${id}`
+        const vlogToDelete = vlogsByCategory.list.find(vlog => vlog.id === id)
+        const indexToDelete = vlogsByCategory.list.indexOf(vlogToDelete)
+
+        modal.close()
+        
+        try {
+            // chỗ này khi gọi api, trên server trả message luôn, nên xài message từ server, vì khi thay đổi chỉ đổi 1 lần
+            await apiClient.delete(endpoint)
+
+            if(indexToDelete !== -1) vlogsByCategory.list.splice(indexToDelete, 1)
+
+            toast.success(UPDATED_MESSAGE)
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+
     const setFile = (field, event) => {
         vlogData[field] = event.target.files[0]
     }
@@ -165,6 +184,7 @@ export const useVlogStore = defineStore('vlog', () => {
         getVlog,
         add,
         edit,
+        remove,
         setFile
     }
 
