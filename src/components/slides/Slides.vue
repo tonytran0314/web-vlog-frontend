@@ -24,6 +24,7 @@
                 :date="vlog.date"
                 :description="vlog.description"
                 :categories="vlog.categories"
+                :thumbnail="vlog.thumbnail"
             />
         </swiper-slide>
     </swiper-container>

@@ -19,6 +19,10 @@
         categories: {
             type: Array,
             required: true
+        },
+        thumbnail: {
+            type: Array,
+            required: true
         }
     })
 
@@ -28,7 +32,7 @@
     <div class="relative">
         <div>
             <img 
-                src="@/assets/images/11.png" 
+                :src="thumbnail" 
                 alt="background"
                 class="rounded-2xl w-full h-[38rem] object-cover">
         </div>
