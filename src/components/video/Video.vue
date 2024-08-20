@@ -11,7 +11,6 @@
 
     onMounted(() => {
         controls.setVideoElement(video.value)
-        controls.setDuration()
     })
 </script>
 
@@ -21,6 +20,7 @@
         ref="video" 
         @click="controls.togglePlay"
         @timeupdate="controls.updateTime"
+        @loadedmetadata="controls.setDuration"
         class="size-full object-contain rounded-2xl" autoplay>
 
             <source :src="vlog.video"> 
