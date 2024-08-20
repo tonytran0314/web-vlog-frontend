@@ -14,6 +14,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@vime/core": "^5.4.1",
+    "@vime/vue-next": "^5.4.1",
     "@vueuse/core": "^10.11.0",
     "axios": "^1.7.2",
     "nprogress": "^0.2.0",
