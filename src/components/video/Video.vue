@@ -21,7 +21,7 @@
         ref="video" 
         @click="controls.togglePlay"
         @timeupdate="controls.updateTime"
-        class="size-full object-contain rounded-2xl">
+        class="size-full object-contain rounded-2xl" autoplay>
 
             <source :src="vlog.video"> 
 
