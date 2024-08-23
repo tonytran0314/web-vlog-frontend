@@ -9,7 +9,7 @@ const PREVIEW_WIDTH = '176' // px
 
 export const useVlogControlsStore = defineStore('vlog-controls', () => {
 
-    const isVlogPlaying = ref(true)
+    const isVlogPlaying = ref(false)
     const isFullscreen = ref(false)
     const duration = ref(0)
     const volumeIcon = ref(HIGH_VOLUM_ICON)

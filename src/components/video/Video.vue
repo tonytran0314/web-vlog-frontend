@@ -26,7 +26,7 @@
         @click="controls.togglePlay"
         @timeupdate="controls.updateTime"
         @loadedmetadata="controls.setDuration"
-        class="size-full object-contain rounded-2xl" autoplay>
+        class="size-full object-contain rounded-2xl" >
 
             <source :src="vlog.video"> 
 
