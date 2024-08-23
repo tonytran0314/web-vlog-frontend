@@ -1,14 +1,13 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import HomeView from '@/views/HomeView.vue'
-import VlogView from '@/views/VlogView.vue'
-import CategoryView from '@/views/CategoryView.vue'
-
-import DashboardView from '@/views/admin/DashboardView.vue'
-import VlogManagementView from '@/views/admin/VlogManagementView.vue'
+import HomeView               from '@/views/HomeView.vue'
+import VlogView               from '@/views/VlogView.vue'
+import CategoryView           from '@/views/CategoryView.vue'
+import NotFoundView           from '@/views/NotFoundView.vue'
+import DashboardView          from '@/views/admin/DashboardView.vue'
+import VlogManagementView     from '@/views/admin/VlogManagementView.vue'
+import AuthenticationView     from '@/views/admin/AuthenticationView.vue'
 import CategoryManagementView from '@/views/admin/CategoryManagementView.vue'
-
-import NotFoundView from '@/views/NotFoundView.vue'
 
 const validateSlug = (to, from, next) => {
   const slug = to.params.slug
@@ -44,6 +43,11 @@ const routes = [
   },
 
   // refactor by nested
+  { 
+    path: '/login',
+    name: 'Authentication',
+    component: AuthenticationView 
+  },
   { 
     path: '/admin',
     name: 'Dashboard',
