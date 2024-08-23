@@ -9,7 +9,7 @@ NProgress.configure({
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // Replace with your API base URL
-  timeout: 10000, // Request timeout
+  // timeout: 10000, // Request timeout
 });
 
 
