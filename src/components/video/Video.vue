@@ -23,6 +23,7 @@
     <!-- customized controls -->
     <video 
         ref="video" 
+        :poster="vlog.thumbnail" 
         @click="controls.togglePlay"
         @timeupdate="controls.updateTime"
         @loadedmetadata="controls.setDuration"
@@ -46,3 +47,11 @@
         <DefaultUi></DefaultUi>
     </Player> -->
 </template>
+
+<style>
+    video[poster] {
+        width: 100%;
+        height: inherit;
+        object-fit: cover;
+    }
+</style>

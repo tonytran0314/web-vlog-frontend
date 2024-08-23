@@ -26,7 +26,7 @@
 
 <template>
     <div class="flex flex-col gap-4 text-white">
-        <div ref="videoWrapper" class="group/video relative w-full h-auto">
+        <div ref="videoWrapper" class="group/video relative w-full h-[608px]">
             <Video />
             <Controls />
         </div>
