@@ -28,7 +28,7 @@
     <div class="flex flex-col gap-4 text-white">
         <div ref="videoWrapper" class="group/video relative w-full h-auto">
             <Video />
-            <!-- <Controls /> -->
+            <Controls />
         </div>
         <!-- <div class="flex gap-4 justify-center">
             <div class="size-12 rounded-full bg-main"></div>
