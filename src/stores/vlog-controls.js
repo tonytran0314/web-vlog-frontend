@@ -105,7 +105,9 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     const setVideoWrapper = (wrapper) => videoWrapper.value = wrapper
     const setVolumeBar = (volume) => volumeBar.value = volume
 
-    const setDuration = () => duration.value = videoElement.value.duration
+    const setDuration = () => {
+      if(videoElement.value) duration.value = videoElement.value.duration
+    }
 
     const replay = () => play()
 
@@ -144,8 +146,10 @@ export const useVlogControlsStore = defineStore('vlog-controls', () => {
     }
 
     const updateTime = () => {
-      setCurrentTime()
-      setProcess(videoElement.value.currentTime)
+      if(videoElement.value) {
+        setCurrentTime()
+        setProcess(videoElement.value.currentTime)
+      }
     }
 
     const seek = (event) => {

@@ -14,9 +14,8 @@
 
     onMounted(() => {
         controls.setVideoElement(video.value)
+        controls.setDuration()
     })
-
-    // To enable customized video controls, uncomment the commented codes
 </script>
 
 <template>
