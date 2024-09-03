@@ -1,8 +1,10 @@
 <script setup>
-    import { useAdminMenuStore } from '@/stores/admin-menu'
-    import { useRoute } from 'vue-router'
+    import { useRoute }             from 'vue-router'
+    import { useAuthStore }         from '@/stores/auth'
+    import { useAdminMenuStore }    from '@/stores/admin-menu'
 
     const route = useRoute()
+    const authentication = useAuthStore()
     const { links } = useAdminMenuStore()
 </script>
 
@@ -33,6 +35,13 @@
                         <font-awesome-icon :icon="['fas', link.icon]" />
                         <div>{{ link.label }}</div>
                     </router-link>
+                    <div 
+                        @click="authentication.logout" 
+                        class="cursor-pointer flex items-center gap-4 py-3 pl-12 relative hover:bg-my-blue"
+                    >
+                        <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
+                        <span>Đăng xuất</span>
+                    </div>
                 </nav>
             </div>
         </div>
