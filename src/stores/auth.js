@@ -1,14 +1,15 @@
-import { useToast }     from "vue-toastification"
-import { reactive }     from "vue"
-import { useRouter }    from 'vue-router'
-import { defineStore }  from "pinia"
+import { useToast }             from "vue-toastification"
+import { useRouter }            from 'vue-router'
+import { defineStore }          from "pinia"
+import { ref, reactive }        from "vue"
 
-import apiClient        from '@/api/apiClient' 
+import apiClient                from '@/api/apiClient' 
 
 const toast = useToast()
 
 export const useAuthStore = defineStore('auth', () => {
     
+    const token = ref(localStorage.getItem('userToken')) || null
     const router = useRouter()
 
     const user = reactive({
@@ -24,8 +25,8 @@ export const useAuthStore = defineStore('auth', () => {
         try {
             const res = await apiClient.post('/login', userData)
             if (res.status === 200) {
-                localStorage.setItem('userToken', res.data.data.token)
-                router.push({ name: 'Dashboard' })
+                setUserToken(res.data.data.token)
+                goToAdminDashboard()
             }
         } catch (error) {
             toast.error(error.response.data.message)
@@ -33,13 +34,48 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const logout = () => {
+        removeUserToken()
+        goToLogin()
+    }
+
+    const validateToken = async () => {
+        if (!token.value) return false;
+
+        try {
+            await apiClient.post('/validate-token', {}, {
+                headers: {
+                  'Authorization': `Bearer ${token.value}`,
+                },
+            })
+            
+            return true;
+        } catch (error) {
+            removeUserToken();
+            console.log(error)
+            return false;
+        }
+    }
+
+    const setUserToken = (token) => {
+        localStorage.setItem('userToken', token)
+    }
+
+    const removeUserToken = () => {
         localStorage.removeItem('userToken')
+    }
+
+    const goToAdminDashboard = () => {
+        router.push({ name: 'Dashboard' })
+    }
+
+    const goToLogin = () => {
         router.push({ name: 'Authentication' })
     }
 
     return {
         user,
         login,
-        logout
+        logout,
+        validateToken
     }
 })

@@ -9,6 +9,8 @@ import VlogManagementView     from '@/views/admin/VlogManagementView.vue'
 import AuthenticationView     from '@/views/admin/AuthenticationView.vue'
 import CategoryManagementView from '@/views/admin/CategoryManagementView.vue'
 
+import { useAuthStore }       from '@/stores/auth.js'
+
 const validateSlug = (to, from, next) => {
   const slug = to.params.slug
   
@@ -24,48 +26,48 @@ const routes = [
   { 
     path: '/', 
     name: 'Home', 
-    component: HomeView 
-  },
+    component: HomeView },
   { 
     path: '/vlog', 
-    redirect: '/' 
-  },
+    redirect: '/' },
   { 
     path: '/vlog/:slug', 
     name: 'Vlog', 
     component: VlogView, 
-    beforeEnter: validateSlug 
-  },
+    beforeEnter: validateSlug },
   { 
     path: '/category/:slug?', 
     name: 'Category',
-    component: CategoryView 
-  },
+    component: CategoryView },
 
-  // refactor by nested
   { 
     path: '/login',
     name: 'Authentication',
-    component: AuthenticationView 
-  },
+    component: AuthenticationView },
+
+  
+  // refactor by nested
   { 
     path: '/admin',
     name: 'Dashboard',
-    component: DashboardView 
-  },
+    component: DashboardView,
+    meta: { requiresAuth: true } },
   { 
     path: '/admin/vlog',
     name: 'Vlog Management',
-    component: VlogManagementView },
+    component: VlogManagementView,
+    meta: { requiresAuth: true } },
   { 
     path: '/admin/category',
     name: 'Category Management',
-    component: CategoryManagementView },
+    component: CategoryManagementView,
+    meta: { requiresAuth: true } },
+
+
   { 
     path: '/:pathName(.*)*', // the second * is for all routes even vlog/{wrong-slug}
     name: 'Not Found',
-    component: NotFoundView 
-  },
+    component: NotFoundView },
 ]
 
 const router = createRouter({
@@ -73,8 +75,22 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     // Always scroll to the top of the page when navigating to a new route
-    return { top: 0 };
+    return { top: 0 }
   },
+})
+
+router.beforeEach(async (to, from, next) => {
+  const auth = useAuthStore()
+
+  if (to.meta.requiresAuth) {
+    const isTokenValid = await auth.validateToken()
+
+    if (!isTokenValid) {
+      return next({ name: 'Authentication' })
+    }
+  }
+
+  next()
 })
 
 export default router

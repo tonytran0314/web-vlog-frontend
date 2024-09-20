@@ -1,8 +1,9 @@
-import { defineStore } from 'pinia'
-import apiClient from '@/api/apiClient' 
-import { useToast } from "vue-toastification"
-import { useModalStore } from '@/stores/modals'
-import { reactive, ref } from 'vue'
+import apiClient            from '@/api/apiClient' 
+
+import { useToast }         from "vue-toastification"
+import { defineStore }      from 'pinia'
+import { useModalStore }    from '@/stores/modals'
+import { reactive, ref }    from 'vue'
 
 const toast = useToast()
 const ADDED_MESSAGE = 'Added Category'
